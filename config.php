@@ -68,8 +68,8 @@ define('GOTEO_DB_PASSWORD', '');
 define('GOTEO_DATA_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR);
 
 // Mail
-define('GOTEO_MAIL_FROM', 'victor@gmail.com');
-define('GOTEO_MAIL_NAME', 'victor');
+define('GOTEO_MAIL_FROM', 'victormft@gmail.com');
+define('GOTEO_MAIL_NAME', 'victormft');
 define('GOTEO_MAIL_TYPE', 'mail');
 define('GOTEO_MAIL_SMTP_AUTH', true);
 define('GOTEO_MAIL_SMTP_SECURE', 'ssl');
