@@ -55,7 +55,7 @@ $(function () {
        input.focus(function () {
 
            input.keydown(function () {
-           
+          
                var val = input.val();
                
                clearTimeout(updating);
@@ -65,7 +65,7 @@ $(function () {
                }, 700);
 
            });
-
+ 
           input.one('blur', function () { 
               update(input.val());
           });

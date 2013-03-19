@@ -282,6 +282,7 @@ if (!('Superform' in window)) {
                             });
                         }         
                         
+                       
                         
                         el.__updating = $.ajax({
                             type:       'POST',

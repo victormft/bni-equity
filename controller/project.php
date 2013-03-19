@@ -67,6 +67,7 @@ namespace Goteo\Controller {
 
         //Aunque no esté en estado edición un admin siempre podrá editar un proyecto
         public function edit ($id) {
+			
             $project = Model\Project::get($id, null);
 
             // si no tenemos SESSION stepped es porque no venimos del create
@@ -134,7 +135,7 @@ namespace Goteo\Controller {
             
                         
             
-            foreach ($_REQUEST as $k => $v) {                
+            foreach ($_REQUEST as $k => $v) {              
                 if (strncmp($k, 'view-step-', 10) === 0 && !empty($v) && !empty($steps[substr($k, 10)])) {
                     $step = substr($k, 10);
                 }                
@@ -276,7 +277,7 @@ namespace Goteo\Controller {
 
 
             // segun el paso añadimos los datos auxiliares para pintar
-            switch ($step) {
+            switch ($step) { 
                 case 'userProfile':
                     $owner = Model\User::get($project->owner);
                     // si es el avatar por defecto no lo mostramos aqui
@@ -302,7 +303,7 @@ namespace Goteo\Controller {
                     }
                     break;
                 
-                case 'overview':
+                case 'overview': 
                     $viewData['currently'] = Model\Project::currentStatus();
                     $viewData['categories'] = Model\Project\Category::getAll();
                     $viewData['scope'] = Model\Project::scope();

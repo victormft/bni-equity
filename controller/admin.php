@@ -190,25 +190,25 @@ namespace Goteo\Controller {
                             'data' => $data,
                             'columns' => array(
                                 'edit' => '',
-                                'text' => _('Texto'),
-                                'group' => _('Agrupación')
+                                'text' => ('Texto'),
+                                'group' => ('Agrupación')
                             ),
                             'url' => '/admin/texts',
                             'filters' => array(
                                 'idfilter' => array(
-                                        'label'   => _('Filtrar por tipo:'),
+                                        'label'   => ('Filtrar por tipo:'),
                                         'type'    => 'select',
                                         'options' => $idfilters,
                                         'value'   => $filters['idfilter']
                                     ),
                                 'group' => array(
-                                        'label'   => _('Filtrar por agrupación:'),
+                                        'label'   => ('Filtrar por agrupación:'),
                                         'type'    => 'select',
                                         'options' => $groups,
                                         'value'   => $filters['group']
                                     ),
                                 'text' => array(
-                                        'label'   => _('Buscar texto:'),
+                                        'label'   => ('Buscar texto:'),
                                         'type'    => 'input',
                                         'options' => null,
                                         'value'   => $filters['text']
@@ -255,18 +255,18 @@ namespace Goteo\Controller {
                                 'action' => '/admin/texts/edit/'.$id.'/'.$filter,
                                 'submit' => array(
                                     'name' => 'update',
-                                    'label' => _('Aplicar')
+                                    'label' => ('Aplicar')
                                 ),
                                 'fields' => array (
                                     'idtext' => array(
-                                        'label' => _(''),
+                                        'label' => (''),
                                         'name' => 'id',
                                         'type' => 'hidden',
                                         'properties' => '',
 
                                     ),
                                     'newtext' => array(
-                                        'label' => _('Texto'),
+                                        'label' => ('Texto'),
                                         'name' => 'text',
                                         'type' => 'textarea',
                                         'properties' => 'cols="100" rows="6"',
@@ -403,12 +403,12 @@ namespace Goteo\Controller {
                     try {
                         $sql = "UPDATE project SET " . $set . " WHERE id = :id";
                         if (Model\Project::query($sql, $values)) {
-                            $log_text = _('El admin %s ha <span class="red">tocado las fechas</span> del proyecto %s');
+                            $log_text = ('El admin %s ha <span class="red">tocado las fechas</span> del proyecto %s');
                         } else {
-                            $log_text = _('Al admin %s le ha <span class="red">fallado al tocar las fechas</span> del proyecto %s');
+                            $log_text = ('Al admin %s le ha <span class="red">fallado al tocar las fechas</span> del proyecto %s');
                         }
                     } catch(\PDOException $e) {
-                        $errors[] = _("No se ha guardado correctamente. ") . $e->getMessage();
+                        $errors[] = ("No se ha guardado correctamente. ") . $e->getMessage();
                     }
                 } elseif (isset($_POST['save-accounts'])) {
 
@@ -416,7 +416,7 @@ namespace Goteo\Controller {
                     $accounts->bank = $_POST['bank'];
                     $accounts->paypal = $_POST['paypal'];
                     if ($accounts->save($errors)) {
-                        $errors[] = _('Se han actualizado las cuentas del proyecto ').$_POST['id'];
+                        $errors[] = ('Se han actualizado las cuentas del proyecto ').$_POST['id'];
                     }
 
                 }
@@ -436,49 +436,49 @@ namespace Goteo\Controller {
                 case 'review':
                     // pasar un proyecto a revision
                     if ($project->ready($errors)) {
-                        $log_text = _('El admin %s ha pasado el proyecto %s al estado <span class="red">Revisión</span>');
+                        $log_text = ('El admin %s ha pasado el proyecto %s al estado <span class="red">Revisión</span>');
                     } else {
-                        $log_text = _('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Revisión</span>');
+                        $log_text = ('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Revisión</span>');
                     }
                     break;
                 case 'publish':
                     // poner un proyecto en campaña
                     if ($project->publish($errors)) {
-                        $log_text = _('El admin %s ha pasado el proyecto %s al estado <span class="red">en Campaña</span>');
+                        $log_text = ('El admin %s ha pasado el proyecto %s al estado <span class="red">en Campaña</span>');
                     } else {
-                        $log_text = _('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">en Campaña</span>');
+                        $log_text = ('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">en Campaña</span>');
                     }
                     break;
                 case 'cancel':
                     // descartar un proyecto por malo
                     if ($project->cancel($errors)) {
-                        $log_text = _('El admin %s ha pasado el proyecto %s al estado <span class="red">Descartado</span>');
+                        $log_text = ('El admin %s ha pasado el proyecto %s al estado <span class="red">Descartado</span>');
                     } else {
-                        $log_text = _('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Descartado</span>');
+                        $log_text = ('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Descartado</span>');
                     }
                     break;
                 case 'enable':
                     // si no está en edición, recuperarlo
                     if ($project->enable($errors)) {
-                        $log_text = _('El admin %s ha pasado el proyecto %s al estado <span class="red">Edición</span>');
+                        $log_text = ('El admin %s ha pasado el proyecto %s al estado <span class="red">Edición</span>');
                     } else {
-                        $log_text = _('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Edición</span>');
+                        $log_text = ('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Edición</span>');
                     }
                     break;
                 case 'complete':
                     // dar un proyecto por financiado manualmente
                     if ($project->succeed($errors)) {
-                        $log_text = _('El admin %s ha pasado el proyecto %s al estado <span class="red">Financiado</span>');
+                        $log_text = ('El admin %s ha pasado el proyecto %s al estado <span class="red">Financiado</span>');
                     } else {
-                        $log_text = _('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Financiado</span>');
+                        $log_text = ('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Financiado</span>');
                     }
                     break;
                 case 'fulfill':
                     // marcar que el proyecto ha cumplido con los retornos colectivos
                     if ($project->satisfied($errors)) {
-                        $log_text = _('El admin %s ha pasado el proyecto %s al estado <span class="red">Retorno cumplido</span>');
+                        $log_text = ('El admin %s ha pasado el proyecto %s al estado <span class="red">Retorno cumplido</span>');
                     } else {
-                        $log_text = _('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Retorno cumplido</span>');
+                        $log_text = ('Al admin %s le ha fallado al pasar el proyecto %s al estado <span class="red">Retorno cumplido</span>');
                     }
                     break;
             }
@@ -488,7 +488,7 @@ namespace Goteo\Controller {
                  * Evento Feed
                  */
                 $log = new Feed();
-                $log->title = _('Cambio estado/fechas de un proyecto desde el admin');
+                $log->title = ('Cambio estado/fechas de un proyecto desde el admin');
                 $log->url = '/admin/projects';
                 $log->type = 'admin';
                 $log_items = array(
@@ -554,8 +554,8 @@ namespace Goteo\Controller {
             $categories = Model\Project\Category::getAll();
             $owners = Model\User::getOwners();
             $orders = array(
-                'name' => _('Nombre'),
-                'updated' => _('Enviado a revision')
+                'name' => ('Nombre'),
+                'updated' => ('Enviado a revision')
             );
 
             return new View(
@@ -621,16 +621,16 @@ namespace Goteo\Controller {
                         if ($review->save($errors)) {
                             switch ($action) {
                                 case 'add':
-                                    $success[] = _('Revisión iniciada correctamente');
+                                    $success[] = ('Revisión iniciada correctamente');
 
                                     /*
                                      * Evento Feed
                                      */
                                     $log = new Feed();
-                                    $log->title = _('valoración iniciada (admin)');
+                                    $log->title = ('valoración iniciada (admin)');
                                     $log->url = '/admin/reviews';
                                     $log->type = 'admin';
-                                    $log_text = _('El admin %s ha %s la valoración de %s');
+                                    $log_text = ('El admin %s ha %s la valoración de %s');
                                     $log_items = array(
                                         Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                                         Feed::item('relevant', 'Iniciado'),
@@ -643,7 +643,7 @@ namespace Goteo\Controller {
 
                                     break;
                                 case 'edit':
-                                    $success[] = _('Datos editados correctamente');
+                                    $success[] = ('Datos editados correctamente');
                                     break;
                             }
                             
@@ -671,19 +671,19 @@ namespace Goteo\Controller {
 
                     // marcamos la revision como completamente cerrada
                     if (Model\Review::close($id, $errors)) {
-                        $message = _('La revisión se ha cerrado');
+                        $message = ('La revisión se ha cerrado');
 
                         /*
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('valoración finalizada (admin)');
+                        $log->title = ('valoración finalizada (admin)');
                         $log->url = '/admin/reviews';
                         $log->type = 'admin';
-                        $log_text = _('El admin %s ha dado por %s la valoración de %s');
+                        $log_text = ('El admin %s ha dado por %s la valoración de %s');
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                            Feed::item('relevant', _('Finalizada')),
+                            Feed::item('relevant', ('Finalizada')),
                             Feed::item('project', $review->name, $review->project)
                         );
                         $log->html = \vsprintf($log_text, $log_items);
@@ -725,13 +725,13 @@ namespace Goteo\Controller {
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = _('asignar revision (admin)');
+                            $log->title = ('asignar revision (admin)');
                             $log->url = '/admin/reviews';
                             $log->type = 'admin';
-                            $log_text = _('El admin %s ha %s a %s la revisión de %s');
+                            $log_text = ('El admin %s ha %s a %s la revisión de %s');
                             $log_items = array(
                                 Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                                Feed::item('relevant', _('Asignado')),
+                                Feed::item('relevant', ('Asignado')),
                                 Feed::item('user', $userData->name, $userData->id),
                                 Feed::item('project', $reviewData->name, $reviewData->project)
                             );
@@ -762,13 +762,13 @@ namespace Goteo\Controller {
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = _('asignar revision (admin)');
+                            $log->title = ('asignar revision (admin)');
                             $log->url = '/admin/reviews';
                             $log->type = 'admin';
-                            $log_text = _('El admin %s ha %s a %s la revisión de %s');
+                            $log_text = ('El admin %s ha %s a %s la revisión de %s');
                             $log_items = array(
                                 Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                                Feed::item('relevant', _('Desasignado')),
+                                Feed::item('relevant', ('Desasignado')),
                                 Feed::item('user', $userData->name, $userData->id),
                                 Feed::item('project', $reviewData->name, $reviewData->project)
                             );
@@ -807,8 +807,8 @@ namespace Goteo\Controller {
 
             $projects = Model\Review::getList($filters);
             $status = array(
-                'open' => _('Abiertas'),
-                'closed' => _('Cerradas')
+                'open' => ('Abiertas'),
+                'closed' => ('Cerradas')
             );
             $checkers = Model\User::getAll(array('role'=>'checker'));
 
@@ -871,7 +871,7 @@ namespace Goteo\Controller {
                     if (!empty($id)) {
                         $project = Model\Project::getMini($id);
                     } elseif ($action != 'add') {
-                        Message::Error(_('No hay proyecto sobre el que operar'));
+                        Message::Error(('No hay proyecto sobre el que operar'));
                         throw new Redirection('/admin/translates');
                     }
 
@@ -890,11 +890,11 @@ namespace Goteo\Controller {
                         switch ($action) {
                             case 'assign': // se la ponemos
                                 $assignation->save($errors);
-                                $what = _('Asignado');
+                                $what = ('Asignado');
                                 break;
                             case 'unassign': // se la quitamos
                                 $assignation->remove($errors);
-                                $what = _('Desasignado');
+                                $what = ('Desasignado');
                                 break;
                         }
 
@@ -903,10 +903,10 @@ namespace Goteo\Controller {
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = $what . _(' traduccion (admin)');
+                            $log->title = $what . (' traduccion (admin)');
                             $log->url = '/admin/reviews';
                             $log->type = 'admin';
-                            $log_text = _('El admin %s ha %s a %s la traducción del proyecto %s');
+                            $log_text = ('El admin %s ha %s a %s la traducción del proyecto %s');
                             $log_items = array(
                                 Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                                 Feed::item('relevant', $what),
@@ -933,20 +933,20 @@ namespace Goteo\Controller {
                         // ponemos los datos que llegan
                         $sql = "UPDATE project SET lang = :lang, translate = 1 WHERE id = :id";
                         if (Model\Project::query($sql, array(':lang'=>$_POST['lang'], ':id'=>$id))) {
-                            $success[] = ($action == 'add') ? _('El proyecto ').$project->name._(' se ha habilitado para traducir') : _('Datos de traducción actualizados');
+                            $success[] = ($action == 'add') ? ('El proyecto ').$project->name.(' se ha habilitado para traducir') : ('Datos de traducción actualizados');
 
                             if ($action == 'add') {
                                 /*
                                  * Evento Feed
                                  */
                                 $log = new Feed();
-                                $log->title = _('proyecto habilitado para traducirse (admin)');
+                                $log->title = ('proyecto habilitado para traducirse (admin)');
                                 $log->url = '/admin/translates';
                                 $log->type = 'admin';
-                                $log_text = _('El admin %s ha %s la traducción del proyecto %s');
+                                $log_text = ('El admin %s ha %s la traducción del proyecto %s');
                                 $log_items = array(
                                     Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                                    Feed::item('relevant', _('Habilitado')),
+                                    Feed::item('relevant', ('Habilitado')),
                                     Feed::item('project', $project->name, $project->id)
                                 );
                                 $log->html = \vsprintf($log_text, $log_items);
@@ -957,7 +957,7 @@ namespace Goteo\Controller {
                                 $action = 'edit';
                             }
                         } else {
-                            $errors[] = _('Ha fallado al habilitar la traducción del proyecto ') . $project->name;
+                            $errors[] = ('Ha fallado al habilitar la traducción del proyecto ') . $project->name;
                         }
                     }
 
@@ -981,9 +981,9 @@ namespace Goteo\Controller {
                         $mailHandler->html = true;
                         $mailHandler->template = $template->id;
                         if ($mailHandler->send()) {
-                            $success[] = _('Se ha enviado un email a').'<strong>'.$project->user->name.'</strong>'._('a la dirección').'<strong>'.$project->user->email.'</strong>';
+                            $success[] = ('Se ha enviado un email a').'<strong>'.$project->user->name.'</strong>'.('a la dirección').'<strong>'.$project->user->email.'</strong>';
                         } else {
-                            $errors[] = _('Ha fallado informar a').' <strong>'.$project->user->name.'</strong> '._('de la posibilidad de traducción de su proyecto');
+                            $errors[] = ('Ha fallado informar a').' <strong>'.$project->user->name.'</strong> '.('de la posibilidad de traducción de su proyecto');
                         }
                         unset($mailHandler);
                         $action = 'edit';
@@ -1017,7 +1017,7 @@ namespace Goteo\Controller {
                     // el campo translate del proyecto $id a false
                     $sql = "UPDATE project SET translate = 0 WHERE id = :id";
                     if (Model\Project::query($sql, array(':id'=>$id))) {
-                        $success[] = _('La traducción del proyecto ').$project->name._(' se ha finalizado');
+                        $success[] = ('La traducción del proyecto ').$project->name.(' se ha finalizado');
 
                         Model\Project::query("DELETE FROM user_translate WHERE project = :id", array(':id'=>$id));
 
@@ -1025,10 +1025,10 @@ namespace Goteo\Controller {
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('traducción finalizada (admin)');
+                        $log->title = ('traducción finalizada (admin)');
                         $log->url = '/admin/translates';
                         $log->type = 'admin';
-                        $log_text = _('El admin %s ha dado por %s la traducción de %s');
+                        $log_text = ('El admin %s ha dado por %s la traducción de %s');
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                             Feed::item('relevant', 'Finalizada'),
@@ -1039,7 +1039,7 @@ namespace Goteo\Controller {
 
                         unset($log);
                     } else {
-                        $errors[] = _('Falló al finalizar la traducción');
+                        $errors[] = ('Falló al finalizar la traducción');
                     }
                     break;
             }
@@ -1095,7 +1095,7 @@ namespace Goteo\Controller {
 				if ($promo->save($errors)) {
                     switch ($_POST['action']) {
                         case 'add':
-                            $success[] = _('Proyecto destacado correctamente');
+                            $success[] = ('Proyecto destacado correctamente');
 
                             $projectData = Model\Project::getMini($_POST['project']);
 
@@ -1103,13 +1103,13 @@ namespace Goteo\Controller {
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = _('nuevo proyecto destacado en portada (admin)');
+                            $log->title = ('nuevo proyecto destacado en portada (admin)');
                             $log->url = '/admin/promote';
                             $log->type = 'admin';
-                            $log_text = _('El admin %s ha %s el proyecto %s');
+                            $log_text = ('El admin %s ha %s el proyecto %s');
                             $log_items = array(
                                 Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                                Feed::item('relevant', _('Destacado en portada'), '/'),
+                                Feed::item('relevant', ('Destacado en portada'), '/'),
                                 Feed::item('project', $projectData->name, $projectData->id)
                             );
                             $log->html = \vsprintf($log_text, $log_items);
@@ -1119,7 +1119,7 @@ namespace Goteo\Controller {
 
                             break;
                         case 'edit':
-                            $success[] = _('Destacado actualizado correctamente');
+                            $success[] = ('Destacado actualizado correctamente');
                             break;
                     }
 				}
@@ -1183,13 +1183,13 @@ namespace Goteo\Controller {
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('proyecto quitado portada (admin)');
+                        $log->title = ('proyecto quitado portada (admin)');
                         $log->url = '/admin/promote';
                         $log->type = 'admin';
-                        $log_text = _('El admin %s ha %s el proyecto %s');
+                        $log_text = ('El admin %s ha %s el proyecto %s');
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                            Feed::item('relevant', _('Quitado de la portada')),
+                            Feed::item('relevant', ('Quitado de la portada')),
                             Feed::item('project', $projectData->name, $projectData->id)
                         );
                         $log->html = \vsprintf($log_text, $log_items);
@@ -1197,7 +1197,7 @@ namespace Goteo\Controller {
 
                         unset($log);
 
-                        $success[] = _('Proyecto quitado correctamente');
+                        $success[] = ('Proyecto quitado correctamente');
                     }
                     break;
                 case 'add':
@@ -1278,7 +1278,7 @@ namespace Goteo\Controller {
                 }
 
 				if ($banner->save($errors)) {
-                    $success[] = _('Datos guardados');
+                    $success[] = ('Datos guardados');
 
                     if ($_POST['action'] == 'add') {
                         $projectData = Model\Project::getMini($_POST['project']);
@@ -1287,13 +1287,13 @@ namespace Goteo\Controller {
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('nuevo banner de proyecto destacado en portada (admin)');
+                        $log->title = ('nuevo banner de proyecto destacado en portada (admin)');
                         $log->url = '/admin/promote';
                         $log->type = 'admin';
-                        $log_text = _('El admin %s ha %s del proyecto %s');
+                        $log_text = ('El admin %s ha %s del proyecto %s');
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                            Feed::item('relevant', _('Publicado un banner'), '/'),
+                            Feed::item('relevant', ('Publicado un banner'), '/'),
                             Feed::item('project', $projectData->name, $projectData->id)
                         );
                         $log->html = \vsprintf($log_text, $log_items);
@@ -1349,13 +1349,13 @@ namespace Goteo\Controller {
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('banner de proyecto quitado portada (admin)');
+                        $log->title = ('banner de proyecto quitado portada (admin)');
                         $log->url = '/admin/promote';
                         $log->type = 'admin';
-                        $log_text = _('El admin %s ha %s del proyecto %s');
+                        $log_text = ('El admin %s ha %s del proyecto %s');
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                            Feed::item('relevant', _('Quitado el banner'), '/'),
+                            Feed::item('relevant', ('Quitado el banner'), '/'),
                             Feed::item('project', $projectData->name, $projectData->id)
                         );
                         $log->html = \vsprintf($log_text, $log_items);
@@ -1451,10 +1451,10 @@ namespace Goteo\Controller {
 				if ($faq->save($errors)) {
                     switch ($_POST['action']) {
                         case 'add':
-                            $success = _('Pregunta añadida correctamente');
+                            $success = ('Pregunta añadida correctamente');
                             break;
                         case 'edit':
-                            $success = _('Pregunta editado correctamente');
+                            $success = ('Pregunta editado correctamente');
                             break;
                     }
 				}
@@ -1576,10 +1576,10 @@ namespace Goteo\Controller {
 				if ($criteria->save($errors)) {
                     switch ($_POST['action']) {
                         case 'add':
-                            $success = _('Criterio añadido correctamente');
+                            $success = ('Criterio añadido correctamente');
                             break;
                         case 'edit':
-                            $success = _('Criterio editado correctamente');
+                            $success = ('Criterio editado correctamente');
                             break;
                     }
 				}
@@ -1700,19 +1700,19 @@ namespace Goteo\Controller {
 				if ($icon->save($errors)) {
                     switch ($_POST['action']) {
                         case 'add':
-                            $success = _('Nuevo tipo añadido correctamente');
+                            $success = ('Nuevo tipo añadido correctamente');
                             break;
                         case 'edit':
-                            $success = _('Tipo editado correctamente');
+                            $success = ('Tipo editado correctamente');
 
                             /*
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = _('modificacion de tipo de retorno/recompensa (admin)');
+                            $log->title = ('modificacion de tipo de retorno/recompensa (admin)');
                             $log->url = '/admin/icons';
                             $log->type = 'admin';
-                            $log_text = _("El admin %s ha %s el tipo de retorno/recompensa %s");
+                            $log_text = ("El admin %s ha %s el tipo de retorno/recompensa %s");
                             $log_items = array(
                                 Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                                 Feed::item('relevant', 'Modificado'),
@@ -1848,19 +1848,19 @@ namespace Goteo\Controller {
 				if ($license->save($errors)) {
                     switch ($_POST['action']) {
                         case 'add':
-                            $success = _('Licencia añadida correctamente');
+                            $success = ('Licencia añadida correctamente');
                             break;
                         case 'edit':
-                            $success = _('Licencia editada correctamente');
+                            $success = ('Licencia editada correctamente');
 
                             /*
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = _('modificacion de licencia (admin)');
+                            $log->title = ('modificacion de licencia (admin)');
                             $log->url = '/admin/licenses';
                             $log->type = 'admin';
-                            $log_text = _("El admin %s ha %s la licencia %s");
+                            $log_text = ("El admin %s ha %s la licencia %s");
                             $log_items = array(
                                 Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                                 Feed::item('relevant', 'Modificado'),
@@ -1979,7 +1979,7 @@ namespace Goteo\Controller {
                 ));
 
 				if ($post->update($errors)) {
-                    $success[] = _('Entrada colocada en la portada correctamente');
+                    $success[] = ('Entrada colocada en la portada correctamente');
 				}
 				else {
                     return new View(
@@ -2066,7 +2066,7 @@ namespace Goteo\Controller {
                 ));
 
 				if ($post->update($errors)) {
-                    $success[] = _('Entrada colocada en el footer correctamente');
+                    $success[] = ('Entrada colocada en el footer correctamente');
 				}
 				else {
                     return new View(
@@ -2158,22 +2158,22 @@ namespace Goteo\Controller {
                                 'action' => "$url/edit/",
                                 'submit' => array(
                                     'name' => 'update',
-                                    'label' => _('Añadir')
+                                    'label' => ('Añadir')
                                 ),
                                 'fields' => array (
                                     'id' => array(
-                                        'label' => _(''),
+                                        'label' => (''),
                                         'name' => 'id',
                                         'type' => 'hidden'
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Categoría'),
+                                        'label' => ('Categoría'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     ),
                                     'description' => array(
-                                        'label' => _('Descripción'),
+                                        'label' => ('Descripción'),
                                         'name' => 'description',
                                         'type' => 'textarea',
                                         'properties' => 'cols="100" rows="2"',
@@ -2227,12 +2227,12 @@ namespace Goteo\Controller {
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Categoría'),
+                                        'label' => ('Categoría'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     ),
                                     'description' => array(
-                                        'label' => _('Descripción'),
+                                        'label' => ('Descripción'),
                                         'name' => 'description',
                                         'type' => 'textarea',
                                         'properties' => 'cols="100" rows="2"',
@@ -2265,14 +2265,14 @@ namespace Goteo\Controller {
                     'folder' => 'base',
                     'file' => 'list',
                     'model' => 'category',
-                    'addbutton' => _('Nueva categoría'),
+                    'addbutton' => ('Nueva categoría'),
                     'data' => $model::getAll(),
                     'columns' => array(
                         'edit' => '',
-                        'name' => _('Categoría'),
-                        'numProj' => _('Proyectos'),
-                        'numUser' => _('Usuarios'),
-                        'order' => _('Prioridad'),
+                        'name' => ('Categoría'),
+                        'numProj' => ('Proyectos'),
+                        'numUser' => ('Usuarios'),
+                        'order' => ('Prioridad'),
                         'translate' => '',
                         'up' => '',
                         'down' => '',
@@ -2317,7 +2317,7 @@ namespace Goteo\Controller {
                                 'action' => "$url/edit/",
                                 'submit' => array(
                                     'name' => 'update',
-                                    'label' => _('Añadir')
+                                    'label' => ('Añadir')
                                 ),
                                 'fields' => array (
                                     'id' => array(
@@ -2327,7 +2327,7 @@ namespace Goteo\Controller {
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Tag'),
+                                        'label' => ('Tag'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     )
@@ -2373,13 +2373,13 @@ namespace Goteo\Controller {
                                 ),
                                 'fields' => array (
                                     'id' => array(
-                                        'label' => _(''),
+                                        'label' => (''),
                                         'name' => 'id',
                                         'type' => 'hidden'
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Tag'),
+                                        'label' => ('Tag'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     )
@@ -2404,7 +2404,7 @@ namespace Goteo\Controller {
                     'folder' => 'base',
                     'file' => 'list',
                     'model' => 'tag',
-                    'addbutton' => _('Nuevo tag'),
+                    'addbutton' => ('Nuevo tag'),
                     'data' => $model::getList(1),
                     'columns' => array(
                         'edit' => '',
@@ -2506,10 +2506,10 @@ namespace Goteo\Controller {
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = _('Operación sobre usuario (admin)');
+                            $log->title = ('Operación sobre usuario (admin)');
                             $log->url = '/admin/users';
                             $log->type = 'user';
-                            $log_text = _('El admin %s ha %s del usuario %s');
+                            $log_text = ('El admin %s ha %s del usuario %s');
                             $log_items = array(
                                 Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                                 Feed::item('relevant', 'Tocado ' . implode (' y ', $tocado)),
@@ -2522,7 +2522,7 @@ namespace Goteo\Controller {
 
 
                             // mensaje de ok y volvemos a la lista de usuarios
-                            Message::Info(_('Datos actualizados'));
+                            Message::Info(('Datos actualizados'));
                             throw new Redirection('/admin/users');
                             
                         } else {
@@ -2553,43 +2553,43 @@ namespace Goteo\Controller {
                     switch ($subaction)  {
                         case 'ban':
                             $sql = "UPDATE user SET active = 0 WHERE id = :user";
-                            $log_action = _('Desactivado');
+                            $log_action = ('Desactivado');
                             break;
                         case 'unban':
                             $sql = "UPDATE user SET active = 1 WHERE id = :user";
-                            $log_action = _('Activado');
+                            $log_action = ('Activado');
                             break;
                         case 'show':
                             $sql = "UPDATE user SET hide = 0 WHERE id = :user";
-                            $log_action = _('Mostrado');
+                            $log_action = ('Mostrado');
                             break;
                         case 'hide':
                             $sql = "UPDATE user SET hide = 1 WHERE id = :user";
-                            $log_action = _('Ocultado');
+                            $log_action = ('Ocultado');
                             break;
                         case 'checker':
                             $sql = "REPLACE INTO user_role (user_id, role_id) VALUES (:user, 'checker')";
-                            $log_action = _('Hecho revisor');
+                            $log_action = ('Hecho revisor');
                             break;
                         case 'nochecker':
                             $sql = "DELETE FROM user_role WHERE role_id = 'checker' AND user_id = :user";
-                            $log_action = _('Quitado de revisor');
+                            $log_action = ('Quitado de revisor');
                             break;
                         case 'translator':
                             $sql = "REPLACE INTO user_role (user_id, role_id) VALUES (:user, 'translator')";
-                            $log_action = _('Hecho traductor');
+                            $log_action = ('Hecho traductor');
                             break;
                         case 'notranslator':
                             $sql = "DELETE FROM user_role WHERE role_id = 'translator' AND user_id = :user";
-                            $log_action = _('Quitado de traductor');
+                            $log_action = ('Quitado de traductor');
                             break;
                         case 'admin':
                             $sql = "REPLACE INTO user_role (user_id, role_id) VALUES (:user, 'admin')";
-                            $log_action = _('Hecho admin');
+                            $log_action = ('Hecho admin');
                             break;
                         case 'noadmin':
                             $sql = "DELETE FROM user_role WHERE role_id = 'admin' AND user_id = :user";
-                            $log_action = _('Quitado de admin');
+                            $log_action = ('Quitado de admin');
                             break;
                     }
 
@@ -2601,18 +2601,18 @@ namespace Goteo\Controller {
                         if (Model\User::query($sql, array(':user'=>$id))) {
                             
                             // mensaje de ok y volvemos a la gestion del usuario
-                            $msgi = _("Ha <strong>%s</strong> al usuario <strong>%s</strong> CORRECTAMENTE");
+                            $msgi = ("Ha <strong>%s</strong> al usuario <strong>%s</strong> CORRECTAMENTE");
                             $msgi = sprintf($msgi, $log_action, $user->name);
                             Message::Info( $msgi );
-                            $log_text = _('El admin %s ha %s al usuario %s');
+                            $log_text = ('El admin %s ha %s al usuario %s');
 
                         } else {
 
                             // mensaje de error y volvemos a la gestion del usuario
-                            $msgi = _("Ha FALLADO cuando ha <strong>%s</strong> al usuario <strong>%s</strong>");
+                            $msgi = ("Ha FALLADO cuando ha <strong>%s</strong> al usuario <strong>%s</strong>");
                             $msgi = sprintf( $msgi, $log_action, $id);
                             Message::Error( $msgi );
-                            $log_text = _("Al admin %s le ha <strong>FALLADO</strong> cuando ha %s al usuario %s");
+                            $log_text = ("Al admin %s le ha <strong>FALLADO</strong> cuando ha %s al usuario %s");
 
                         }
 
@@ -2620,7 +2620,7 @@ namespace Goteo\Controller {
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('Operación sobre usuario (admin)');
+                        $log->title = ('Operación sobre usuario (admin)');
                         $log->url = '/admin/users';
                         $log->type = 'user';
                         $log_items = array(
@@ -2711,18 +2711,18 @@ namespace Goteo\Controller {
                 default:
                     $users = Model\User::getAll($filters);
                     $status = array(
-                                'active' => _('Activo'),
-                                'inactive' => _('Inactivo')
+                                'active' => ('Activo'),
+                                'inactive' => ('Inactivo')
                             );
                     $interests = Model\User\Interest::getAll();
                     $roles = array(
-                        'admin' => _('Administrador'),
-                        'checker' => _('Revisor'),
-                        'translator' => _('Traductor')
+                        'admin' => ('Administrador'),
+                        'checker' => ('Revisor'),
+                        'translator' => ('Traductor')
                     );
                     $orders = array(
-                        'created' => _('Fecha de alta'),
-                        'name' => _('Nombre')
+                        'created' => ('Fecha de alta'),
+                        'name' => ('Nombre')
                     );
 
                     return new View(
@@ -2770,7 +2770,7 @@ namespace Goteo\Controller {
 
                 //el original tiene que ser de tpv o cash y estar como 'cargo ejecutado'
                 if ($original->method == 'paypal' || $original->status != 1) {
-                    Message::Error(_('No se puede reubicar este aporte!'));
+                    Message::Error(('No se puede reubicar este aporte!'));
                     throw new Redirection('/admin/invests');
                 }
 
@@ -2822,10 +2822,10 @@ namespace Goteo\Controller {
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = _('Aporte reubicado');
+                            $log->title = ('Aporte reubicado');
                             $log->url = '/admin/invests';
                             $log->type = 'money';
-                            $log_text = _("%s ha aportado %s al proyecto %s en nombre de %s");
+                            $log_text = ("%s ha aportado %s al proyecto %s en nombre de %s");
                             $log_items = array(
                                 Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                                 Feed::item('money', $_POST['amount'].' &euro;'),
@@ -2836,14 +2836,14 @@ namespace Goteo\Controller {
                             $log->add($errors);
                             unset($log);
 
-                            Message::Info(_('Aporte reubicado correctamente'));
+                            Message::Info(('Aporte reubicado correctamente'));
                             throw new Redirection('/admin/invests');
                         } else {
-							$msgi = _("A fallado al cambiar el estado del aporte original (%s)");
+							$msgi = ("A fallado al cambiar el estado del aporte original (%s)");
                             $errors[] = sprintf($msgi, $original->id);
                         }
                     } else{
-                        $errors[] = _('Ha fallado algo al reubicar el aporte');
+                        $errors[] = ('Ha fallado algo al reubicar el aporte');
                     }
 
                 }
@@ -2903,10 +2903,10 @@ namespace Goteo\Controller {
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('Aporte manual');
+                        $log->title = ('Aporte manual');
                         $log->url = '/admin/invests';
                         $log->type = 'money';
-                        $log_text = _("%s ha aportado %s al proyecto %s en nombre de %s");
+                        $log_text = ("%s ha aportado %s al proyecto %s en nombre de %s");
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                             Feed::item('money', $_POST['amount'].' &euro;'),
@@ -2917,10 +2917,10 @@ namespace Goteo\Controller {
                         $log->add($errors);
                         unset($log);
                         
-                        Message::Info( _('Aporte manual creado correctamente') );
+                        Message::Info( ('Aporte manual creado correctamente') );
                         throw new Redirection('/admin/invests');
                     } else{
-                        $errors[] = _('Ha fallado algo al crear el aporte manual');
+                        $errors[] = ('Ha fallado algo al crear el aporte manual');
                     }
 
                 }
@@ -2968,10 +2968,10 @@ namespace Goteo\Controller {
                 $campaigns = Model\Invest::campaigns();
                 // extras
                 $types = array(
-                    'donative' => _('Solo los donativos'),
-                    'anonymous' => _('Solo los anónimos'),
-                    'manual' => _('Solo los manuales'),
-                    'campaign' => _('Solo los de Bolsa'),
+                    'donative' => ('Solo los donativos'),
+                    'anonymous' => ('Solo los anónimos'),
+                    'manual' => ('Solo los manuales'),
+                    'campaign' => ('Solo los de Bolsa'),
                 );
 
            }
@@ -2981,7 +2981,7 @@ namespace Goteo\Controller {
                 // estados de aporte
                 $project = Model\Project::get($id);
                 if (!$project instanceof Model\Project) {
-                    Message::Error(_('Instancia de proyecto no valida'));
+                    Message::Error(('Instancia de proyecto no valida'));
                     throw new Redirection('/admin/invests');
                 }
                 $invests = Model\Invest::getAll($id);
@@ -3015,7 +3015,7 @@ namespace Goteo\Controller {
             if ($action == 'cancel') {
 
                 if ($project->status > 3 && $project->status < 6) {
-                    $errors[] = _('No debería poderse cancelar un aporte cuando el proyecto ya está financiado. Si es imprescindible, hacerlo desde el panel de paypal o tpv');
+                    $errors[] = ('No debería poderse cancelar un aporte cuando el proyecto ya está financiado. Si es imprescindible, hacerlo desde el panel de paypal o tpv');
                     break;
                 }
 
@@ -3023,16 +3023,16 @@ namespace Goteo\Controller {
                     case 'paypal':
                         $err = array();
                         if (Paypal::cancelPreapproval($invest, $err)) {
-                            $errors[] = _('Preaproval paypal cancelado.');
-                            $log_text = _("El admin %s ha cancelado aporte y preapproval de %s de %s mediante PayPal (id: %s) al proyecto %s del dia %s");
+                            $errors[] = ('Preaproval paypal cancelado.');
+                            $log_text = ("El admin %s ha cancelado aporte y preapproval de %s de %s mediante PayPal (id: %s) al proyecto %s del dia %s");
                         } else {
                             $txt_errors = implode('; ', $err);
-                            $errors[] = _('Fallo al cancelar el preapproval en paypal: ') . $txt_errors;
-                            $log_text = _("El admin %s ha fallado al cancelar el aporte de %s de %s mediante PayPal (id: %s) al proyecto %s del dia %s. <br />Se han dado los siguientes errores: ").$txt_errors;
+                            $errors[] = ('Fallo al cancelar el preapproval en paypal: ') . $txt_errors;
+                            $log_text = ("El admin %s ha fallado al cancelar el aporte de %s de %s mediante PayPal (id: %s) al proyecto %s del dia %s. <br />Se han dado los siguientes errores: ").$txt_errors;
                             if ($invest->cancel()) {
-                                $errors[] = _('Aporte cancelado');
+                                $errors[] = ('Aporte cancelado');
                             } else{
-                                $errors[] = _('Fallo al cancelar el aporte');
+                                $errors[] = ('Fallo al cancelar el aporte');
                             }
                         }
                         break;
@@ -3040,21 +3040,21 @@ namespace Goteo\Controller {
                         $err = array();
                         if (Tpv::cancelPreapproval($invest, $err)) {
                             $txt_errors = implode('; ', $err);
-                            $errors[] = _('Aporte cancelado correctamente. ') . $txt_errors;
-                            $log_text = _("El admin %s ha anulado el cargo tpv de %s de %s mediante TPV (id: %s) al proyecto %s del dia %s");
+                            $errors[] = ('Aporte cancelado correctamente. ') . $txt_errors;
+                            $log_text = ("El admin %s ha anulado el cargo tpv de %s de %s mediante TPV (id: %s) al proyecto %s del dia %s");
                         } else {
                             $txt_errors = implode('; ', $err);
-                            $errors[] = _('Fallo en la operación. ') . $txt_errors;
-                            $log_text = _("El admin %s ha fallado al solicitar la cancelación del cargo tpv de %s de %s mediante TPV (id: %s) al proyecto %s del dia %s. <br />Se han dado los siguientes errores: $txt_errors");
+                            $errors[] = ('Fallo en la operación. ') . $txt_errors;
+                            $log_text = ("El admin %s ha fallado al solicitar la cancelación del cargo tpv de %s de %s mediante TPV (id: %s) al proyecto %s del dia %s. <br />Se han dado los siguientes errores: $txt_errors");
                         }
                         break;
                     case 'cash':
                         if ($invest->cancel()) {
-                            $log_text = _("El admin %s ha cancelado aporte manual de %s de %s (id: %s) al proyecto %s del dia %s");
-                            $errors[] = _('Aporte cancelado');
+                            $log_text = ("El admin %s ha cancelado aporte manual de %s de %s (id: %s) al proyecto %s del dia %s");
+                            $errors[] = ('Aporte cancelado');
                         } else{
-                            $log_text = _("El admin %s ha fallado al cancelar el aporte manual de %s de %s (id: %s) al proyecto %s del dia %s. ");
-                            $errors[] = _('Fallo al cancelar el aporte');
+                            $log_text = ("El admin %s ha fallado al cancelar el aporte manual de %s de %s (id: %s) al proyecto %s del dia %s. ");
+                            $errors[] = ('Fallo al cancelar el aporte');
                         }
                         break;
                 }
@@ -3063,7 +3063,7 @@ namespace Goteo\Controller {
                  * Evento Feed
                  */
                 $log = new Feed();
-                $log->title = _('Cargo cancelado (admin)');
+                $log->title = ('Cargo cancelado (admin)');
                 $log->url = '/admin/invests';
                 $log->type = 'system';
                 $log_items = array(
@@ -3088,20 +3088,20 @@ namespace Goteo\Controller {
                         $projectAccount = Model\Project\Account::get($invest->project);
 
                         if (empty($projectAccount->paypal)) {
-                            $errors[] = _('El proyecto no tiene cuenta paypal!!, ponersela en la seccion Contrato del dashboard del autor');
+                            $errors[] = ('El proyecto no tiene cuenta paypal!!, ponersela en la seccion Contrato del dashboard del autor');
                             $log_text = null;
                             // Erroraco!
                             /*
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = _('proyecto sin cuenta paypal (admin)');
+                            $log->title = ('proyecto sin cuenta paypal (admin)');
                             $log->url = '/admin/projects';
                             $log->type = 'project';
-                            $log_text = _('El proyecto %s aun no ha puesto su %s !!!');
+                            $log_text = ('El proyecto %s aun no ha puesto su %s !!!');
                             $log_items = array(
                                 Feed::item('project', $project->name, $project->id),
-                                Feed::item('relevant', _('cuenta PayPal'))
+                                Feed::item('relevant', ('cuenta PayPal'))
                             );
                             $log->html = \vsprintf($log_text, $log_items);
                             $log->add($errors);
@@ -3113,30 +3113,30 @@ namespace Goteo\Controller {
 
                         $invest->account = $projectAccount->paypal;
                         if (Paypal::pay($invest, $errors)) {
-                            $errors[] = _('Cargo paypal correcto');
-                            $log_text = _("El admin %s ha ejecutado el cargo a %s por su aporte de %s mediante PayPal (id: %s) al proyecto %s del dia %s");
+                            $errors[] = ('Cargo paypal correcto');
+                            $log_text = ("El admin %s ha ejecutado el cargo a %s por su aporte de %s mediante PayPal (id: %s) al proyecto %s del dia %s");
                             $invest->status = 1;
                         } else {
                             $txt_errors = implode('; ', $errors);
-                            $errors[] = _('Fallo al ejecutar cargo paypal: ') . $txt_errors;
-                            $log_text = _("El admin %s ha fallado al ejecutar el cargo a %s por su aporte de %s mediante PayPal (id: %s) al proyecto %s del dia %s. <br />Se han dado los siguientes errores: $txt_errors");
+                            $errors[] = ('Fallo al ejecutar cargo paypal: ') . $txt_errors;
+                            $log_text = ("El admin %s ha fallado al ejecutar el cargo a %s por su aporte de %s mediante PayPal (id: %s) al proyecto %s del dia %s. <br />Se han dado los siguientes errores: $txt_errors");
                         }
                         break;
                     case 'tpv':
                         if (Tpv::pay($invest, $errors)) {
-                            $errors[] = _('Cargo sermepa correcto');
-                            $log_text = _("El admin %s ha ejecutado el cargo a %s por su aporte de %s mediante TPV (id: %s) al proyecto %s del dia %s");
+                            $errors[] = ('Cargo sermepa correcto');
+                            $log_text = ("El admin %s ha ejecutado el cargo a %s por su aporte de %s mediante TPV (id: %s) al proyecto %s del dia %s");
                             $invest->status = 1;
                         } else {
                             $txt_errors = implode('; ', $errors);
-                            $errors[] = _('Fallo al ejecutar cargo sermepa: ') . $txt_errors;
-                            $log_text = _("El admin %s ha fallado al ejecutar el cargo a %s por su aporte de %s mediante TPV (id: %s) al proyecto %s del dia %s <br />Se han dado los siguientes errores: $txt_errors");
+                            $errors[] = ('Fallo al ejecutar cargo sermepa: ') . $txt_errors;
+                            $log_text = ("El admin %s ha fallado al ejecutar el cargo a %s por su aporte de %s mediante TPV (id: %s) al proyecto %s del dia %s <br />Se han dado los siguientes errores: $txt_errors");
                         }
                         break;
                     case 'cash':
                         $invest->setStatus('1');
-                        $errors[] = _('Aporte al contado, nada que ejecutar.');
-                        $log_text = _("El admin %s ha dado por ejecutado el aporte manual a nombre de %s por la cantidad de %s (id: %s) al proyecto %s del dia %s");
+                        $errors[] = ('Aporte al contado, nada que ejecutar.');
+                        $log_text = ("El admin %s ha dado por ejecutado el aporte manual a nombre de %s por la cantidad de %s (id: %s) al proyecto %s del dia %s");
                         $invest->status = 1;
                         break;
                 }
@@ -3146,7 +3146,7 @@ namespace Goteo\Controller {
                      * Evento Feed
                      */
                     $log = new Feed();
-                    $log->title = _('Cargo ejecutado (admin)');
+                    $log->title = ('Cargo ejecutado (admin)');
                     $log->url = '/admin/invests';
                     $log->type = 'system';
                     $log_items = array(
@@ -3268,10 +3268,10 @@ namespace Goteo\Controller {
 
             // filtros de revisión de proyecto
             $review = array(
-                'collect' => _('Recaudado'),
-                'paypal'  => _('Rev. PayPal'),
-                'tpv'     => _('Rev. TPV'),
-                'online'  => _('Pagos Online')
+                'collect' => ('Recaudado'),
+                'paypal'  => ('Rev. PayPal'),
+                'tpv'     => ('Rev. TPV'),
+                'online'  => ('Pagos Online')
             );
 
 
@@ -3369,8 +3369,8 @@ namespace Goteo\Controller {
             }
 
             $status = array(
-                        'nok' => _('Pendiente'),
-                        'ok'  => _('Cumplido')
+                        'nok' => ('Pendiente'),
+                        'ok'  => ('Cumplido')
                         
                     );
             $icons = Model\Icon::getAll('social');
@@ -3403,18 +3403,18 @@ namespace Goteo\Controller {
 
             $blog = Model\Blog::get(\GOTEO_NODE, 'node');
             if (!$blog instanceof \Goteo\Model\Blog) {
-                $errors[] = _('No tiene espacio de blog, Contacte con nosotros');
+                $errors[] = ('No tiene espacio de blog, Contacte con nosotros');
                 $action = 'list';
             } else {
                 if (!$blog->active) {
-                    $errors[] = _('Lo sentimos, el blog para este nodo esta desactivado');
+                    $errors[] = ('Lo sentimos, el blog para este nodo esta desactivado');
                     $action = 'list';
                 }
             }
 
             // primero comprobar que tenemos blog
             if (!$blog instanceof Model\Blog) {
-                $errors[] = _('No se ha encontrado ningún blog para este nodo');
+                $errors[] = ('No se ha encontrado ningún blog para este nodo');
                 $action = 'list';
             }
 
@@ -3479,10 +3479,10 @@ namespace Goteo\Controller {
                     /// este es el único save que se lanza desde un metodo process_
                     if ($post->save($errors)) {
                         if ($action == 'edit') {
-                            $success[] = _('La entrada se ha actualizado correctamente');
+                            $success[] = ('La entrada se ha actualizado correctamente');
                             ////Text::get('dashboard-project-updates-saved');
                         } else {
-                            $success[] = _('Se ha añadido una nueva entrada');
+                            $success[] = ('Se ha añadido una nueva entrada');
                             ////Text::get('dashboard-project-updates-inserted');
                             $id = $post->id;
                         }
@@ -3493,10 +3493,10 @@ namespace Goteo\Controller {
                              * Evento Feed
                              */
                             $log = new Feed();
-                            $log->title = _('nueva entrada blog Goteo (admin)');
+                            $log->title = ('nueva entrada blog Goteo (admin)');
                             $log->url = '/admin/blog';
                             $log->type = 'admin';
-                            $log_text = _('El admin %s ha %s en el blog Goteo la entrada "%s"');
+                            $log_text = ('El admin %s ha %s en el blog Goteo la entrada "%s"');
                             $log_items = array(
                                 Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                                 Feed::item('relevant', 'Publicado'),
@@ -3522,7 +3522,7 @@ namespace Goteo\Controller {
                         }
 
                     } else {
-                        $errors[] = _('Ha habido algun problema al guardar los datos');
+                        $errors[] = ('Ha habido algun problema al guardar los datos');
                         ////Text::get('dashboard-project-updates-fail');
                     }
             }
@@ -3545,13 +3545,13 @@ namespace Goteo\Controller {
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('entrada quitada (admin)');
+                        $log->title = ('entrada quitada (admin)');
                         $log->url = '/admin/blog';
                         $log->type = 'admin';
-                        $log_text = _('El admin %s ha %s la entrada "%s" del blog de Goteo');
+                        $log_text = ('El admin %s ha %s la entrada "%s" del blog de Goteo');
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                            Feed::item('relevant', _('Quitado')),
+                            Feed::item('relevant', ('Quitado')),
                             Feed::item('blog', $tempData->title)
                         );
                         $log->html = \vsprintf($log_text, $log_items);
@@ -3560,9 +3560,9 @@ namespace Goteo\Controller {
                         unset($log);
 
                         unset($blog->posts[$id]);
-                        $success[] = _('Entrada eliminada');
+                        $success[] = ('Entrada eliminada');
                     } else {
-                        $errors[] = _('No se ha podido eliminar la entrada');
+                        $errors[] = ('No se ha podido eliminar la entrada');
                     }
                     // no break para que continue con list
                 case 'list':
@@ -3594,7 +3594,7 @@ namespace Goteo\Controller {
                             )
                         );
 
-                    $message = _('Añadiendo una nueva entrada');
+                    $message = ('Añadiendo una nueva entrada');
 
                     return new View(
                         'view/admin/index.html.php',
@@ -3621,14 +3621,14 @@ namespace Goteo\Controller {
                         $post = Model\Blog\Post::get($id);
 
                         if (!$post instanceof Model\Blog\Post) {
-                            $errors[] = _('La entrada esta corrupta, contacte con nosotros.');
+                            $errors[] = ('La entrada esta corrupta, contacte con nosotros.');
                             //Text::get('dashboard-project-updates-postcorrupt');
                             $action = 'list';
                             break;
                         }
                     }
 
-                    $message = _('Editando una entrada existente');
+                    $message = ('Editando una entrada existente');
 
                     return new View(
                         'view/admin/index.html.php',
@@ -3704,14 +3704,14 @@ namespace Goteo\Controller {
                     /// este es el único save que se lanza desde un metodo process_
                     if ($post->save($errors)) {
                         if ($action == 'edit') {
-                            $success[] = _('El término se ha actualizado correctamente');
+                            $success[] = ('El término se ha actualizado correctamente');
                         } else {
-                            $success[] = _('Se ha añadido un nuevo término');
+                            $success[] = ('Se ha añadido un nuevo término');
                             $id = $post->id;
                         }
                         $action = $editing ? 'edit' : 'list';
                     } else {
-                        $errors[] = _('Ha habido algun problema al guardar los datos');
+                        $errors[] = ('Ha habido algun problema al guardar los datos');
                     }
             }
 
@@ -3728,9 +3728,9 @@ namespace Goteo\Controller {
                 case 'remove':
                     // eliminar un término
                     if (Model\Glossary::delete($id)) {
-                        $success[] = _('Término eliminado');
+                        $success[] = ('Término eliminado');
                     } else {
-                        $errors[] = _('No se ha podido eliminar el término');
+                        $errors[] = ('No se ha podido eliminar el término');
                     }
                     break;
                 case 'add':
@@ -3738,7 +3738,7 @@ namespace Goteo\Controller {
                     // obtenemos datos basicos
                     $post = new Model\Glossary();
 
-                    $message = _('Añadiendo un nuevo término');
+                    $message = ('Añadiendo un nuevo término');
 
                     return new View(
                         'view/admin/index.html.php',
@@ -3761,14 +3761,14 @@ namespace Goteo\Controller {
                         $post = Model\Glossary::get($id);
 
                         if (!$post instanceof Model\Glossary) {
-                            $errors[] = _('La entrada esta corrupta, contacte con nosotros.');
+                            $errors[] = ('La entrada esta corrupta, contacte con nosotros.');
                             //Text::get('dashboard-project-updates-postcorrupt');
                             $action = 'list';
                             break;
                         }
                     }
 
-                    $message = _('Editando un término existente');
+                    $message = ('Editando un término existente');
 
                     return new View(
                         'view/admin/index.html.php',
@@ -3860,18 +3860,18 @@ namespace Goteo\Controller {
                     /// este es el único save que se lanza desde un metodo process_
                     if ($post->save($errors)) {
                         if ($action == 'edit') {
-                            $success[] = _('La entrada se ha actualizado correctamente');
+                            $success[] = ('La entrada se ha actualizado correctamente');
 
                             if ((bool) $post->publish) {
-                                $log_action = _('Publicado');
+                                $log_action = ('Publicado');
                             } else {
-                                $log_action = _('Modificado');
+                                $log_action = ('Modificado');
                             }
 
                         } else {
-                            $success[] = _('Se ha añadido una nueva entrada');
+                            $success[] = ('Se ha añadido una nueva entrada');
                             $id = $post->id;
-                            $log_action = _('Añadido');
+                            $log_action = ('Añadido');
                         }
                         $action = $editing ? 'edit' : 'list';
 
@@ -3879,10 +3879,10 @@ namespace Goteo\Controller {
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('modificacion de idea about (admin)');
+                        $log->title = ('modificacion de idea about (admin)');
                         $log->url = '/admin/info';
                         $log->type = 'admin';
-                        $log_text = _('El admin %s ha %s la Idea de fuerza "%s"');
+                        $log_text = ('El admin %s ha %s la Idea de fuerza "%s"');
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                             Feed::item('relevant', $log_action),
@@ -3893,7 +3893,7 @@ namespace Goteo\Controller {
                         unset($log);
 
                     } else {
-                        $errors[] = _('Ha habido algun problema al guardar los datos');
+                        $errors[] = ('Ha habido algun problema al guardar los datos');
                     }
             }
 
@@ -3917,19 +3917,19 @@ namespace Goteo\Controller {
                     $tempData = Model\Info::get($id);
                     // eliminar un término
                     if (Model\Info::delete($id)) {
-                        $success[] = _('Entrada eliminada');
+                        $success[] = ('Entrada eliminada');
 
                         /*
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('quitar de idea about (admin)');
+                        $log->title = ('quitar de idea about (admin)');
                         $log->url = '/admin/info';
                         $log->type = 'admin';
-                        $log_text = _('El admin %s ha %s la Idea de fuerza "%s"');
+                        $log_text = ('El admin %s ha %s la Idea de fuerza "%s"');
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                            Feed::item('relevant', _('Eliminado')),
+                            Feed::item('relevant', ('Eliminado')),
                             Feed::item('relevant', $tempData->title)
                         );
                         $log->html = \vsprintf($log_text, $log_items);
@@ -3937,7 +3937,7 @@ namespace Goteo\Controller {
                         unset($log);
 
                     } else {
-                        $errors[] = _('No se ha podido eliminar la entrada');
+                        $errors[] = ('No se ha podido eliminar la entrada');
                     }
                     break;
                 case 'add':
@@ -3947,7 +3947,7 @@ namespace Goteo\Controller {
                         $post = new Model\Info();
                     }
 
-                    $message = _('Añadiendo una nueva entrada');
+                    $message = ('Añadiendo una nueva entrada');
 
                     return new View(
                         'view/admin/index.html.php',
@@ -3970,14 +3970,14 @@ namespace Goteo\Controller {
                         $post = Model\Info::get($id);
 
                         if (!$post instanceof Model\Info) {
-                            $errors[] = _('La entrada esta corrupta, contacte con nosotros.');
+                            $errors[] = ('La entrada esta corrupta, contacte con nosotros.');
                             //Text::get('dashboard-project-updates-postcorrupt');
                             $action = 'list';
                             break;
                         }
                     }
 
-                    $message = _('Editando una entrada existente');
+                    $message = ('Editando una entrada existente');
 
                     return new View(
                         'view/admin/index.html.php',
@@ -4042,7 +4042,7 @@ namespace Goteo\Controller {
                                 'action' => "$url/edit/",
                                 'submit' => array(
                                     'name' => 'update',
-                                    'label' => _('Añadir')
+                                    'label' => ('Añadir')
                                 ),
                                 'fields' => array (
                                     'id' => array(
@@ -4052,25 +4052,25 @@ namespace Goteo\Controller {
 
                                     ),
                                     'title' => array(
-                                        'label' => _('Noticia'),
+                                        'label' => ('Noticia'),
                                         'name' => 'title',
                                         'type' => 'text',
                                         'properties' => 'size="100" maxlength="100"'
                                     ),
                                     'description' => array(
-                                        'label' => _('Entradilla'),
+                                        'label' => ('Entradilla'),
                                         'name' => 'description',
                                         'type' => 'textarea',
                                         'properties' => 'cols="100" rows="2"'
                                     ),
                                     'url' => array(
-                                        'label' => _('Enlace'),
+                                        'label' => ('Enlace'),
                                         'name' => 'url',
                                         'type' => 'text',
                                         'properties' => 'size=100'
                                     ),
                                     'order' => array(
-                                        'label' => _('Posición'),
+                                        'label' => ('Posición'),
                                         'name' => 'order',
                                         'type' => 'text'
                                     )
@@ -4104,13 +4104,13 @@ namespace Goteo\Controller {
                                  * Evento Feed
                                  */
                                 $log = new Feed();
-                                $log->title = _('nueva micronoticia (admin)');
+                                $log->title = ('nueva micronoticia (admin)');
                                 $log->url = '/admin/news';
                                 $log->type = 'admin';
-                                $log_text = _('El admin %s ha %s la micronoticia "%s"');
+                                $log_text = ('El admin %s ha %s la micronoticia "%s"');
                                 $log_items = array(
                                     Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                                    Feed::item('relevant', _('Publicado')),
+                                    Feed::item('relevant', ('Publicado')),
                                     Feed::item('news', $_POST['title'], '#news'.$item->id)
                                 );
                                 $log->html = \vsprintf($log_text, $log_items);
@@ -4145,25 +4145,25 @@ namespace Goteo\Controller {
 
                                     ),
                                     'title' => array(
-                                        'label' => _('Noticia'),
+                                        'label' => ('Noticia'),
                                         'name' => 'title',
                                         'type' => 'text',
                                         'properties' => 'size="100"  maxlength="80"'
                                     ),
                                     'description' => array(
-                                        'label' => _('Entradilla'),
+                                        'label' => ('Entradilla'),
                                         'name' => 'description',
                                         'type' => 'textarea',
                                         'properties' => 'cols="100" rows="2"'
                                     ),
                                     'url' => array(
-                                        'label' => _('Enlace'),
+                                        'label' => ('Enlace'),
                                         'name' => 'url',
                                         'type' => 'text',
                                         'properties' => 'size=100'
                                     ),
                                     'order' => array(
-                                        'label' => _('Posición'),
+                                        'label' => ('Posición'),
                                         'name' => 'order',
                                         'type' => 'text'
                                     )
@@ -4188,10 +4188,10 @@ namespace Goteo\Controller {
                          * Evento Feed
                          */
                         $log = new Feed();
-                        $log->title = _('micronoticia quitada (admin)');
+                        $log->title = ('micronoticia quitada (admin)');
                         $log->url = '/admin/news';
                         $log->type = 'admin';
-                        $log_text = _('El admin %s ha %s la micronoticia "%s"');
+                        $log_text = ('El admin %s ha %s la micronoticia "%s"');
                         $log_items = array(
                             Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
                             Feed::item('relevant', 'Quitado'),
@@ -4213,13 +4213,13 @@ namespace Goteo\Controller {
                     'folder' => 'base',
                     'file' => 'list',
                     'model' => 'news',
-                    'addbutton' => _('Nueva noticia'),
+                    'addbutton' => ('Nueva noticia'),
                     'data' => $model::getAll(),
                     'columns' => array(
                         'edit' => '',
-                        'title' => _('Noticia'),
-                        'url' => _('Enlace'),
-                        'order' => _('Posición'),
+                        'title' => ('Noticia'),
+                        'url' => ('Enlace'),
+                        'order' => ('Posición'),
                         'up' => '',
                         'down' => '',
                         'translate' => '',
@@ -4262,33 +4262,33 @@ namespace Goteo\Controller {
                                 'action' => "$url/edit/",
                                 'submit' => array(
                                     'name' => 'update',
-                                    'label' => _('Añadir')
+                                    'label' => ('Añadir')
                                 ),
                                 'fields' => array (
                                     'id' => array(
-                                        'label' => _(''),
+                                        'label' => (''),
                                         'name' => 'id',
                                         'type' => 'hidden'
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Patrocinador'),
+                                        'label' => ('Patrocinador'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     ),
                                     'url' => array(
-                                        'label' => _('Enlace'),
+                                        'label' => ('Enlace'),
                                         'name' => 'url',
                                         'type' => 'text',
                                         'properties' => 'size=100'
                                     ),
                                     'image' => array(
-                                        'label' => _('Logo'),
+                                        'label' => ('Logo'),
                                         'name' => 'image',
                                         'type' => 'image'
                                     ),
                                     'order' => array(
-                                        'label' => _('Posición'),
+                                        'label' => ('Posición'),
                                         'name' => 'order',
                                         'type' => 'text'
                                     )
@@ -4349,29 +4349,29 @@ namespace Goteo\Controller {
                                 ),
                                 'fields' => array (
                                     'id' => array(
-                                        'label' => _(''),
+                                        'label' => (''),
                                         'name' => 'id',
                                         'type' => 'hidden'
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Patrocinador'),
+                                        'label' => ('Patrocinador'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     ),
                                     'url' => array(
-                                        'label' => _('Enlace'),
+                                        'label' => ('Enlace'),
                                         'name' => 'url',
                                         'type' => 'text',
                                         'properties' => 'size=100'
                                     ),
                                     'image' => array(
-                                        'label' => _('Logo'),
+                                        'label' => ('Logo'),
                                         'name' => 'image',
                                         'type' => 'image'
                                     ),
                                     'order' => array(
-                                        'label' => _('Posición'),
+                                        'label' => ('Posición'),
                                         'name' => 'order',
                                         'type' => 'text'
                                     )
@@ -4401,14 +4401,14 @@ namespace Goteo\Controller {
                 array(
                     'folder' => 'base',
                     'file' => 'list',
-                    'addbutton' => _('Nuevo patrocinador'),
+                    'addbutton' => ('Nuevo patrocinador'),
                     'data' => $model::getAll(),
                     'columns' => array(
                         'edit' => '',
-                        'name' => _('Patrocinador'),
-                        'url' => _('Enlace'),
-                        'image' => _('Imagen'),
-                        'order' => _('Posición'),
+                        'name' => ('Patrocinador'),
+                        'url' => ('Enlace'),
+                        'image' => ('Imagen'),
+                        'order' => ('Posición'),
                         'up' => '',
                         'down' => '',
                         'remove' => ''
@@ -4450,22 +4450,22 @@ namespace Goteo\Controller {
                                 'action' => "$url/edit/",
                                 'submit' => array(
                                     'name' => 'update',
-                                    'label' => _('Añadir')
+                                    'label' => ('Añadir')
                                 ),
                                 'fields' => array (
                                     'id' => array(
-                                        'label' => _(''),
+                                        'label' => (''),
                                         'name' => 'id',
                                         'type' => 'hidden'
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Campaña'),
+                                        'label' => ('Campaña'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     ),
                                     'description' => array(
-                                        'label' => _('Descripción'),
+                                        'label' => ('Descripción'),
                                         'name' => 'description',
                                         'type' => 'textarea',
                                         'properties' => 'cols="100" rows="2"'
@@ -4512,18 +4512,18 @@ namespace Goteo\Controller {
                                 ),
                                 'fields' => array (
                                     'id' => array(
-                                        'label' => _(''),
+                                        'label' => (''),
                                         'name' => 'id',
                                         'type' => 'hidden'
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Campaña'),
+                                        'label' => ('Campaña'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     ),
                                     'description' => array(
-                                        'label' => _('Descripción'),
+                                        'label' => ('Descripción'),
                                         'name' => 'description',
                                         'type' => 'textarea',
                                         'properties' => 'cols="100" rows="2"'
@@ -4548,12 +4548,12 @@ namespace Goteo\Controller {
                 array(
                     'folder' => 'base',
                     'file' => 'list',
-                    'addbutton' => _('Nueva campaña'),
+                    'addbutton' => ('Nueva campaña'),
                     'data' => $model::getList(),
                     'columns' => array(
                         'edit' => '',
-                        'name' => _('Campaña'),
-                        'used' => _('Aportes'),
+                        'name' => ('Campaña'),
+                        'used' => ('Aportes'),
                         'remove' => ''
                     ),
                     'url' => "$url",
@@ -4593,22 +4593,22 @@ namespace Goteo\Controller {
                                 'action' => "$url/edit/",
                                 'submit' => array(
                                     'name' => 'update',
-                                    'label' => _('Añadir')
+                                    'label' => ('Añadir')
                                 ),
                                 'fields' => array (
                                     'id' => array(
-                                        'label' => _(''),
+                                        'label' => (''),
                                         'name' => 'id',
                                         'type' => 'hidden'
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Campaña'),
+                                        'label' => ('Campaña'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     ),
                                     'description' => array(
-                                        'label' => _('Descripción'),
+                                        'label' => ('Descripción'),
                                         'name' => 'description',
                                         'type' => 'textarea',
                                         'properties' => 'cols="100" rows="2"'
@@ -4655,18 +4655,18 @@ namespace Goteo\Controller {
                                 ),
                                 'fields' => array (
                                     'id' => array(
-                                        'label' => _(''),
+                                        'label' => (''),
                                         'name' => 'id',
                                         'type' => 'hidden'
 
                                     ),
                                     'name' => array(
-                                        'label' => _('Campaña'),
+                                        'label' => ('Campaña'),
                                         'name' => 'name',
                                         'type' => 'text'
                                     ),
                                     'description' => array(
-                                        'label' => _('Descripción'),
+                                        'label' => ('Descripción'),
                                         'name' => 'description',
                                         'type' => 'textarea',
                                         'properties' => 'cols="100" rows="2"'
@@ -4691,12 +4691,12 @@ namespace Goteo\Controller {
                 array(
                     'folder' => 'base',
                     'file' => 'list',
-                    'addbutton' => _('Nuevo nodo'),
+                    'addbutton' => ('Nuevo nodo'),
                     'data' => $model::getList(),
                     'columns' => array(
                         'edit' => '',
-                        'name' => _('Campaña'),
-                        'used' => _('Aportes'),
+                        'name' => ('Campaña'),
+                        'used' => ('Aportes'),
                         'remove' => ''
                     ),
                     'url' => "$url",
@@ -4728,14 +4728,14 @@ namespace Goteo\Controller {
             $status = Model\Project::status();
             $methods = Model\Invest::methods();
             $types = array(
-                'investor' => _('Cofinanciadores'),
-                'owner' => _('Autores'),
-                'user' => _('Usuarios')
+                'investor' => ('Cofinanciadores'),
+                'owner' => ('Autores'),
+                'user' => ('Usuarios')
             );
             $roles = array(
-                'admin' => _('Administrador'),
-                'checker' => _('Revisor'),
-                'translator' => _('Traductor')
+                'admin' => ('Administrador'),
+                'checker' => ('Revisor'),
+                'translator' => ('Traductor')
             );
 
             // una variable de sesion para mantener los datos de todo esto
@@ -4802,26 +4802,26 @@ namespace Goteo\Controller {
                         if (!empty($filters['project']) && !empty($sqlInner)) {
                             $sqlFilter .= " AND project.name LIKE (:project) ";
                             $values[':project'] = '%'.$filters['project'].'%';
-                            $_SESSION['mailing']['filters_txt'] .= _('de proyectos que su nombre contenga').' <strong>\'' . $filters['project'] . '\'</strong> ';
+                            $_SESSION['mailing']['filters_txt'] .= ('de proyectos que su nombre contenga').' <strong>\'' . $filters['project'] . '\'</strong> ';
                         } elseif (empty($filters['project']) && !empty($sqlInner)) {
-                            $_SESSION['mailing']['filters_txt'] .= _('de cualquier proyecto');
+                            $_SESSION['mailing']['filters_txt'] .= ('de cualquier proyecto');
                         }
 
                         if (isset($filters['status']) && $filters['status'] > -1 && !empty($sqlInner)) {
                             $sqlFilter .= "AND project.status = :status ";
                             $values[':status'] = $filters['status'];
-                            $_SESSION['mailing']['filters_txt'] .= _('en estado').' <strong>' . $status[$filters['status']] . '</strong> ';
+                            $_SESSION['mailing']['filters_txt'] .= ('en estado').' <strong>' . $status[$filters['status']] . '</strong> ';
                         } elseif ($filters['status'] < 0 && !empty($sqlInner)) {
-                            $_SESSION['mailing']['filters_txt'] .= _('en cualquier estado');
+                            $_SESSION['mailing']['filters_txt'] .= ('en cualquier estado');
                         }
 
                         if ($filters['type'] == 'investor') {
                             if (!empty($filters['method']) && !empty($sqlInner)) {
                                 $sqlFilter .= "AND invest.method = :method ";
                                 $values[':method'] = $filters['method'];
-                                $_SESSION['mailing']['filters_txt'] .= _('mediante').' <strong>' . $methods[$filters['method']] . '</strong> ';
+                                $_SESSION['mailing']['filters_txt'] .= ('mediante').' <strong>' . $methods[$filters['method']] . '</strong> ';
                             } elseif (empty($filters['method']) && !empty($sqlInner)) {
-                                $_SESSION['mailing']['filters_txt'] .= _('mediante cualquier metodo');
+                                $_SESSION['mailing']['filters_txt'] .= ('mediante cualquier metodo');
                             }
                         }
 
@@ -4831,7 +4831,7 @@ namespace Goteo\Controller {
                                     AND user_interest.interest = :interest
                                     ";
                             $values[':interest'] = $filters['interest'];
-                            $_SESSION['mailing']['filters_txt'] .= _('interesados en fin').' <strong>' . $interests[$filters['interest']] . '</strong> ';
+                            $_SESSION['mailing']['filters_txt'] .= ('interesados en fin').' <strong>' . $interests[$filters['interest']] . '</strong> ';
                         }
 
                         if (!empty($filters['role'])) {
@@ -4840,18 +4840,18 @@ namespace Goteo\Controller {
                                     AND user_role.role_id = :role
                                     ";
                             $values[':role'] = $filters['role'];
-                            $_SESSION['mailing']['filters_txt'] .= _('que sean').' <strong>' . $roles[$filters['role']] . '</strong> ';
+                            $_SESSION['mailing']['filters_txt'] .= ('que sean').' <strong>' . $roles[$filters['role']] . '</strong> ';
                         }
 
                         if (!empty($filters['name'])) {
                             $sqlFilter .= " AND ( user.name LIKE (:name) OR user.email LIKE (:name) ) ";
                             $values[':name'] = '%'.$filters['name'].'%';
-                            $_SESSION['mailing']['filters_txt'] .= _('que su nombre o email contenga').' <strong>\'' . $filters['name'] . '\'</strong> ';
+                            $_SESSION['mailing']['filters_txt'] .= ('que su nombre o email contenga').' <strong>\'' . $filters['name'] . '\'</strong> ';
                         }
 
                         if (!empty($filters['workshopper'])) {
                             $sqlFilter .= " AND user.password = SHA1(user.email) ";
-                            $_SESSION['mailing']['filters_txt'] .= _('que su contraseña sea igual que su email');
+                            $_SESSION['mailing']['filters_txt'] .= ('que su contraseña sea igual que su email');
                         }
 
                         $sql = "SELECT
@@ -4875,12 +4875,12 @@ namespace Goteo\Controller {
                                 $_SESSION['mailing']['receivers'][$receiver->id] = $receiver;
                             }
                         } else {
-                            $_SESSION['mailing']['errors'][] = _('Fallo el SQL!!!!!').' <br />' . $sql . '<pre>'.print_r($values, 1).'</pre>';
+                            $_SESSION['mailing']['errors'][] = ('Fallo el SQL!!!!!').' <br />' . $sql . '<pre>'.print_r($values, 1).'</pre>';
                         }
 
                         // si no hay destinatarios, salta a la lista con mensaje de error
                         if (empty($_SESSION['mailing']['receivers'])) {
-                            $_SESSION['mailing']['errors'][] = _('No se han encontrado destinatarios para ') . $_SESSION['mailing']['filters_txt'];
+                            $_SESSION['mailing']['errors'][] = ('No se han encontrado destinatarios para ') . $_SESSION['mailing']['filters_txt'];
 
                             throw new Redirection('/admin/mailing/list');
                         }
@@ -4906,7 +4906,7 @@ namespace Goteo\Controller {
                         $users = array();
                         foreach ($_POST as $key=>$value) {
                             $matches = array();
-                            \preg_match('#receiver_(\w+)#', $key, $matches);
+                            \preg_match('#receiver(\w+)#', $key, $matches);
 //                            echo \trace($matches);
                             if (!empty($matches[1]) && !empty($_SESSION['mailing']['receivers'][$matches[1]]->email)) {
                                 $users[] = $matches[1];
@@ -5075,19 +5075,19 @@ namespace Goteo\Controller {
 
 				if (Worth::save($data, $errors)) {
                     $action = 'list';
-                    $success[] = _('Nivel de meritocracia modificado');
+                    $success[] = ('Nivel de meritocracia modificado');
 
                     /*
                      * Evento Feed
                      */
                     $log = new Feed();
-                    $log->title = _('modificacion de meritocracia (admin)');
+                    $log->title = ('modificacion de meritocracia (admin)');
                     $log->url = '/admin/worth';
                     $log->type = 'admin';
-                    $log_text = _("El admin %s ha %s el nivel de meritocrácia %s");
+                    $log_text = ("El admin %s ha %s el nivel de meritocrácia %s");
                     $log_items = array(
                         Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
-                        Feed::item('relevant', _('Modificado')),
+                        Feed::item('relevant', ('Modificado')),
                         Feed::item('project', $icon->name)
                     );
                     $log->html = \vsprintf($log_text, $log_items);
