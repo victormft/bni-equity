@@ -2591,6 +2591,14 @@ namespace Goteo\Controller {
                             $sql = "DELETE FROM user_role WHERE role_id = 'admin' AND user_id = :user";
                             $log_action = ('Quitado de admin');
                             break;
+						case 'superadmin':
+                            $sql = "REPLACE INTO user_role (user_id, role_id) VALUES (:user, 'superadmin')";
+                            $log_action = ('Hecho superadmin');
+                            break;
+                        case 'nosuperadmin':
+                            $sql = "DELETE FROM user_role WHERE role_id = 'superadmin' AND user_id = :user";
+                            $log_action = ('Quitado de superadmin');
+                            break;
                     }
 
 
