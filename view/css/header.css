@@ -44,7 +44,7 @@ div#super-header {
 
 div#super-header + * {
     font-size: 12px;
-    border-top: 2.2em solid #59595c;
+    border-top: 2.2em solid #000;
     margin-top: -2.2em;
 }
 
@@ -71,6 +71,7 @@ div#sub-header{
 }
 
 div#sub-header.banners{
+	border-bottom: 1px solid #8ab131;
     padding:0;
 }
 
@@ -549,8 +550,34 @@ div#header div#highlights > ul > li > a {
 
 /* menu y despelgable dashboard */
 div#header div#menu {
-    background: #b5dadc url('header/background.png') repeat-x top;
+    /* tirado do Goteo: background: #b5dadc url('header/background.png') repeat-x top;*/
+	
     overflow: visible;
+	background-color: #e8e8e8;
+  	background-repeat: repeat-x;
+  
+  	/* Safari 4-5, Chrome 1-9 */
+  	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d7d6c9), to(#e8e8e8));
+  
+  	/* Safari 5.1, Chrome 10+ */
+  	background: -webkit-linear-gradient(top, #e8e8e8, #d7d6c9);
+  
+  	/* Firefox 3.6+ */
+  	background: -moz-linear-gradient(top, #e8e8e8, #d7d6c9);
+  
+  	/* IE 10 */
+  	background: -ms-linear-gradient(top, #e8e8e8, #d7d6c9);
+  
+  	/* Opera 11.10+ */
+  	background: -o-linear-gradient(top, #e8e8e8, #d7d6c9);
+
+  	border-bottom: 1px solid #8ab131;	
+	
+	-WEBKIT-BOX-SHADOW: 0PX 3PX 15PX 0PX #999;
+  -MOZ-BOX-SHADOW: 0PX 3PX 15PX 0PX #999; 
+  BOX-SHADOW: 0PX 3PX 15PX 0PX #999;
+
+	
 }
 
 div#header div#menu > ul {
