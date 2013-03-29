@@ -24,7 +24,7 @@ unset($_SESSION['messages']);
 <script type="text/javascript">
 	  jQuery(document).ready(function ($) { 
 		   $(".message-close").click(function (event) {
-					$("#message").fadeOut(2000);
+					$("#message").fadeOut(500);
            });
 	  });
 </script>

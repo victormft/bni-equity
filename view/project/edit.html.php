@@ -39,6 +39,7 @@ include 'view/prologue.html.php';
 
     include 'view/header.html.php'; ?>
 
+    <!--
     <div id="sub-header">
         <div class="project-header">
             <a href="/user/<?php echo $project->owner; ?>" target="_blank"><img src="<?php echo $project->user->avatar->getLink(50, 50, true); ?>" /></a>
@@ -47,6 +48,8 @@ include 'view/prologue.html.php';
             <div class="project-by"><a href="/user/<?php echo $project->owner; ?>" target="_blank">Por: <?php echo $project->user->name; ?></a></div>
         </div>
     </div>
+	-->
+
 
 <?php if(isset($_SESSION['messages'])) { include 'view/header/message.html.php'; } ?>
 
