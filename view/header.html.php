@@ -27,7 +27,7 @@ use Goteo\Library\Text,
 
 <div id="header">
     <h1><?php echo Text::get('regular-main-header'); ?></h1>
-    <div id="super-header">
+    <!--<div id="super-header">
 	   <?php include 'view/header/highlights.html.php' ?>
     
 	   <div id="rightside" style="float:right;">
@@ -54,7 +54,7 @@ use Goteo\Library\Text,
 							try{clearTimeout(TID_LANG)}catch(e){};
 						},function() {
 						   TID_LANG = setTimeout('$("ul.lang").hide()',100);
-						   $("#lang").css("background","#59595C url('/view/css/bolita.png') 4px 7px no-repeat");
+						   $("#lang").css("background","#000 url('/view/css/bolita.png') 4px 7px no-repeat");
 						});
 						
 						
@@ -67,7 +67,7 @@ use Goteo\Library\Text,
 		</div>
      
 
-    </div>
+    </div> -->
 
     <?php include 'view/header/menu.html.php' ?>
 

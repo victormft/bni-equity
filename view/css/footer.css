@@ -31,7 +31,7 @@ div#footer {
 	padding: 20px 0 10px 0;
 	
     position: relative;		
-    background-color: #faf8f8;         
+    background-color: #fafafa;         
     z-index: 0;    
     /*max-width: 940px;*/
     bottom: 0;
@@ -39,7 +39,10 @@ div#footer {
     clear: both;
     color: #1f1d1e;
     font-size: 12px;
-    text-decoration: none;   
+    text-decoration: none; 
+	
+	border-top: 1px solid #dfdfdf;
+	  
 }
 
 div#sub-footer{
@@ -48,7 +51,7 @@ div#sub-footer{
 	height:30px;
     font-size: 12px;
     overflow: hidden;
-    background-color: #58595B;
+    background-color: black;
 	float:none !important;
 	color:#fff;
 }

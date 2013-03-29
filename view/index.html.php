@@ -47,7 +47,7 @@ include 'view/header.html.php';
             <div class="subhead-banner"><?php echo Text::html('main-banner-header'); ?></div>
             <?php endif; ?>
         </div>
-        <div class="mod-pojctopen"><?php echo Text::html('open-banner-header', $fbCode); ?></div>
+        <!-- <div class="mod-pojctopen"><?php echo Text::html('open-banner-header', $fbCode); ?></div> -->
     </div>
     <div class="sliderbanners-ctrl">
         <a class="prev">prev</a>

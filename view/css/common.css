@@ -28,7 +28,13 @@ html {
 
 html, body {        
     padding: 0;    
-    background-color: #e7e7e7;
+	/* Safari 5.1, Chrome 10+ */
+	background-color: #f8f8f8;/*#e7e7e7;/*#D2FAC5;/*#BFFFAA;/*#9FFF9F;*/
+  	
+	/*background: -webkit-linear-gradient(top, #fff, #0f0);*/
+	
+
+    /* tirado do goteo: background-color: #e7e7e7; */
 }
 
 

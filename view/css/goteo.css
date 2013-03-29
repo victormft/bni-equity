@@ -48,7 +48,10 @@ div#sub-header > div > h2 {
 }
 
 /* Main container */
-div#main {    
+div#main {   
+     
+	/*background-color: white; /*tirar eventualmente se der qlqr pau!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+	 
     width: 940px;
     margin: 10px auto;
     clear: both;
@@ -56,6 +59,13 @@ div#main {
     overflow-x: hidden;
     position: relative;
     z-index: 0;
+	
+	/*
+	-WEBKIT-BOX-SHADOW: 0PX 0PX 15PX 3PX #777;
+  	-MOZ-BOX-SHADOW: 0PX 0PX 15PX 3PX #777; 
+  	
+	BOX-SHADOW: 0PX 0PX 15PX 3PX #777;
+	*/
 }
 
 /**
@@ -65,7 +75,8 @@ div#main {
 div.widget {
     background-color: white;
     padding: 15px 20px;
-    overflow: hidden;    
+    overflow: hidden;  
+	  
 }
 
  

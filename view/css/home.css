@@ -25,13 +25,25 @@ body.home div#main div.learn {
 
 body.home div#main div.widget.projects h2.title {
 	margin-left:-47px;
+	color: #DAA520;
+	/* #F4C430    #DAA520*/
 }
 body.home div#main div.widget.projects h3.title{
 	margin-left:3px;
 }
 
 body.home div#main div.widget.projects{
-	padding:15px 0 0 75px;	
+	padding:15px 0 0 50px;	
+	
+	border: 1px solid #dfdfdf;
+	border-radius: 5px;
+	
+	/*
+	-WEBKIT-BOX-SHADOW: 0PX 0PX 15PX 3PX #777;
+  	-MOZ-BOX-SHADOW: 0PX 0PX 15PX 3PX #777; 
+  	
+	BOX-SHADOW: inset 0PX 0PX 15PX 0PX #777;
+	*/
 }
 
 body.home div#main div.widget.projects div.widget.project{
@@ -145,6 +157,6 @@ body.home div#main div.learn div.slder_container div.slder_slide div.post div.im
 
 body.home div#main div.projects {
     overflow: hidden;
-    margin-left: -3%;    
+    margin-left: 0%;    
     margin-bottom: 15px;
 }

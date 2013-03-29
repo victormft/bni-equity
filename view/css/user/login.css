@@ -19,12 +19,23 @@
 body.user-login div#main > div {
     display: table-cell;
 	width: 30%;
+	
+	padding-top: 30px;
 }
 
 body.user-login div#main > div > * {
     padding: 20px 20px 15px;
     background-color: white;
 	margin: 0 0 15px;
+	border: 1px solid #dfdfdf;
+	border-radius: 5px;
+	
+	/*
+	-WEBKIT-BOX-SHADOW: 0PX 0PX 15PX 3PX #777;
+  	-MOZ-BOX-SHADOW: 0PX 0PX 15PX 3PX #777; 
+  	
+	BOX-SHADOW: inset 0PX 0PX 15PX 0PX #777;
+	*/
 }
 
 body.user-login div#main > div h2 {

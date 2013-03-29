@@ -71,6 +71,7 @@ jQuery(document).ready(function($) {
 });
 </script>
 
+<!-- 
 <div id="sub-header">
 	<div class="clearfix">
 		<div class="subhead-banner">
@@ -79,6 +80,7 @@ jQuery(document).ready(function($) {
 		<div class="mod-pojctopen"><?php echo Text::html('open-banner-header', $fbCode); ?></div>
 	</div>
 </div>
+-->
 
 <?php if(isset($_SESSION['messages'])) { include 'view/header/message.html.php'; } ?>
 

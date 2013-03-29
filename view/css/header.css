@@ -67,12 +67,22 @@ div#sub-header-secondary {
 }
 
 div#sub-header{
-   background-color: #faf8f8;
+   background-color: #f8f8f8;
+   
+  /* border-bottom: 1px solid #8ab131;*/
+   
+/*   -WEBKIT-BOX-SHADOW: inset 0PX 3PX 15PX 0PX #999;
+  	-MOZ-BOX-SHADOW: inset 0PX 3PX 15PX 0PX #999; 
+  	BOX-SHADOW: inset 0PX 0PX 10PX 3PX #999;
+*/
+
 }
 
 div#sub-header.banners{
-	border-bottom: 1px solid #8ab131;
+	
     padding:0;
+	
+	
 }
 
 div#sub-header-secondary{
@@ -261,7 +271,11 @@ div#sub-header > div.clearfix{
 
 div#sub-header > div.clearfix > div{
 	width:680px;
-	float:left;
+	margin-left: 130px;
+	margin-top: 20px;
+	
+	
+	/*float:left; */
 }
 
 /* Lo del open */
@@ -470,7 +484,7 @@ div#header div#about ul li {
 }
 
 div#header div#about ul li#lang{
-	background:url('bolita.png') 4px 7px no-repeat;
+	background:url('bolita.png') 4px 7px no-repeat #000;
 	margin-left: 15px;
     padding-right: 22px;
     width: 24px;
@@ -553,14 +567,14 @@ div#header div#menu {
     /* tirado do Goteo: background: #b5dadc url('header/background.png') repeat-x top;*/
 	
     overflow: visible;
-	background-color: #e8e8e8;
+	background-color: #f0f0f0;
   	background-repeat: repeat-x;
   
   	/* Safari 4-5, Chrome 1-9 */
   	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d7d6c9), to(#e8e8e8));
   
   	/* Safari 5.1, Chrome 10+ */
-  	background: -webkit-linear-gradient(top, #e8e8e8, #d7d6c9);
+  	background: -webkit-linear-gradient(top, #d0d0d0, #f0f0f0);
   
   	/* Firefox 3.6+ */
   	background: -moz-linear-gradient(top, #e8e8e8, #d7d6c9);
@@ -571,12 +585,13 @@ div#header div#menu {
   	/* Opera 11.10+ */
   	background: -o-linear-gradient(top, #e8e8e8, #d7d6c9);
 
-  	border-bottom: 1px solid #8ab131;	
+  	border-bottom: 1px solid #bfbfbf;/*#8ab131;	*/
+	
 	
 	-WEBKIT-BOX-SHADOW: 0PX 3PX 15PX 0PX #999;
-  -MOZ-BOX-SHADOW: 0PX 3PX 15PX 0PX #999; 
-  BOX-SHADOW: 0PX 3PX 15PX 0PX #999;
-
+  	-MOZ-BOX-SHADOW: 0PX 3PX 15PX 0PX #999; 
+  	BOX-SHADOW: 0PX 3PX 10PX 0PX #AAA;
+	
 	
 }
 
@@ -599,7 +614,7 @@ div#header div#menu > ul > li {
 
 div#header div#menu > ul > li.home {
     width: 90px;
-    height: 48px;
+    height: 100px;
     position: absolute;
     left: 0;
     top: 0;
@@ -636,7 +651,9 @@ div#header div#menu > ul > li.create > a {
     font-size: 12px;
     color: white;
     display: inline-block;
-    margin: .68em .2em .6em 0;
+	margin-top: 30px;
+	margin-left: 5px;
+    /*margin: 1.4em .2em .6em 0;*/
     max-width: 7.5em;
     text-align: left;
 	width:80px;
@@ -644,20 +661,24 @@ div#header div#menu > ul > li.create > a {
 }
 
 div#header div#menu > ul > li.explore > a {    
-    margin-left: 124px;
+    margin-left: 170px;
+	margin-top: 30px;
 }
 
 div#header div#menu > ul > li.search {
-    margin-top: 1em;
+    margin-top: 35px;
     margin-right: .5em;    
 }
 
 div#header div#menu > ul > li.search fieldset {
     margin: 0;
-    padding: 0 1.5em 0 0;
+    padding: 0 1.4em 0 0;
     border: 1px solid #808184;
     position: relative;
-    font-size: 11px;
+    font-size: 14px;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 div#header div#menu > ul > li.search fieldset legend {
@@ -666,20 +687,23 @@ div#header div#menu > ul > li.search fieldset legend {
 
 div#header div#menu > ul > li.search fieldset input[type="text"] {
     border: none;
-    height: 11px;
-    padding: .2em;
-    background-color: transparent;
-    font-size: 11px;
-    width: 12em;
+    height: 15px;
+    /*padding: .2em;*/
+    background-color: #faf8f8;
+    font-size: 14px;
+    width: 15em;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 div#header div#menu > ul > li.search fieldset input[type="text"]:focus {
-    background-color: #E3F0F0 !important;
+    background-color: #faf8f8 !important;
 }
 
 div#header div#menu > ul > li.search fieldset input[type="submit"] {
 
-    background: transparent url('header/search.png') no-repeat center center;
+    background: #faf8f8 url('header/search.png') no-repeat center center;
     display: block;
     position: absolute;
     right: 0;
@@ -688,24 +712,24 @@ div#header div#menu > ul > li.search fieldset input[type="submit"] {
     overflow: hidden;
     text-indent: 2000px;
     margin: 0;
-	height: 15px;
+	height: 23px;
 	width: 1.6em;
 }
 
 div#header div#menu > ul > li.search fieldset input[type="submit"]:hover {
-    background-color: #8ed9d8;
+    background-color: #0F0;/*#8ed9d8;*/
 }
 
 div#header div#menu > ul > li.community ,
 div#header div#menu > ul > li.login ,
 div#header div#menu > ul > li.dashboard {
-    height: 48px;    
+    height: 68px;    
     position: relative;
 	
 } 
 
 div#header div#menu{
-	min-height:48px;
+	min-height:100px;
 }
 
 div#header div#menu > ul > li.community,
@@ -731,7 +755,7 @@ div#header div#menu > ul > li.login fieldset > legend {
 div#header div#menu > ul > li.community > a,
 div#header div#menu > ul > li.login > a,
 div#header div#menu > ul > li.dashboard > a {
-    padding: .5em .8em;
+    padding: 1.2em .8em;
     font-size: 12px;
     height: 40px;
     line-height: 40px;
