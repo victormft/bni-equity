@@ -26,9 +26,10 @@
         <h2><?php echo Text::get('regular-menu'); ?></h2>
         
         <ul>
-            <li class="home"><a href="/"><?php echo Text::get('regular-home'); ?></a></li>
-            <li class="explore"><a class="button red" href="/discover"><?php echo Text::get('regular-discover'); ?></a></li>
-            <li class="create"><a class="button aqua" href="/project/create"><?php echo Text::get('regular-create'); ?></a></li>
+            <li class="home"><a href="/"><?php //echo Text::get('regular-home'); ?><font style="font-size:36px; font-family:'Palatino Linotype', 'Book Antiqua', Palatino, serif; font-weight:bold"><text style="color:#8dc63f">BNI</text>Equity</font></a></li>
+            <li class="explore"><a href="/discover"><?php //echo Text::get('regular-discover'); ?>
+            <img src="http://localhost/view/css/dollar.png" width="20" height="20" /><span>Investir</span></a></li>
+            <li class="create"><a  href="/project/create"><?php //echo Text::get('regular-create'); ?><img src="http://localhost/view/css/puzzle.png" width="20" height="20" /><span>Submeter</span></a></li>
             <li class="search">
                 <form method="get" action="/discover/results">
                     <fieldset>
@@ -38,7 +39,8 @@
                     </fieldset>
                 </form>
             </li>
-            <?php if (!empty($_SESSION['user'])): ?>
+        <!--
+		    <?php if (!empty($_SESSION['user'])): ?>
             <li class="community"><a href="/community"><span><?php echo Text::get('community-menu-main'); ?></span></a>
                 <div>
                     <ul>
@@ -52,7 +54,7 @@
                 <a href="/community"><span><?php echo Text::get('community-menu-main'); ?></span></a>
             </li>
             <?php endif ?>
-
+         -->
             <?php if (!empty($_SESSION['user'])): ?>            
             <li class="dashboard"><a href="/dashboard"><span><?php echo Text::get('dashboard-menu-main'); ?></span><img src="<?php echo $_SESSION['user']->avatar->getLink(28, 28, true); ?>" /></a>
                 <div>
@@ -75,7 +77,7 @@
             </li>            
             <?php else: ?>            
             <li class="login">
-                <a href="/user/login"><?php echo Text::get('regular-login'); ?></a>
+                <a href="/user/login"> <img src="http://localhost/view/css/log_in.png" width="20" height="20" /><span><?php echo Text::get('regular-login'); ?></span></a>
             </li>
             
             <?php endif ?>

@@ -91,7 +91,9 @@ if (isset($this['investor']) && is_object($this['investor'])) {
 
     <h<?php echo $level + 1 ?> class="author"><?php echo Text::get('regular-by')?> <a href="<?php echo SITE_URL ?>/user/profile/<?php echo htmlspecialchars($project->user->id) ?>"<?php echo $blank; ?>><?php echo htmlspecialchars(Text::recorta($project->user->name,40)) ?></a></h<?php echo $level + 1?>>
 
-    <div class="description"><?php echo Text::recorta($project->description, 100); ?></div>
+    <div class="description"><?php echo Text::recorta($project->description, 200); ?></div>
+    
+    <div class="local"><?php echo htmlspecialchars($project->location) ?></div>
 
     <?php echo new View('view/project/meter_hor.html.php', array('project' => $project)) ?>
 

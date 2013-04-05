@@ -76,6 +76,8 @@ div.widget {
     background-color: white;
     padding: 15px 20px;
     overflow: hidden;  
+
+/*	border: 1px solid #dfdfdf; */
 	  
 }
 
@@ -95,7 +97,7 @@ div.widget .title{
     padding: 0 0 0 20px;
     margin: 0 0 .8em -20px;
     text-decoration: none;
-	background: url("arrowH2-section.gif") no-repeat -5px -16px;
+	/* background: url("arrowH2-section.gif") no-repeat -5px -16px; */
 }
 
 

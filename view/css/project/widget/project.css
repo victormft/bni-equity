@@ -177,7 +177,7 @@ div.widget.project div.keepiton {
 */
 div.widget.project > .title {    
     font-size: 14px !important;
-    height: 2em;
+/*    height: 2em; */
     padding: 0px 12px !important;
     margin: 0px !important;
 }
@@ -209,8 +209,10 @@ div.widget.project.balloon > .title a {
 
 div.widget.project > .author {
     padding: 2px 0px 0px 12px;
-	max-height:1.2em;
-	overflow:hidden	
+	/* max-height:1.2em; */
+	overflow:hidden;
+	height: 2em;	
+	color: #777;
 }
 
 div.widget.project > .author,
@@ -231,7 +233,14 @@ div.widget.project > .title a:hover{
 div.widget.project div.description {
     padding: 2px 12px;
     min-height: 42px;
+    font-size: 12px;
+	color: #888;
+	padding-bottom: 10px;
+}
+
+div.widget.project div.local {
     font-size: 11px;
+	color: #000;
 }
 
 div.widget.project div.meter {

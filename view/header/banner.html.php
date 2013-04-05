@@ -37,11 +37,13 @@ list($mreach, $mof, $mrest) = explode('-', $metter_txt);
             <li><img src="<?php echo SRC_URL ?>/view/css/icon/s/<?php echo $reward->icon ?>.png" alt="<?php echo $reward->icon ?>" title="<?php echo $reward->reward ?>" /></li>
             <?php if ($c>4) break; else $c++; endforeach; ?>
         </ul>
-        <div class="license"><?php foreach ($banner->project->social_rewards as $id=>$reward) :
+     
+      <!--  <div class="license"><?php foreach ($banner->project->social_rewards as $id=>$reward) :
             if (empty($reward->license)) continue; ?>
             <img src="<?php echo SRC_URL ?>/view/css/license/<?php echo $reward->license ?>.png" alt="<?php echo $reward->license ?>" /></div>
             <?php break; endforeach; ?>
-
+       -->
+       
     </div>
     <ul class="financ-meter">
         <li><?php echo $mreach ?></li>
@@ -54,4 +56,4 @@ list($mreach, $mof, $mrest) = explode('-', $metter_txt);
         <?php endif; ?>
     </ul>
 </div>
-<div class="shb-img"><img src="<?php echo $banner->image->getLink(700, 156, true) ?>" title="<?php echo $banner->project->name ?>" alt="<?php echo $banner->project->name ?>" /></div>
+<div class="shb-img"><img src="<?php echo $banner->image->getLink(700, 300, true) ?>" title="<?php echo $banner->project->name ?>" alt="<?php echo $banner->project->name ?>" /></div>

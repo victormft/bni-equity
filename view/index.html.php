@@ -38,23 +38,30 @@ include 'view/header.html.php';
     <div class="clearfix">
         <div class="slides_container">
             <!-- Módulo de texto más sign in -->
-            <div class="subhead-banner"><?php echo Text::html('main-banner-header'); ?></div>
+        <!--    <div class="subhead-banner"><?php echo Text::html('main-banner-header'); ?></div> -->
             <!-- Módulo banner imagen más resumen proyecto -->
-            <?php if (!empty($this['banners'])) : foreach ($this['banners'] as $id=>$banner) : ?>
-            <div class="subhead-banner"><?php echo new View('view/header/banner.html.php', array('banner'=>$banner)); ?></div>
+            <?php $width=0; if (!empty($this['banners'])) : foreach ($this['banners'] as $id=>$banner) : ?>
+            <div class="subhead-banner"><?php $width = $width+1; echo new View('view/header/banner.html.php', array('banner'=>$banner)); ?></div>
             <?php endforeach;
             else : ?>
             <div class="subhead-banner"><?php echo Text::html('main-banner-header'); ?></div>
             <?php endif; ?>
         </div>
         <!-- <div class="mod-pojctopen"><?php echo Text::html('open-banner-header', $fbCode); ?></div> -->
-    </div>
-    <div class="sliderbanners-ctrl">
+    </div> 
+    <div class="sliderbanners-ctrl" style="width:<?php echo (32+$width*18) ?>px; margin: 0 auto;">
         <a class="prev">prev</a>
         <ul class="paginacion"></ul>
         <a class="next">next</a>
     </div>
 </div>
+
+<div id="msg-home">
+	<div class="title">A primeira plataforma de Equity Crowdfunding do Brasil </div>
+	<div class="text">Com o BNIEquity é possível tornar-se sócio de empresas que estão começando agora e que precisam de um suporte financeiro.</div>
+</div>
+
+
 <div id="main">
 
     <?php if (!empty($this['posts'])): ?>

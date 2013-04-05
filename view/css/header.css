@@ -28,7 +28,7 @@ div#super-header {
 div#header a,
 div#header span,
 div#header strong {
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     text-decoration: none;
 }
 
@@ -63,7 +63,7 @@ div#sub-header,
 div#sub-header-secondary { 
     clear: both;
     padding: 20px 0;
-    margin-bottom: 32px;
+    margin-bottom: 60px;
 }
 
 div#sub-header{
@@ -79,7 +79,7 @@ div#sub-header{
 }
 
 div#sub-header.banners{
-	
+	max-height:300px;
     padding:0;
 	
 	
@@ -116,15 +116,15 @@ div#sub-header-secondary > div > h2 a:hover span.red{
 
 div#sub-header > div > div.slides_container{
 	width:680px;
-	height:156px;
+	height:270px;
 	display:none;
-	float:left;
+	/*float:left;*/
 }
 
 div#sub-header > div > div.slides_container > div.slides_control > div.subhead-banner{
 	margin:0px;
 	width:680px;
-	height:156px;
+	height:200px;
 	display:block;
 }
 
@@ -145,7 +145,7 @@ div#sub-header > div > div.slides_container > div.slides_control > div.subhead-b
 
 div#sub-header > div > div.slides_container > div.slides_control > div.subhead-banner .shb-img{
 	margin:0px;
-	height:156px;
+	height:200px;
 }
 
 div#sub-header > div > div.slides_container > div.slides_control > div.subhead-banner .shb-info{
@@ -217,7 +217,7 @@ div#sub-header > div > div.slides_container > div.slides_control > div.subhead-b
 	font-size: 11px;
     font-weight: normal;
 	list-style:none;
-	margin: -11px 0 0 20px;
+	margin: -35px 0 0 20px;
 	padding:0;
 }
 
@@ -271,8 +271,8 @@ div#sub-header > div.clearfix{
 
 div#sub-header > div.clearfix > div{
 	width:680px;
-	margin-left: 130px;
-	margin-top: 20px;
+	/*margin-left: 130px;*/
+	margin: 20px auto;
 	
 	
 	/*float:left; */
@@ -327,6 +327,7 @@ div#sub-header > div > h2 .greenblue{
 
 /* controles del carrusel de banners */
 .sliderbanners-ctrl {
+	width: 150px;
 	max-width: 940px;
 	margin: 0 auto;
 	padding:0px;
@@ -340,7 +341,7 @@ div#sub-header > div > h2 .greenblue{
 	line-height: 2000px;
 	overflow: hidden;
 	float:left;
-	margin: 8px 0 0 0;
+	/*margin: 8px 0 0 0;*/
 	cursor:pointer;
 }
 
@@ -364,7 +365,7 @@ div#sub-header > div > h2 .greenblue{
 	margin: 8px 0 0 0;
 	list-style:none;
 	padding:0px;
-	float:left;
+/*	float:left;*/
 
 }
 
@@ -622,23 +623,23 @@ div#header div#menu > ul > li.home {
 
 div#header div#menu > ul > li.home > a {    
     overflow: hidden;
-    text-indent: 2000px;
+    /*text-indent: 2000px;*/
     display: block;
-    line-height: 2000px;
-    width: 105px;
-    height: 36px;  
+    /*line-height: 2000px;*/
+    /*width: 170px;*/
+    /*height: 36px;  */
     position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -45px;
-    margin-top: -18px;
-    background: url('header/main-logo.png') no-repeat left center;        
+    left: 80%;
+    top: 45%;
+    margin-left: -70px;
+    margin-top: -20px;
+/*    background: url('header/simbolo_teste.png') no-repeat left center;        */
 }
-
+/*
 div#header div#menu > ul > li.home > a:hover {
     background: url('header/main-logo.png') no-repeat right center;
 }
-
+*/
 div#header div#menu > ul > li.explore,
 div#header div#menu > ul > li.create {
     float: left;
@@ -647,22 +648,47 @@ div#header div#menu > ul > li.create {
 
 div#header div#menu > ul > li.explore > a,
 div#header div#menu > ul > li.create > a {
-    padding: .4em 1.8em .4em .8em;
-    font-size: 12px;
-    color: white;
+    padding: .4em .1em .4em .8em;
+    font-size: 16px;
+    color: #59595c;
     display: inline-block;
-	margin-top: 30px;
+	margin-top: 40px;
 	margin-left: 5px;
     /*margin: 1.4em .2em .6em 0;*/
     max-width: 7.5em;
     text-align: left;
-	width:80px;
+	width:90px;
 	line-height: 1em;
 }
 
+div#header div#menu > ul > li.explore > a:hover,
+div#header div#menu > ul > li.create > a:hover {
+	
+	color:#8dc63f;
+	
+}
+
 div#header div#menu > ul > li.explore > a {    
-    margin-left: 170px;
-	margin-top: 30px;
+    margin-left: 250px;
+	margin-top: 40px;
+}
+
+div#header div#menu > ul > li.explore > a > img {
+position: relative;
+right:3px;
+top: 4px;
+}
+
+div#header div#menu > ul > li.create > a > img {
+position: relative;
+right:3px;
+top: 4px;
+}
+
+div#header div#menu > ul > li.login > a > img {
+position: relative;
+right:3px;
+top: 4px;
 }
 
 div#header div#menu > ul > li.search {
@@ -699,6 +725,8 @@ div#header div#menu > ul > li.search fieldset input[type="text"] {
 
 div#header div#menu > ul > li.search fieldset input[type="text"]:focus {
     background-color: #faf8f8 !important;
+	outline:none;
+	outline-offset: 0px;
 }
 
 div#header div#menu > ul > li.search fieldset input[type="submit"] {
@@ -713,17 +741,17 @@ div#header div#menu > ul > li.search fieldset input[type="submit"] {
     text-indent: 2000px;
     margin: 0;
 	height: 23px;
-	width: 1.6em;
+	width: 2.0em;
 }
 
 div#header div#menu > ul > li.search fieldset input[type="submit"]:hover {
-    background-color: #0F0;/*#8ed9d8;*/
+   /* background-color: #0F0;/*#8ed9d8;*/
 }
 
 div#header div#menu > ul > li.community ,
 div#header div#menu > ul > li.login ,
 div#header div#menu > ul > li.dashboard {
-    height: 68px;    
+    /*height: 68px;    */
     position: relative;
 	
 } 
@@ -734,7 +762,7 @@ div#header div#menu{
 
 div#header div#menu > ul > li.community,
 div#header div#menu > ul > li.dashboard {
-    background: transparent url('header/down-black.png') no-repeat right 30px;
+    background: transparent url('header/down-black.png') no-repeat right 55px;
 	position:relative;
 	top:3px;
 }
@@ -756,11 +784,12 @@ div#header div#menu > ul > li.community > a,
 div#header div#menu > ul > li.login > a,
 div#header div#menu > ul > li.dashboard > a {
     padding: 1.2em .8em;
-    font-size: 12px;
+    font-size: 14px;
     height: 40px;
     line-height: 40px;
     display: inline-block;    
     color: #59595c;
+	margin-top: 20px;
 }
 
 
@@ -783,9 +812,9 @@ div#header ul.lang {
 }
 
 div#header div#menu > ul > li.community:hover,
-div#header div#menu > ul > li.login:hover,
+/*div#header div#menu > ul > li.login:hover,*/
 div#header div#menu > ul > li.dashboard:hover {
-    background-color: #1db3b2;    
+    background-color: #8dc63f;/*#1db3b2;    */
 }
 
 div#header div#menu > ul > li.community:hover,
@@ -794,9 +823,14 @@ div#header div#menu > ul > li.dashboard:hover {
 }
 
 div#header div#menu > ul > li.community:hover *,
-div#header div#menu > ul > li.login:hover *,
+/*div#header div#menu > ul > li.login:hover *,*/
 div#header div#menu > ul > li.dashboard:hover * {
     color: white;
+} 
+
+div#header div#menu > ul > li.login > a:hover{
+	color: #8dc63f;
+	
 } 
 
 div#header div#menu > ul > li.dashboard > a > span > em {
@@ -822,12 +856,12 @@ div#header div#menu > ul > li.dashboard > div > ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    background-color: #1db3b2;
+    background-color: #8dc63f;/*#1db3b2;*/
 }
 
 div#header div#menu > ul > li.community > div > ul > li,
 div#header div#menu > ul > li.dashboard > div > ul > li {
-    border-top: 1px solid #a5e1e0;    
+    border-top: 1px solid #C5EB91;    
 }
 
 div#header div#menu > ul > li.community > div > ul > li *,
@@ -848,7 +882,7 @@ div#header div#menu > ul > li.dashboard > div > ul > li.logout > a > span{
 
 div#header div#menu > ul > li.community > div > ul > li > a:hover,
 div#header div#menu > ul > li.dashboard > div > ul > li > a:hover {
-    background-color: #78d1d1;
+    background-color: #C5EB91;/*#78d1d1;*/
 }
 /* fin del menu y despelgable dashboard */
 

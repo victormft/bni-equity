@@ -18,6 +18,27 @@
  */
 @import url("project/widget/projects.css");
 
+body.home div#msg-home{
+	text-align: center;
+}
+
+body.home div#msg-home div.title{
+	color: #58595b;
+	font-size: 28px;
+	font:"Futura Md BT";
+	margin-bottom: 5px;
+	padding-top: 30px;
+}
+
+body.home div#msg-home div.text{
+	color: #909090;
+	width: 620px;
+	font-size: 18px;
+	font:"Futura Md BT";
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+
 body.home div#main div.learn {    
     margin-bottom: 16px;
     position: relative;
@@ -37,13 +58,14 @@ body.home div#main div.widget.projects{
 	
 	border: 1px solid #dfdfdf;
 	border-radius: 5px;
-	
-	/*
-	-WEBKIT-BOX-SHADOW: 0PX 0PX 15PX 3PX #777;
-  	-MOZ-BOX-SHADOW: 0PX 0PX 15PX 3PX #777; 
+
+/*
+	-WEBKIT-BOX-SHADOW: 0PX 0PX 15PX 3PX #AAA;
+  	-MOZ-BOX-SHADOW: 0PX 0PX 15PX 3PX #AAA; 
   	
-	BOX-SHADOW: inset 0PX 0PX 15PX 0PX #777;
-	*/
+	BOX-SHADOW: 0PX 0PX 15PX 3PX #AAA;
+*/
+	
 }
 
 body.home div#main div.widget.projects div.widget.project{

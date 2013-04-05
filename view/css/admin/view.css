@@ -78,6 +78,7 @@ body.admin div.admin-menu ul li.comunication {
 
 body.admin div#main div.widget {
     margin-bottom: 20px;
+	border: 1px solid #dedede;
 }
 
 body.admin div#main > div.center {
