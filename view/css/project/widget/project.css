@@ -17,7 +17,12 @@
  *
  */
 div.widget.project.active {
-    background-color: #f8f8f8 !important;
+    
+	/*background-color: #f8f8f8 !important;*/
+	
+	-WEBKIT-BOX-SHADOW: 0PX 0PX 5PX 0PX #999;
+  	-MOZ-BOX-SHADOW: 0PX 0PX 5PX 0PX #999; 
+  	 BOX-SHADOW: 0PX 0PX 10PX 0PX #999;	
 }
 
 div.widget.project.active div.image {
@@ -240,7 +245,8 @@ div.widget.project div.description {
 
 div.widget.project div.local {
     font-size: 11px;
-	color: #000;
+	font-weight: bold;
+	color: #555;
 }
 
 div.widget.project div.meter {
@@ -278,7 +284,7 @@ div.widget.project div.meter.activable {
     z-index: 999
 }
 div.widget.project div.meter.activable.active {
-    background-color: #EBEAEB;
+   /* background-color: #EBEAEB;*/
 }
 div.widget.project div.meter div.obtained {
     display: none;
@@ -331,7 +337,7 @@ div.widget.project div.meter.active div.obtained {
 }
 div.widget.project div.meter.active dl .days {
     display: block !important;
-    background-color: #f8f8f8 !important;
+   /* background-color: #f8f8f8 !important;*/
 }
 /* Hasta aqu� la movida de lo obtenido */
 

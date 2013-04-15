@@ -23,13 +23,26 @@ use Goteo\Model\Category,
     Goteo\Library\Location,
     Goteo\Library\Text;
 
+
 $categories = Category::getList();  // categorias que se usan en proyectos
 $locations = Location::getList();  //localizaciones de royectos
 $rewards = Icon::getList(); // iconos que se usan en proyectos
 
 $params = $this['params'];
 ?>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	$("a#ajax").click(function() { // inclui todos os links com id="ajax"
+		$("#ajaxContent").load($(this).attr("href")); // carrega o conteúdo da página em HREF dentro da DIV #ajaxContent (id="ajaxContent")
+		return false; // remove a ação do link para navegar até a página do HREF, pois ela já foi carregada na DIV
+	});
+});
+</script>
+
+
 <div class="widget searcher">
+<a id="ajax" href="/discover/view_ajax/recent">teste</a>
     <form method="post" action="/discover/results">
         <div class="text-filter">
             <label for="text-query"><?php echo Text::get('discover-searcher-bycontent-header'); ?></label>

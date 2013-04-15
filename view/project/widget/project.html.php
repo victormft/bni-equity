@@ -41,12 +41,16 @@ if (isset($this['investor']) && is_object($this['investor'])) {
     $invest = Invest::supported($investor->id, $project->id);
 }
 ?>
-
-<div class="widget project activable<?php if (isset($this['balloon'])) echo ' balloon' ?>">
-	<a href="<?php echo SITE_URL ?>/project/<?php echo $project->id ?>" class="expand"<?php echo $blank; ?>></a>
+<div class="wrap-balloon">
     <?php if (isset($this['balloon'])): ?>
     <div class="balloon"><?php echo $this['balloon'] ?></div>
     <?php endif ?>
+
+<div class="widget project activable<?php //if (isset($this['balloon'])) echo ' balloon' ?>">
+	<a href="<?php echo SITE_URL ?>/project/<?php echo $project->id ?>" class="expand"<?php echo $blank; ?>></a>
+    <?php //if (isset($this['balloon'])): ?>
+    <!--<div class="balloon"><?php echo $this['balloon'] ?></div>-->
+    <?php //endif ?>
 
     <div class="image">
         <?php switch ($project->tagmark) {
@@ -142,4 +146,6 @@ if (isset($this['investor']) && is_object($this['investor'])) {
      *
      */
     ?>
+</div>
+
 </div>

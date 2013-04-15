@@ -25,6 +25,34 @@
         
         <h2><?php echo Text::get('regular-menu'); ?></h2>
         
+        <div class="up_content">
+        
+        	<ul>
+            
+            	<li>
+                	<a href="/faq">FAQ/Ajuda</a>
+                </li>
+                
+                <li class="separator">
+                	<span>|</span>
+                </li>
+            	
+                <li>
+                	<a href="/about">Quem somos?</a>
+                </li>
+                
+                <li class="separator">
+                	<span>|</span>
+                </li>
+                
+                <li>
+                    <a href="/news">Notícias</a>
+                </li>
+            
+            </ul>
+        
+        </div>
+        
         <ul>
             <li class="home"><a href="/"><?php //echo Text::get('regular-home'); ?><font style="font-size:36px; font-family:'Palatino Linotype', 'Book Antiqua', Palatino, serif; font-weight:bold"><text style="color:#8dc63f">BNI</text>Equity</font></a></li>
             <li class="explore"><a href="/discover"><?php //echo Text::get('regular-discover'); ?>
@@ -34,7 +62,7 @@
                 <form method="get" action="/discover/results">
                     <fieldset>
                         <legend><?php echo Text::get('regular-search'); ?></legend>
-                        <input type="text" name="query"  />
+                        <input type="text" name="query" value="Buscar projetos..." onfocus="this.value=''" onblur="this.value='Buscar projetos...'" />
                         <input type="submit" value="Buscar" >
                     </fieldset>
                 </form>

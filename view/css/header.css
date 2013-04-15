@@ -596,6 +596,51 @@ div#header div#menu {
 	
 }
 
+div#header div#menu div.up_content {	
+	position:absolute;
+	padding-top: 10px;
+	left:50%;
+	width: 940px;
+	margin-left:-480px;
+	z-index:2;
+	
+}
+
+div#header div#menu div.up_content > ul {
+	float:right;
+	margin: 0;
+	padding: 0;
+	list-style-type:none;
+	list-style: none;
+	
+	
+}
+
+div#header div#menu div.up_content > ul > li {
+	float: right;
+	padding-left:8px;
+	padding-right:8px;
+	color:#888;
+}
+
+div#header div#menu div.up_content > ul > li > a {
+	color:#888;
+}
+
+div#header div#menu div.up_content > ul > li:hover {
+	text-decoration:underline;
+}
+
+div#header div#menu div.up_content > ul > li.separator {
+	padding:0;
+	
+}
+
+div#header div#menu div.up_content > ul > li.separator:hover {
+	text-decoration:none;
+	
+}
+
 div#header div#menu > ul {
     max-width: 940px;
     margin: 0 auto;
@@ -665,6 +710,7 @@ div#header div#menu > ul > li.explore > a:hover,
 div#header div#menu > ul > li.create > a:hover {
 	
 	color:#8dc63f;
+	text-decoration:underline;
 	
 }
 
@@ -692,7 +738,7 @@ top: 4px;
 }
 
 div#header div#menu > ul > li.search {
-    margin-top: 35px;
+    margin-top: 47px;
     margin-right: .5em;    
 }
 
@@ -705,6 +751,15 @@ div#header div#menu > ul > li.search fieldset {
 	
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+
+}
+
+div#header div#menu > ul > li.search fieldset:hover {
+	border-color:#8dc63f;
+	
+	-WEBKIT-BOX-SHADOW: 0PX 0PX 5PX 0PX #999;
+  	-MOZ-BOX-SHADOW: 0PX 0PX 5PX 0PX #999; 
+  	 BOX-SHADOW: 0PX 0PX 5PX 0PX #999;	
 }
 
 div#header div#menu > ul > li.search fieldset legend {
@@ -718,6 +773,7 @@ div#header div#menu > ul > li.search fieldset input[type="text"] {
     background-color: #faf8f8;
     font-size: 14px;
     width: 15em;
+	color:#999;
 	
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -727,6 +783,7 @@ div#header div#menu > ul > li.search fieldset input[type="text"]:focus {
     background-color: #faf8f8 !important;
 	outline:none;
 	outline-offset: 0px;
+	color: #58595b;
 }
 
 div#header div#menu > ul > li.search fieldset input[type="submit"] {
@@ -762,7 +819,7 @@ div#header div#menu{
 
 div#header div#menu > ul > li.community,
 div#header div#menu > ul > li.dashboard {
-    background: transparent url('header/down-black.png') no-repeat right 55px;
+    background: transparent url('header/down-black.png') no-repeat right 30px;
 	position:relative;
 	top:3px;
 }
@@ -783,13 +840,14 @@ div#header div#menu > ul > li.login fieldset > legend {
 div#header div#menu > ul > li.community > a,
 div#header div#menu > ul > li.login > a,
 div#header div#menu > ul > li.dashboard > a {
-    padding: 1.2em .8em;
+	padding: 10px .8em;
+    /*padding: 1.2em .8em;*/
     font-size: 14px;
     height: 40px;
     line-height: 40px;
     display: inline-block;    
     color: #59595c;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 }
 
 
@@ -830,6 +888,7 @@ div#header div#menu > ul > li.dashboard:hover * {
 
 div#header div#menu > ul > li.login > a:hover{
 	color: #8dc63f;
+	text-decoration:underline;
 	
 } 
 
