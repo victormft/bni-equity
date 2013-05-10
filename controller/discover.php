@@ -150,7 +150,7 @@ namespace Goteo\Controller {
 		
 		public function view_ajax ($type = 'all') {
 
-            if (!in_array($type, array('popular', 'outdate', 'recent', 'success', 'archive', 'all'))) {
+            if (!in_array($type, array('highlighted','popular', 'outdate', 'recent', 'success', 'archive', 'all'))) {
                 throw new Redirection('/discover');
             }
 

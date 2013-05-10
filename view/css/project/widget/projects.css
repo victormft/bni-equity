@@ -23,7 +23,7 @@ div.widget.projects > .title {
 }
 
 div.widget.projects div.project {
-    background-color: #ebeaeb;
+    background-color: #fafafa;/*#ebeaeb;*/
     margin: 0 0 3.33% 3.33%;
     float: left;    
     padding: 0;
@@ -31,6 +31,9 @@ div.widget.projects div.project {
 	position:relative;
 	z-index:98;
 	border: 1px solid #dfdfdf;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+
 }
 
 div.widget.projects div.project a.expand{
@@ -53,12 +56,13 @@ div.wrap-balloon{
 
 div.balloon{
 	background: #cae4e6 url('/view/css/balloonbeak.png') no-repeat bottom left;
-    border-bottom: 15px solid white;
+    border-bottom: 15px solid #faf8f8;
     height: 76px;
 	padding: 12px;
 	margin-right: 40px;
 	margin: 0;
 	max-width: 228px;
+	
 	
 }
 

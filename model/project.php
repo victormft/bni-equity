@@ -1742,6 +1742,16 @@ namespace Goteo\Model {
         {
             // segun el tipo (ver controller/discover.php)
             switch ($type) {
+				case 'highlighted':
+					//destaques/promotes
+					$sql = 
+                			"SELECT project.id, promote.order
+                            FROM project
+							LEFT JOIN promote
+								ON promote.project = project.id
+                            WHERE project.status = 3
+                            ORDER BY promote.order ASC";
+				break;
                 case 'popular':
                     // de los que estan en campaña,
                     // los que tienen más usuarios (unicos) cofinanciadores y mensajeros

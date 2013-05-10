@@ -98,9 +98,34 @@ if (isset($this['investor']) && is_object($this['investor'])) {
     <div class="description"><?php echo Text::recorta($project->description, 200); ?></div>
     
     <div class="local"><?php echo htmlspecialchars($project->location) ?></div>
+    
+    <div class="meter_info">
+    	<div class="goal">Goal: R$
+			<span style="font-weight:bold;"><?php echo \amount_format(htmlspecialchars($project->mincost)) ?></span>
+        </div>
+    	<div class="status_bar">
+        	<div class="progress"></div>
+        </div>
+        <ul>
+        	<li>
+            	<strong><?php echo number_format(round(($project->invested / $project->mincost) * 100)) ?>%</strong>
+                <p>ATINGIDOS</p>
+            </li>
+            <li>
+            	<strong>R$
+                	<span><?php echo \amount_format(htmlspecialchars($project->invested)) ?></span>
+                </strong>
+                <p>INVESTIDOS</p>
+            </li>
+            <li>
+            	<strong><?php echo number_format(htmlspecialchars($project->days)) ?> dias</strong>
+                <p>RESTANTES</p>
+            </li>
+        </ul>
+    </div>
 
-    <?php echo new View('view/project/meter_hor.html.php', array('project' => $project)) ?>
-
+    <?php // echo new View('view/project/meter_hor.html.php', array('project' => $project)) ?>
+<!--
     <div class="rewards">
         <h<?php echo $level + 1 ?>><?php echo Text::get('project-rewards-header'); ?></h<?php echo $level + 1?>>
 
@@ -121,7 +146,7 @@ if (isset($this['investor']) && is_object($this['investor'])) {
 
 
     </div>
-
+-->
     <?php
     /*
      * quitamos los botones
