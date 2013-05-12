@@ -1,22 +1,4 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
 
 namespace Goteo\Controller {
@@ -75,7 +57,13 @@ namespace Goteo\Controller {
                 $_SESSION['stepped'] = array(
                      'userProfile'  => 'userProfile',
                      'userPersonal' => 'userPersonal',
-                     'overview'     => 'overview',
+					 'enterprise'   => 'enterprise',
+					 'pitch'        => 'pitch',
+					 'entrepreneurs'   => 'entrepreneurs',
+					 
+					 
+					 'userPersonal2' => 'userPersonal2',
+                     'company'      => 'company',
                      'costs'        => 'costs',
                      'rewards'      => 'rewards',
                      'supports'     => 'supports'
@@ -96,7 +84,7 @@ namespace Goteo\Controller {
                  
             } else {
                 // todos los pasos, entrando en userProfile por defecto
-                $step = 'userProfile';
+                $step = 'userPersonal';
 
                 $steps = array(
                     'userProfile' => array(
@@ -104,27 +92,61 @@ namespace Goteo\Controller {
                         'title' => Text::get('step-userProfile'),
                         'offtopic' => true
                     ),
+					
+					
+				
                     'userPersonal' => array(
-                        'name' => Text::get('step-2'),
+                        'name' => Text::get('step-1'),
                         'title' => Text::get('step-userPersonal'),
                         'offtopic' => true
                     ),
-                    'overview' => array(
-                        'name' => Text::get('step-3'),
-                        'title' => Text::get('step-overview')
+					
+					'enterprise' => array(
+                        'name' => "Your company",
+                        'title' => "Information about your company",
+                        'offtopic' => true
+                    ),
+					
+					'pitch' => array(
+                        'name' => "Pitch",
+                        'title' => "Your pitch",
+                        'offtopic' => true
+                    ),
+					
+					'entrepreneurs' => array(
+                        'name' => "Entrepreneurs",
+                        'title' => "Information about the entrepreneurs",
+                        'offtopic' => true
+                    ),
+					
+					
+					
+					
+					
+					'userPersonal2' => array(
+                        'name' => meu,
+                        'title' => meeeu,
+                        'offtopic' => true
+                    ),
+					
+                    'company' => array(
+                        'name' => Text::get('step-2'),
+                        'title' => Text::get('step-company')
                     ),
                     'costs'=> array(
-                        'name' => Text::get('step-4'),
+                        'name' => Text::get('step-3'),
                         'title' => Text::get('step-costs')
                     ),
                     'rewards' => array(
                         'name' => Text::get('step-5'),
                         'title' => Text::get('step-rewards')
                     ),
-                    'supports' => array(
+                    
+					'supports' => array(
                         'name' => Text::get('step-6'),
                         'title' => Text::get('step-supports')
                     ),
+					
                     'preview' => array(
                         'name' => Text::get('step-7'),
                         'title' => Text::get('step-preview'),
@@ -303,7 +325,13 @@ namespace Goteo\Controller {
                     }
                     break;
                 
-                case 'overview': 
+				case 'enterprise': 
+                    $viewData['currently'] = Model\Project::currentStatus();
+                    $viewData['categories'] = Model\Project\Category::getAll();
+                    $viewData['scope'] = Model\Project::scope();
+                    break;
+				
+                case 'company': 
                     $viewData['currently'] = Model\Project::currentStatus();
                     $viewData['categories'] = Model\Project\Category::getAll();
                     $viewData['scope'] = Model\Project::scope();
@@ -313,15 +341,15 @@ namespace Goteo\Controller {
                     $viewData['types'] = Model\Project\Cost::types();
                     if ($_POST) {
                         foreach ($_POST as $k => $v) {
-                            if (!empty($v) && preg_match('/cost-(\d+)-edit/', $k, $r)) {
+                            if (!empty($v) && preg_match('/costs-(\d+)-edit/', $k, $r)) {
                                 $viewData[$k] = true;
                             }
                         }
                         
-                        if (!empty($_POST['cost-add'])) {
+                        if (!empty($_POST['costs-add'])) {
                             $last = end($project->costs);
                             if ($last !== false) {
-                                $viewData["cost-{$last->id}-edit"] = true;
+                                $viewData["costs-{$last->id}-edit"] = true;
                             }
                         }
                     }
@@ -360,6 +388,7 @@ namespace Goteo\Controller {
                     
                     break;
 
+
                 case 'supports':
                     $viewData['types'] = Model\Project\Support::types();
                     if ($_POST) {
@@ -378,6 +407,7 @@ namespace Goteo\Controller {
                     }                   
                     
                     break;
+
                 
                 case 'preview':
                     $success = array();
@@ -389,7 +419,7 @@ namespace Goteo\Controller {
                         $success[] = Text::get('guide-project-success-okfinish');
                     }
                     $viewData['success'] = $success;
-                    $viewData['types'] = Model\Project\Cost::types();
+                    $viewData['types'] = Model\Project\cost::types();
                     break;
             }
 
@@ -640,20 +670,39 @@ namespace Goteo\Controller {
 
             // campos que guarda este paso
             $fields = array(
-                'contract_name',
-                'contract_nif',
-                'contract_email',
-                'phone',
+                //'contract_name',
+				'leader_name',
+				'leader_gender',
+				'contract_birthdate',
+				'leader_rg',
+				'leader_telephone',
+				'leader_email',
+				'leader_facebook',
+				'leader_linkedin',
+				'leader_twitter',
+				'leader_street',
+				'leader_city',
+				'leader_state',
+				'leader_cep',
+				'leader_country',
+				
+				
+                //'contract_nif',
+                //'contract_email',
+                //'phone',
                 'contract_entity',
-                'contract_birthdate',
+                
                 'entity_office',
                 'entity_name',
                 'entity_cif',
-                'address',
-                'zipcode',
-                'location',
-                'country',
+                //'address',
+                //'zipcode',
+                //'location',
+                //'country',
                 'secondary_address',
+				
+				'past_funded',
+				
                 'post_address',
                 'post_zipcode',
                 'post_location',
@@ -683,13 +732,147 @@ namespace Goteo\Controller {
 
             return true;
         }
-
-        /*
-         * Paso 3 - DESCRIPCIÓN
+		
+		
+		
+		
+		
+		
+		/*
+         * Paso 2 - COMPANY / ENTERPRISE - THIS ONE!!
          */
 
-        private function process_overview(&$project, &$errors) {
-            if (!isset($_POST['process_overview'])) {
+        private function process_enterprise(&$project, &$errors) {
+            if (!isset($_POST['process_enterprise'])) {
+                return false;
+            }
+
+            // campos que guarda este paso
+            // image, media y category  van aparte
+            $fields = array(
+                'name',        
+				'subtitle',
+				'cnpj',
+				'site',
+				'company_facebook',
+				'amount_needed',
+				'equity',
+				'brazilian_bool',
+				'company_cep',
+				'growth_stage',
+				'opportunity',
+				'exit_strategy',							
+				'past_funded',
+				'investment_secured',
+				'employees_forecast',
+				'employees',
+				'revenue',
+				'profit',
+				'press',
+				
+			);
+			
+			
+			foreach ($fields as $field) {
+                if (isset($_POST[$field])) {
+                    $project->$field = $_POST[$field];
+                }
+            }
+			
+			//categorias
+            // añadir las que vienen y no tiene
+            $tiene = $project->categories;
+            if (isset($_POST['categories'])) {
+                $viene = $_POST['categories'];
+                $quita = array_diff($tiene, $viene);
+            } else {
+                $quita = $tiene;
+            }
+            $guarda = array_diff($viene, $tiene);
+            foreach ($guarda as $key=>$cat) {
+                $category = new Model\Project\Category(array('id'=>$cat,'project'=>$project->id));
+                $project->categories[] = $category;
+            }
+
+            // quitar las que tiene y no vienen
+            foreach ($quita as $key=>$cat) {
+                unset($project->categories[$key]);
+            }
+
+            $quedan = $project->categories; // truki para xdebug
+			
+			
+			//VER
+			if (!$_POST['past_funded']) {
+                $project->post_address = null;
+
+            }
+
+			
+			return true;
+		}
+		
+		
+		/*
+         * Paso 3 - PITCH
+         */
+		 private function process_pitch(&$project, &$errors) {
+            if (!isset($_POST['process_pitch'])) {
+                return false;
+            }
+			
+			//campos que guarda este paso  
+		 	$fields = array(
+				'name',        
+			
+			
+		 	);
+			
+			foreach ($fields as $field) {
+                if (isset($_POST[$field])) {
+                    $project->$field = $_POST[$field];
+                }
+            };
+			
+			
+		 }
+		 
+		 
+		 
+		 
+		 
+		 /*
+         * Paso 4 - ENTREPRENEURS
+         */
+		 private function process_entrepreneurs(&$project, &$errors) {
+            if (!isset($_POST['process_entrepreneurs'])) {
+                return false;
+            }
+			
+			//campos que guarda este paso  
+		 	$fields = array(
+				'name',        
+			
+			
+		 	);
+			
+			foreach ($fields as $field) {
+                if (isset($_POST[$field])) {
+                    $project->$field = $_POST[$field];
+                }
+            };
+			
+		 }
+		 
+		 
+		 
+		
+        /*
+         * Paso 2 - COMPANY - NOT THIS ONE!!!!!
+         */
+
+        /*private function process_company(&$project, &$errors) {
+            if (!isset($_POST['process_company'])) {
                 return false;
             }
 
@@ -765,9 +948,13 @@ namespace Goteo\Controller {
 
             return true;
         }
+*/
+
+
+
 
         /*
-         * Paso 4 - COSTES
+         * Paso 3 - costs
          */
         private function process_costs(&$project, &$errors) {
             if (!isset($_POST['process_costs'])) {
@@ -800,9 +987,9 @@ namespace Goteo\Controller {
             //añadir nuevo coste
             if (!empty($_POST['cost-add'])) {
                 
-                $project->costs[] = new Model\Project\Cost(array(
+                $project->costs[] = new Model\Project\costs(array(
                     'project' => $project->id,
-                    'cost'  => 'Nueva tarea',
+                    'costs'  => 'Nueva tarea',
                     'type'  => 'task',
                     'required' => 1,
                     'from' => date('Y-m-d'),
@@ -898,6 +1085,9 @@ namespace Goteo\Controller {
         /*
          * Paso 6 - COLABORACIONES
          */
+		 
+		 
+		 
          private function process_supports(&$project, &$errors) {            
             if (!isset($_POST['process_supports'])) {
                 return false;
@@ -955,6 +1145,8 @@ namespace Goteo\Controller {
 
             return true;
         }
+		
+		
 
         /*
          * Paso 7 - PREVIEW

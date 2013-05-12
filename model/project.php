@@ -1,23 +1,4 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
-
 
 namespace Goteo\Model {
 
@@ -42,16 +23,31 @@ namespace Goteo\Model {
             $user, // owner's user information
 
             // Register contract data
-            $contract_name, // Nombre y apellidos del responsable del proyecto
-            $contract_nif, // Guardar sin espacios ni puntos ni guiones
-            $contract_email, // cuenta paypal
-            $phone, // guardar sin espacios ni puntos
+            //$contract_name, // Nombre y apellidos del responsable del proyecto
+			$leader_name, 
+			$leader_gender,
+			$contract_birthdate,
+			$leader_rg,        // Guardar sin espacios ni puntos ni guiones
+			$leader_telephone, // guardar sin espacios ni puntos
+			$leader_email,
+			$leader_facebook,
+			$leader_linkedin,
+			$leader_twitter,
+			$leader_street,
+			$leader_city,
+			$leader_state,
+			$leader_cep,
+			$leader_country,
+			
+            //$contract_nif, // Guardar sin espacios ni puntos ni guiones
+            //$contract_email, // cuenta paypal
+            //$phone, // guardar sin espacios ni puntos
 
             // Para marcar física o jurídica
             $contract_entity = false, // false = física (persona)  true = jurídica (entidad)
 
             // Para persona física
-            $contract_birthdate,
+            
 
             // Para entidad jurídica
             $entity_office, // cargo del responsable dentro de la entidad
@@ -59,13 +55,17 @@ namespace Goteo\Model {
             $entity_cif,  // CIF de la entidad
 
             // Campos de Domicilio: Igual para persona o entidad
-            $address,
-            $zipcode,
-            $location, // owner's location
-            $country,
+            //$address,
+            //$zipcode,
+            //$location, // owner's location
+            //$country,
 
             // Domicilio postal
             $secondary_address = false, // si es diferente al domicilio fiscal
+			
+			$past_funded = false,
+			
+			
             $post_address = null,
             $post_zipcode = null,
             $post_location = null,
@@ -73,8 +73,28 @@ namespace Goteo\Model {
 
 
             // Edit project description
-            $name,
-            $subtitle,
+            $name,        // nome da empresa
+            $subtitle,    // resumo de uma frase sobre a empresa
+			$cnpj,      //adivinha??
+			$site,
+			$company_facebook,
+			$amount_needed,
+			$equity,
+			$brazilian_bool,
+			$company_cep,
+			$growth_stage,
+			$opportunity,
+			$exit_strategy,
+			$investment_secured,
+			$employees_forecast,
+			$employees,
+			$revenue,
+			$profit,
+			$press,
+			
+			
+			
+			
             $lang = 'es',
             $image,
             $gallery = array(), // array de instancias image de project_image
@@ -159,7 +179,7 @@ namespace Goteo\Model {
                 $num = 1;
 
             // datos del usuario que van por defecto: name->contract_name,  location->location
-            $userProfile = User::get($user);
+            // $userProfile = User::get($user);
             // datos del userpersonal por defecto a los cammpos del paso 2
             $userPersonal = User::getPersonal($user);
 
@@ -174,19 +194,40 @@ namespace Goteo\Model {
                 ':amount' => 0,
                 ':days' => 0,
                 ':created'  => date('Y-m-d'),
+				/*
                 ':contract_name' => ($userPersonal->contract_name) ?
                                     $userPersonal->contract_name :
                                     $userProfile->name,
-                ':contract_nif' => $userPersonal->contract_nif,
-                ':phone' => $userPersonal->phone,
-                ':address' => $userPersonal->address,
-                ':zipcode' => $userPersonal->zipcode,
-                ':location' => ($userPersonal->location) ?
-                                $userPersonal->location :
-                                $userProfile->location,
-                ':country' => ($userPersonal->country) ?
-                                $userPersonal->country :
+				*/
+				':leader_name' => $userPersonal->leader_name,
+				':leader_gender' => $userPersonal->leader_gender,
+				':contract_birthdate' => $userPersonal->contract_birthdate,
+				':leader_rg' => $userPersonal->leader_rg,
+				':leader_telephone' => $userPersonal->leader_telephone,
+				':leader_street' => $userPersonal->leader_street,
+				':leader_city' => ($userPersonal->leader_city) ?
+                                $userPersonal->leader_city :
+                                $userProfile->leader_city,
+				':leader_state' => $userPersonal->leader_state,
+				':leader_cep' => $userPersonal->leader_cep,
+				':leader_country' => ($userPersonal->leader_country) ?
+                                $userPersonal->leader_country :
                                 Check::country(),
+					
+									
+                //':contract_nif' => $userPersonal->contract_nif,
+				
+				
+				
+                //':phone' => $userPersonal->phone,
+                //':address' => $userPersonal->address,
+                //':zipcode' => $userPersonal->zipcode,
+                /*':location' => ($userPersonal->location) ?
+                                $userPersonal->location :
+                                $userProfile->location,*/
+                /*':country' => ($userPersonal->country) ?
+                                $userPersonal->country :
+                                Check::country(),*/
                 ':project_location' => ($userPersonal->location) ?
                                 $userPersonal->location :
                                 $userProfile->location,
@@ -554,8 +595,26 @@ namespace Goteo\Model {
                 $fail = false;
 
                 // los nif sin guiones, espacios ni puntos
-                $this->contract_nif = str_replace(array('_', '.', ' ', '-', ',', ')', '('), '', $this->contract_nif);
+                //$this->contract_nif = str_replace(array('_', '.', ' ', '-', ',', ')', '('), '', $this->contract_nif);
+				
+                $this->leader_rg = str_replace(array('_', '.', ' ', '-', ',', ')', '('), '', $this->leader_rg);
+				$this->cnpj = str_replace(array('_', '.', ' ', '-', ',', ')', '('), '', $this->cnpj);
+				
                 $this->entity_cif = str_replace(array('_', '.', ' ', '-', ',', ')', '('), '', $this->entity_cif);
+				
+				if($this->revenue == "Select...") {
+					$this->revenue = NULL;				
+				}
+				
+				if($this->profit == "Select...") {
+					$this->profit = NULL;				
+				}				
+				
+				if($this->press == "Select...") {
+					$this->press = NULL;				
+				}
+				
+				
 
                 // Image
                 if (is_array($this->image) && !empty($this->image['name'])) {
@@ -576,26 +635,67 @@ namespace Goteo\Model {
                 }
 
                 $fields = array(
-                    'contract_name',
-                    'contract_nif',
-                    'contract_email',
+                    //'contract_name',
+					'leader_name',
+					'leader_gender',
+					'contract_birthdate',
+					'leader_rg',
+					'leader_telephone',
+					'leader_email',
+					'leader_facebook',
+					'leader_linkedin',
+					'leader_twitter',
+					'leader_street',
+					'leader_city',
+					'leader_state',
+					'leader_cep',
+					'leader_country',
+					
+                    //'contract_nif',
+                    //'contract_email',
                     'contract_entity',
-                    'contract_birthdate',
+                    
                     'entity_office',
                     'entity_name',
                     'entity_cif',
-                    'phone',
-                    'address',
-                    'zipcode',
-                    'location',
-                    'country',
+                    //'phone',
+                    //'address',
+                    //'zipcode',
+                    //'location',
+                    //'country',
                     'secondary_address',
+					
+					
+					
+					
                     'post_address',
                     'post_zipcode',
                     'post_location',
                     'post_country',
+					
+					
                     'name',
                     'subtitle',
+					'cnpj',
+					'site',
+					'company_facebook',
+					'amount_needed',
+					'equity',
+					'brazilian_bool',
+					'company_cep',
+					'growth_stage',
+					'opportunity',
+					'exit_strategy',
+					'past_funded',
+					'investment_secured',
+					'employees_forecast',
+					'employees',
+					'revenue',
+					'profit',
+					'press',
+					
+					
+					
                     'image',
                     'description',
                     'motivation',
@@ -949,32 +1049,94 @@ namespace Goteo\Model {
             /***************** Revisión de campos del paso 2,DATOS PERSONALES *****************/
             $score = 0;
             // obligatorios: todos
-            if (empty($this->contract_name)) {
+			
+            /*if (empty($this->contract_name)) {
                 $errors['userPersonal']['contract_name'] = Text::get('mandatory-project-field-contract_name');
             } else {
                  $okeys['userPersonal']['contract_name'] = 'ok';
                  ++$score;
+            }*/
+			
+			if (empty($this->leader_name)) {
+                $errors['userPersonal']['leader_name'] = Text::get('mandatory-project-field-contract_name');
+            } else {
+                 $okeys['userPersonal']['leader_name'] = 'ok';
+                 ++$score;
             }
+			
+			if (empty($this->leader_gender)) {
+                $errors['userPersonal']['leader_gender'] = "olá amiguinho!";
+            } else {
+                 $okeys['userPersonal']['leader_gender'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->contract_birthdate)) {
+				$errors['userPersonal']['contract_birthdate'] = Text::get('mandatory-project-field-contract_birthdate');
+			} else {
+				 $okeys['userPersonal']['contract_birthdate'] = 'ok';
+			}
+			
 
-            if (empty($this->contract_nif)) {
+            /*if (empty($this->contract_nif)) {
                 $errors['userPersonal']['contract_nif'] = Text::get('mandatory-project-field-contract_nif');
             } elseif (!Check::nif($this->contract_nif) && !Check::vat($this->contract_nif)) {
                 $errors['userPersonal']['contract_nif'] = Text::get('validate-project-value-contract_nif');
             } else {
                  $okeys['userPersonal']['contract_nif'] = 'ok';
                  ++$score;
+            }*/
+			
+			if (empty($this->leader_rg)) {
+                $errors['userPersonal']['leader_rg'] = Text::get('mandatory-project-field-contract_nif');
+            } elseif (!Check::nif($this->leader_rg) && !Check::vat($this->leader_rg)) {
+                $errors['userPersonal']['leader_rg'] = Text::get('validate-project-value-contract_nif');
+            } else {
+                 $okeys['userPersonal']['leader_rg'] = 'ok';
+                 ++$score;
             }
-
-            if (empty($this->contract_email)) {
+			
+            /*if (empty($this->contract_email)) {
                 $errors['userPersonal']['contract_email'] = Text::get('mandatory-project-field-contract_email');
             } elseif (!Check::mail($this->contract_email)) {
                 $errors['userPersonal']['contract_email'] = Text::get('validate-project-value-contract_email');
             } else {
                  $okeys['userPersonal']['contract_email'] = 'ok';
-            }
+            }*/
 
+
+			if (empty($this->leader_email)) {
+                $errors['userPersonal']['leader_email'] = Text::get('mandatory-project-field-contract_email');
+            } elseif (!Check::mail($this->leader_email)) {
+                $errors['userPersonal']['leader_email'] = Text::get('validate-project-value-contract_email');
+            } else {
+                 $okeys['userPersonal']['leader_email'] = 'ok';
+            }
+			
+			if (!empty($this->leader_facebook)) {
+                $okeys['userPersonal']['leader_facebook'] = 'ok';
+                ++$score;
+                // if amigos > 1000 ++$score;
+            }
+			
+			if (!empty($this->leader_linkedin)) {
+                $okeys['userPersonal']['leader_linkedin'] = 'ok';
+                ++$score;
+                // if contacts > 250 $score+=2;
+            }
+			
+			if (!empty($this->leader_twitter)) {
+                $okeys['userPersonal']['leader_twitter'] = 'ok';
+                ++$score;
+                // if followers > 1000 ++$score;
+                // if listed > 100 ++$score;
+            }
+			
+			
+
+			
             // Segun persona física o jurídica
-            if ($this->contract_entity) {  // JURIDICA
+/*            if ($this->contract_entity) {  // JURIDICA
                 if (empty($this->entity_office)) {
                     $errors['userPersonal']['entity_office'] = Text::get('mandatory-project-field-entity_office');
                 } else {
@@ -1001,147 +1163,343 @@ namespace Goteo\Model {
                 } else {
                      $okeys['userPersonal']['contract_birthdate'] = 'ok';
                 }
-            }
+            }*/
 
 
-            if (empty($this->phone)) {
+            /*if (empty($this->phone)) {
                 $errors['userPersonal']['phone'] = Text::get('mandatory-project-field-phone');
             } elseif (!Check::phone($this->phone)) {
                 $errors['userPersonal']['phone'] = Text::get('validate-project-value-phone');
             } else {
                  $okeys['userPersonal']['phone'] = 'ok';
                  ++$score;
+            }*/
+			
+			if (empty($this->leader_telephone)) {
+                $errors['userPersonal']['leader_telephone'] = Text::get('mandatory-project-field-phone');
+            } elseif (!Check::phone($this->leader_telephone)) {
+                $errors['userPersonal']['leader_telephone'] = Text::get('validate-project-value-phone');
+            } else {
+                 $okeys['userPersonal']['leader_telephone'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->leader_street)) {
+                $errors['userPersonal']['leader_street'] = Text::get('mandatory-project-field-address');
+            } else {
+                 $okeys['userPersonal']['leader_street'] = 'ok';
+                 ++$score;
             }
 
-            if (empty($this->address)) {
+            /*if (empty($this->address)) {
                 $errors['userPersonal']['address'] = Text::get('mandatory-project-field-address');
             } else {
                  $okeys['userPersonal']['address'] = 'ok';
                  ++$score;
+            }*/
+			
+			if (empty($this->leader_city)) {
+                $errors['userPersonal']['leader_city'] = Text::get('mandatory-project-field-address');
+            } else {
+                 $okeys['userPersonal']['leader_city'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->leader_state)) {
+                $errors['userPersonal']['leader_state'] = Text::get('mandatory-project-field-address');
+            } else {
+                 $okeys['userPersonal']['leader_state'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->leader_cep)) {
+                $errors['userPersonal']['leader_cep'] = Text::get('mandatory-project-field-address');
+            } else {
+                 $okeys['userPersonal']['leader_cep'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->leader_country)) {
+                $errors['userPersonal']['leader_country'] = Text::get('mandatory-project-field-address');
+            } else {
+                 $okeys['userPersonal']['leader_country'] = 'ok';
+                 ++$score;
             }
 
-            if (empty($this->zipcode)) {
+            /*if (empty($this->zipcode)) {
                 $errors['userPersonal']['zipcode'] = Text::get('mandatory-project-field-zipcode');
             } else {
                  $okeys['userPersonal']['zipcode'] = 'ok';
                  ++$score;
-            }
+            }*/
 
-            if (empty($this->location)) {
+            /*if (empty($this->location)) {
                 $errors['userPersonal']['location'] = Text::get('mandatory-project-field-residence');
             } else {
                  $okeys['userPersonal']['location'] = 'ok';
-            }
+            }*/
 
-            if (empty($this->country)) {
+            /*if (empty($this->country)) {
                 $errors['userPersonal']['country'] = Text::get('mandatory-project-field-country');
             } else {
                  $okeys['userPersonal']['country'] = 'ok';
                  ++$score;
-            }
+            }*/
 
             $this->setScore($score, 6);
             /***************** FIN Revisión del paso 2, DATOS PERSONALES *****************/
 
-            /***************** Revisión de campos del paso 3, DESCRIPCION *****************/
+            /***************** Revisión de campos del paso 3, ENTERPRISE!!! *****************/
             $score = 0;
             // obligatorios: nombre, subtitulo, imagen, descripcion, about, motivation, categorias, video, localización
             if (empty($this->name)) {
-                $errors['overview']['name'] = Text::get('mandatory-project-field-name');
+                $errors['enterprise']['name'] = Text::get('mandatory-project-field-name');
             } else {
-                 $okeys['overview']['name'] = 'ok';
+                 $okeys['enterprise']['name'] = 'ok';
                  ++$score;
             }
 
             if (!empty($this->subtitle)) {
-                 $okeys['overview']['subtitle'] = 'ok';
+                 $okeys['enterprise']['subtitle'] = 'ok';
             }
+			
+			if (empty($this->cnpj)) {
+                    $errors['enterprise']['cnpj'] = Text::get('mandatory-project-field-entity_cif');
+			} elseif (!Check::nif($this->cnpj)) {
+				$errors['enterprise']['cnpj'] = Text::get('validate-project-value-entity_cif');
+			} else {
+				 $okeys['enterprise']['cnpj'] = 'ok';
+			}
+			
+			if (empty($this->company_cep)) {
+                $errors['enterprise']['company_cep'] = Text::get('mandatory-project-field-address');
+            } else {
+                 $okeys['enterprise']['company_cep'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->site)) {
+                $errors['enterprise']['site'] = "deu erro no site, parceiro!"/*Text::get('mandatory-project-field-name')*/;
+            } else {
+                 $okeys['enterprise']['site'] = 'ok';
+                 ++$score;
+            }
+			
+			if (!empty($this->company_facebook)) {
+                $okeys['enterprise']['company_facebook'] = 'ok';
+                ++$score;
+                // if amigos > 1000 ++$score;
+            }
+				
+			if (empty($this->amount_needed)) {
+                $errors['enterprise']['amount_needed'] = "deu erro no amount, parceiro!"/*Text::get('mandatory-project-field-name')*/;
+            } else {
+                 $okeys['enterprise']['amount_needed'] = 'ok';
+                 ++$score;
+            }	
+			
+			if (empty($this->equity)) {
+                $errors['enterprise']['equity'] = "deu erro no percent, parceiro!";
+            } else {
+                 $okeys['enterprise']['equity'] = 'ok';
+                 ++$score;
+            }
+			
+			/*if (empty($this->brazilian_bool)) {
+                $errors['enterprise']['brazilian_bool'] = "NAO EH BRAZUCA??!";
+            } else {
+                 $okeys['enterprise']['brazilian_bool'] = 'ok';
+            }*/
+			
+			if (empty($this->growth_stage)) {
+                $errors['enterprise']['growth_stage'] = "deu erro GS, parceiro!";
+            } else {
+                 $okeys['enterprise']['growth_stage'] = 'ok';
+                 ++$score;
+            }
+				
+			if (empty($this->categories)) {
+                $errors['enterprise']['categories'] = Text::get('mandatory-project-field-category');
+            } else {
+                 $okeys['enterprise']['categories'] = 'ok';
+                 ++$score;
+            }	
+			
+			if (empty($this->opportunity)) {
+                $errors['enterprise']['opportunity'] = "oportunidades, parceiro!";
+            } else {
+                 $okeys['enterprise']['opportunity'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->exit_strategy)) {
+                $errors['enterprise']['exit_strategy'] = "exit, parceiro!";
+            } else {
+                 $okeys['enterprise']['exit_strategy'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->investment_secured)) {
+                $errors['investment_secured']['investment_secured'] = "past investments, parceiro!";
+            } else {
+                 $okeys['enterprise']['investment_secured'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->employees_forecast)) {
+                $errors['enterprise']['employees_forecast'] = "forescast dos empregados, parça";
+            } else {
+                 $okeys['enterprise']['employees_forecast'] = 'ok';
+                 ++$score;
+            }
+				
+			if (empty($this->employees)) {
+                $errors['enterprise']['employees'] = "atuais";
+            } else {
+                 $okeys['enterprise']['employees'] = 'ok';
+                 ++$score;
+            }	
+			
+			if (empty($this->employees_forecast)) {
+                $errors['enterprise']['employees_forecast'] = "forescast dos empregados, parça";
+            } else {
+                 $okeys['enterprise']['employees_forecast'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->revenue)) {
+                $errors['enterprise']['revenue'] = "forescast dos empregados, parça";
+            } else {
+                 $okeys['enterprise']['revenue'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->profit)) {
+                $errors['enterprise']['profit'] = "forescast dos empregados, parça";
+            } else {
+                 $okeys['enterprise']['profit'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->press)) {
+                $errors['enterprise']['press'] = "responde o press";
+            } else {
+                 $okeys['enterprise']['press'] = 'ok';
+                 ++$score;
+            }
+				
+				
+				
+				
+				
+			
+			
 
             if (empty($this->gallery)) {
-                $errors['overview']['image'] = Text::get('mandatory-project-field-image');
+                $errors['company']['image'] = Text::get('mandatory-project-field-image');
             } else {
-                 $okeys['overview']['image'] = 'ok';
+                 $okeys['company']['image'] = 'ok';
                  ++$score;
                  if (count($this->gallery) >= 2) ++$score;
             }
 
             if (empty($this->description)) {
-                $errors['overview']['description'] = Text::get('mandatory-project-field-description');
+                $errors['company']['description'] = Text::get('mandatory-project-field-description');
             } elseif (!Check::words($this->description, 80)) {
-                 $errors['overview']['description'] = Text::get('validate-project-field-description');
+                 $errors['company']['description'] = Text::get('validate-project-field-description');
             } else {
-                 $okeys['overview']['description'] = 'ok';
+                 $okeys['company']['description'] = 'ok';
                  ++$score;
             }
 
             if (empty($this->about)) {
-                $errors['overview']['about'] = Text::get('mandatory-project-field-about');
+                $errors['company']['about'] = Text::get('mandatory-project-field-about');
              } else {
-                 $okeys['overview']['about'] = 'ok';
+                 $okeys['company']['about'] = 'ok';
                  ++$score;
                  /*
                  if (\strlen($this->about) > 2000) {
-                     $errors['overview']['about'] = Text::get('validate-project-field-about');
+                     $errors['company']['about'] = Text::get('validate-project-field-about');
                  }
                   * 
                   */
             }
 
             if (empty($this->motivation)) {
-                $errors['overview']['motivation'] = Text::get('mandatory-project-field-motivation');
+                $errors['company']['motivation'] = Text::get('mandatory-project-field-motivation');
             } else {
-                 $okeys['overview']['motivation'] = 'ok';
+                 $okeys['company']['motivation'] = 'ok';
                  ++$score;
             }
 
             if (!empty($this->goal))  {
-                 $okeys['overview']['goal'] = 'ok';
+                 $okeys['company']['goal'] = 'ok';
                  ++$score;
             }
 
             if (!empty($this->related)) {
-                 $okeys['overview']['related'] = 'ok';
+                 $okeys['company']['related'] = 'ok';
                  ++$score;
             }
 
             if (empty($this->categories)) {
-                $errors['overview']['categories'] = Text::get('mandatory-project-field-category');
+                $errors['company']['categories'] = Text::get('mandatory-project-field-category');
             } else {
-                 $okeys['overview']['categories'] = 'ok';
+                 $okeys['company']['categories'] = 'ok';
                  ++$score;
             }
 
             if (!empty($this->keywords)) {
-                 $okeys['overview']['keywords'] = 'ok';
+                 $okeys['company']['keywords'] = 'ok';
                  ++$score;
             }
 
             if (empty($this->media)) {
-                $errors['overview']['media'] = Text::get('mandatory-project-field-media');
+                $errors['company']['media'] = Text::get('mandatory-project-field-media');
             } else {
-                 $okeys['overview']['media'] = 'ok';
+                 $okeys['company']['media'] = 'ok';
                  $score+=3;
             }
 
             if (!empty($this->currently)) {
-//                 $okeys['overview']['currently'] = 'ok';
+//                 $okeys['company']['currently'] = 'ok';
                  ++$score;
                  if ($this->currently == 2 || $this->currently == 3) ++$score;
             }
 
             if (empty($this->project_location)) {
-                $errors['overview']['project_location'] = Text::get('mandatory-project-field-location');
+                $errors['company']['project_location'] = Text::get('mandatory-project-field-location');
             } else {
-                 $okeys['overview']['project_location'] = 'ok';
+                 $okeys['company']['project_location'] = 'ok';
                  ++$score;
             }
 
             if (!empty($this->scope)) {
-//                 $okeys['overview']['scope'] = 'ok';
+//                 $okeys['company']['scope'] = 'ok';
             }
 
             $this->setScore($score, 16);
             /***************** FIN Revisión del paso 3, DESCRIPCION *****************/
+
+
+
+
+			/***************** Revisión de campos del paso 3, PITCH *****************/
+			
+			
+			/***************** FIN Revisión del paso 3, PITCH *****************/
+			
+			
+			
+			
+			
+			
+			/***************** Revisión de campos del paso 4, ENTREPRENEURS *****************/
+			
+			
+			/***************** FIN Revisión del paso 4, ENTREPRENEURS *****************/
+
+
 
             /***************** Revisión de campos del paso 4, COSTES *****************/
             $score = 0; $scoreName = $scoreDesc = $scoreAmount = $scoreDate = 0;
@@ -1336,10 +1694,13 @@ namespace Goteo\Model {
 
             $score = $score + $scoreName + $scoreDesc + $scoreAmount;
             $this->setScore($score, 11);
-            /***************** FIN Revisión del paso 5, RETORNOS *****************/
+            /***************** FIN Revisión del paso 5, RETORNOS *****************/ 
 
-            /***************** Revisión de campos del paso 6, COLABORACIONES *****************/
-            $scorename = $scoreDesc = 0;
+           
+		   	
+		    /***************** Revisión de campos del paso 6, COLABORACIONES *****************/
+            /*
+			$scorename = $scoreDesc = 0;
             foreach ($this->supports as $support) {
                 if (!empty($support->support)) {
                      $okeys['supports']['support-'.$support->id.'-support'] = 'ok';
@@ -1353,7 +1714,10 @@ namespace Goteo\Model {
             }
             $score = $scoreName + $scoreDesc;
             $this->setScore($score, 2);
+			*/
             /***************** FIN Revisión del paso 6, COLABORACIONES *****************/
+			
+			
 
             //-------------- Calculo progreso ---------------------//
             $this->setProgress();
@@ -1443,8 +1807,9 @@ namespace Goteo\Model {
 				self::query($sql, array(':status'=>3, ':published'=>date('Y-m-d'), ':id'=>$this->id));
 
                 // borramos mensajes anteriores que sean de colaboraciones
-                self::query("DELETE FROM message WHERE id IN (SELECT thread FROM support WHERE project = ?)", array($this->id));
+                //self::query("DELETE FROM message WHERE id IN (SELECT thread FROM support WHERE project = ?)", array($this->id));
 
+/*
                 // creamos los hilos de colaboración en los mensajes
                 foreach ($this->supports as $id => $support) {
                     $msg = new Message(array(
@@ -1461,6 +1826,7 @@ namespace Goteo\Model {
                     }
                     unset($msg);
                 }
+*/
 
                 return true;
             } catch (\PDOException $e) {
@@ -1742,6 +2108,18 @@ namespace Goteo\Model {
         {
             // segun el tipo (ver controller/discover.php)
             switch ($type) {
+				
+				case 'highlighted':
+					//destaques/promotes
+					$sql = 
+							   "SELECT project.id, promote.order
+									 FROM project
+					   LEFT JOIN promote
+						 ON promote.project = project.id
+									 WHERE project.status = 3
+									 ORDER BY promote.order ASC";
+	        		break;
+				
                 case 'popular':
                     // de los que estan en campaña,
                     // los que tienen más usuarios (unicos) cofinanciadores y mensajeros
@@ -2022,7 +2400,11 @@ namespace Goteo\Model {
             $errors = array(
                 'userProfile'  => array(),  // Errores en el paso 1
                 'userPersonal' => array(),  // Errores en el paso 2
-                'overview'     => array(),  // Errores en el paso 3
+				'enterprise'   => array(),
+				'pitch'        => array(),
+				'entrepreneurs'   => array(),
+				
+                'company'     => array(),  // Errores en el paso 3
                 'costs'        => array(),  // Errores en el paso 4
                 'rewards'      => array(),  // Errores en el paso 5
                 'supports'     => array()   // Errores en el paso 6
