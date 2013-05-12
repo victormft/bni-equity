@@ -26,7 +26,8 @@ namespace Goteo\Controller {
         Goteo\Model\Banner,
         Goteo\Model\Post,
         Goteo\Model\Promote,
-        Goteo\Library\Text;
+        Goteo\Library\Text,
+		Goteo\Library\Listing;
 
     class Index extends \Goteo\Core\Controller {
         
@@ -40,6 +41,13 @@ namespace Goteo\Controller {
             $posts    = Post::getList();
             $promotes = Promote::getAll(true);
             $banners  = Banner::getAll();
+			
+			$projects = Project::published('highlighted');
+			$viewData=array();
+			$viewData['list'] = Listing::get($projects);
+			$viewData['title'] = Text::get('discover-group-highlighted-header');
+			$viewData['type'] = 'highlighted';
+			
 
             foreach ($posts as $id=>$title) {
                 $posts[$id] = Post::get($id);
@@ -67,12 +75,14 @@ namespace Goteo\Controller {
                 array(
                     'banners'  => $banners,
                     'posts'    => $posts,
-                    'promotes' => $promotes
+                    'promotes' => $promotes,
+					'viewData' => $viewData
                 )
             );
             
         }
-        
+		
+		
     }
     
 }

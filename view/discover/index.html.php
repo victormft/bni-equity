@@ -76,7 +76,7 @@ include 'view/header.html.php' ?>
         if (array_empty($list))
             continue;
         ?>
-        <div class="widget projects">
+        <div class="widget projects" id="ajaxContent">
             <h2 class="title"><?php echo $this['title'][$type] ?></h2>
             <?php foreach ($list as $group=>$projects) : ?>
                 <div class="discover-group discover-group-<?php echo $type ?>" id="discover-group-<?php echo $type ?>-<?php echo $group ?>">

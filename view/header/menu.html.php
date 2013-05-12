@@ -25,19 +25,56 @@
         
         <h2><?php echo Text::get('regular-menu'); ?></h2>
         
+        <div class="up_content">
+        
+        	<ul>
+            
+            	<li>
+                	<a href="/faq">FAQ/Ajuda</a>
+                </li>
+                
+                <li class="separator">
+                	<span>|</span>
+                </li>
+            	
+                <li>
+                	<a href="/about">Quem somos?</a>
+                </li>
+                
+                <li class="separator">
+                	<span>|</span>
+                </li>
+                
+                <li>
+                    <a href="/news">Notícias</a>
+                </li>
+            
+            </ul>
+        
+        </div>
+        
         <ul>
             <li class="home"><a href="/"><?php //echo Text::get('regular-home'); ?><font style="font-size:36px; font-family:'Palatino Linotype', 'Book Antiqua', Palatino, serif; font-weight:bold"><text style="color:#8dc63f">BNI</text>Equity</font></a></li>
             <li class="explore"><a href="/discover"><?php //echo Text::get('regular-discover'); ?>
-            <img src="http://localhost/view/css/dollar.png" width="20" height="20" /><span>Investir</span></a></li>
-            <li class="create"><a  href="/project/create"><?php //echo Text::get('regular-create'); ?><img src="http://localhost/view/css/puzzle.png" width="20" height="20" /><span>Submeter</span></a></li>
+            <img src="http://localhost/view/css/dollar.png" width="20" height="20" /><span>Investir<br><span style="color:#888; font-size:12px; padding-left: 20px;">em projetos</span></span></a></li>
+            <li class="create"><a  href="/project/create"><?php //echo Text::get('regular-create'); ?><img src="http://localhost/view/css/puzzle.png" width="20" height="20" /><span>Criar<br><span style="color:#888; font-size:12px; padding-left: 20px;">seu projeto</span></span></a></li>
+            <li class="howitworks"><a  href="/project/create"><?php //echo Text::get('regular-create'); ?><img src="http://localhost/view/css/questionmark.png" width="20" height="20" /><span>Como Funciona?<br><span style="color:#888; font-size:12px; padding-left: 20px;">entenda o BNIEquity</span></span></a></li>
             <li class="search">
                 <form method="get" action="/discover/results">
-                    <fieldset>
+                    <fieldset id="fieldset">
                         <legend><?php echo Text::get('regular-search'); ?></legend>
-                        <input type="text" name="query"  />
+                        <input id="query" type="text" name="query" value="Buscar projetos..." onfocus="this.value=''" onblur="this.value='Buscar projetos...'" />
                         <input type="submit" value="Buscar" >
                     </fieldset>
                 </form>
+                <script>
+                $('#query').focus(function(){
+    				$('#fieldset').addClass('active');
+				});
+				$('#query').blur(function(){
+    				$('#fieldset').removeClass('active');
+				});
+				</script>
             </li>
         <!--
 		    <?php if (!empty($_SESSION['user'])): ?>

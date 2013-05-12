@@ -23,13 +23,17 @@ div.widget.projects > .title {
 }
 
 div.widget.projects div.project {
-    background-color: #ebeaeb;
+    background-color: #fafafa;/*#ebeaeb;*/
     margin: 0 0 3.33% 3.33%;
     float: left;    
     padding: 0;
     width: 250px;
 	position:relative;
 	z-index:98;
+	border: 1px solid #dfdfdf;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+
 }
 
 div.widget.projects div.project a.expand{
@@ -43,6 +47,40 @@ div.widget.projects div.project a.expand{
 div.widget.projects div.project a.button{
     padding: 0.4em 1em !important;
 }
+
+div.wrap-balloon{
+	float: left;
+	
+	
+}
+
+div.balloon{
+	background: #cae4e6 url('/view/css/balloonbeak.png') no-repeat bottom left;
+    border-bottom: 15px solid #faf8f8;
+    height: 76px;
+	padding: 12px;
+	margin-right: 40px;
+	margin: 0;
+	max-width: 228px;
+	
+	
+}
+
+div.balloon > blockquote {  
+    height: 4em;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    font-size: 11px;
+}
+
+div.balloon > h4 {
+    font-size:  14px;    
+    font-weight: bold;            
+    margin: 0 0 .5em;
+    padding: 0;
+}
+
 
 div.widget.projects div.project div.balloon {
     background: #cae4e6 url('/view/css/balloonbeak.png') no-repeat bottom left;

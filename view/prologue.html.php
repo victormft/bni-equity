@@ -35,6 +35,7 @@
         <meta property="og:description" content="<?php echo GOTEO_META_DESCRIPTION ?>" />
         <meta property="og:image" content="<?php echo SITE_URL ?>/goteo_logo.png" />
         <link rel="stylesheet" type="text/css" href="<?php echo SRC_URL ?>/view/css/goteo.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo SRC_URL ?>/view/css/home_slider.css">
       <!--[if IE]>
       <link href="<?php echo SRC_URL ?>/view/css/ie.css" media="screen" rel="stylesheet" type="text/css" />
       <![endif]-->
@@ -54,15 +55,17 @@
           <script type="text/javascript" src="<?php echo SRC_URL ?>/view/js/jquery.jscrollpane.min.js"></script>
           <!-- end custom scrollbars -->
 		  <!-- sliders -->
-		  <script type="text/javascript" src="<?php echo SRC_URL ?>/view/js/jquery.slides.min.js"></script>
+		  <!-- <script type="text/javascript" src="<?php echo SRC_URL ?>/view/js/jquery.slides.min.js"></script> -->
 		  <!-- end sliders -->
           <!-- fancybox-->   
 		  <script type="text/javascript" src="<?php echo SRC_URL ?>/view/js/jquery.fancybox.min.js"></script>
+          <script type="text/javascript" src="<?php echo SRC_URL ?>/view/js/new_slider.js"></script>
 		  <link rel="stylesheet" type="text/css" href="<?php echo SRC_URL ?>/view/css/fancybox/jquery.fancybox.min.css" media="screen" />
           <!-- end custom fancybox-->          
 
 		  <!-- vigilante de sesi�n -->
 		  <script type="text/javascript" src="<?php echo SITE_URL ?>/view/js/watchdog.js"></script>
+          
 
         <?php endif ?>
     </head>

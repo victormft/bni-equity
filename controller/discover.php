@@ -147,6 +147,34 @@ namespace Goteo\Controller {
              );
 
         }
+		
+		public function view_ajax ($type = 'all') {
+
+            if (!in_array($type, array('highlighted','popular', 'outdate', 'recent', 'success', 'archive', 'all'))) {
+                throw new Redirection('/discover');
+            }
+
+            $viewData = array();
+
+            // segun el tipo cargamos el título de la página
+            $viewData['title'] = Text::get('discover-group-'.$type.'-header');
+
+            // segun el tipo cargamos la lista
+			$projects = Model\Project::published($type);
+            $viewData['list']  = Listing::get($projects);
+			
+			//passa o parametro $type
+			$viewData['type'] = $type;
+
+
+            return new View(
+                'view/discover/ajax.html.php',
+                $viewData
+             );
+
+        }
+		
+		
 
     }
     
