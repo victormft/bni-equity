@@ -45,6 +45,7 @@ div.superform li.element > h7,
 div.superform li.element > h8 {    
     margin: 0 0 .5em;    
     font-size: 14px;
+	
 }
 
 div.superform li.element > label {
@@ -539,6 +540,21 @@ div.superform button.image-remove {
 }
 
 div.superform button.image-remove:hover {
+    background: url("/view/css/button/cross-active.png") no-repeat center center !important;
+}
+
+div.superform button.file-remove {
+    position:absolute;
+    right: 5px;
+    top: -10px;
+    background: url("/view/css/button/cross.png") no-repeat center center !important;
+    width: 20px;
+    height: 20px;
+    padding: 0px !important;
+    margin: 0px 10px 0px 0px !important;
+}
+
+div.superform button.file-remove:hover {
     background: url("/view/css/button/cross-active.png") no-repeat center center !important;
 }
 

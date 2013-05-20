@@ -328,6 +328,7 @@ namespace Goteo\Controller {
 				case 'enterprise': 
                     $viewData['currently'] = Model\Project::currentStatus();
                     $viewData['categories'] = Model\Project\Category::getAll();
+					$viewData['ftypes'] = Model\Project\Ftype::getAll();
                     $viewData['scope'] = Model\Project::scope();
                     break;
 				
@@ -395,13 +396,32 @@ namespace Goteo\Controller {
                         foreach ($_POST as $k => $v) {
                             if (!empty($v) && preg_match('/support-(\d+)-edit/', $k, $r)) {
                                 $viewData[$k] = true;
-                            }
+                            }							
                         }
-                        
+							
                         if (!empty($_POST['support-add'])) {
                             $last = end($project->supports);
                             if ($last !== false) {
                                 $viewData["support-{$last->id}-edit"] = true;
+                            }
+                        }
+                    }                   
+                    
+                    break;
+					
+				case 'entrepreneurs':
+                    //$viewData['types'] = Model\Project\Support::types();
+                    if ($_POST) {
+                        foreach ($_POST as $k => $v) {
+                            if (!empty($v) && preg_match('/entrepreneur-(\d+)-edit/', $k, $r)) {
+                                $viewData[$k] = true;
+                            }
+                        }
+                        
+                        if (!empty($_POST['entrepreneur-add'])) {
+                            $last = end($project->entrepreneurs);
+                            if ($last !== false) {
+                                $viewData["entrepreneur-{$last->id}-edit"] = true;
                             }
                         }
                     }                   
@@ -629,6 +649,9 @@ namespace Goteo\Controller {
                 $user->avatar->remove('user');
                 $user->avatar = '';
             }
+			
+			
+			
 
             $user->interests = $_POST['user_interests'];
 
@@ -711,7 +734,8 @@ namespace Goteo\Controller {
 
             $personalData = array();
 
-            foreach ($fields as $field) {
+            
+			foreach ($fields as $field) {
                 if (isset($_POST[$field])) {
                     $project->$field = $_POST[$field];
                     $personalData[$field] = $_POST[$field];
@@ -778,6 +802,57 @@ namespace Goteo\Controller {
                     $project->$field = $_POST[$field];
                 }
             }
+				
+			
+			// tratar el BPLAN que suben
+			if(empty($project->bplan_set)) {
+				if(!empty($_FILES['bplan_upload']['name'])) {
+					$project->bplan_set = $_FILES['bplan_upload'];
+					$project->bplan_set['kind'] = 1;
+					$project->bplan_set['type'] = end(explode(".", $_FILES["bplan_upload"]["name"]));
+					
+				}
+				//$this->view($this->id);
+			}
+			elseif (!empty($_FILES['bplan_upload']['name'])) {
+				Message::Info("Esse projeto já tem um BPlan! Apague o atual se quiser dar upload em outro.");
+			}
+			
+			// tratar el finForecast que suben
+			if(empty($project->finForecast_set)) {
+				if(!empty($_FILES['fin_upload']['name'])) {
+					$project->finForecast_set = $_FILES['fin_upload'];
+					$project->finForecast_set['kind'] = 2;
+					$project->finForecast_set['type'] = end(explode(".", $_FILES["fin_upload"]["name"]));
+					
+				}
+				//$this->view($this->id);
+			}
+			elseif (!empty($_FILES['fin_upload']['name'])) {
+				Message::Info("Esse projeto já tem um FinForecast! Apague o atual se quiser dar upload em outro.");
+			}
+			
+			
+			
+			//tratar dos files que saem
+			foreach ($project->files as $key=>$file) {
+                if (!empty($_POST["bplan-{$file->id}-remove"])) {
+                    $file->remove('project');
+					$project->bplan_set = "";
+                    unset($project->files[$key]);
+                }
+				
+				if (!empty($_POST["finForecast-{$file->id}-remove"])) {
+                    $file->remove('project');
+					$project->finForecast_set = "";
+                    unset($project->files[$key]);
+                }
+            }
+		
+			
+			
+			
+		
 			
 			//categorias
             // añadir las que vienen y no tiene
@@ -802,6 +877,29 @@ namespace Goteo\Controller {
             $quedan = $project->categories; // truki para xdebug
 			
 			
+			//ftypes
+            // añadir los que vienen y no tiene
+            $tiene = $project->ftypes;
+            if (isset($_POST['ftypes'])) {
+                $viene = $_POST['ftypes'];
+                $quita = array_diff($tiene, $viene);
+            } else {
+                $quita = $tiene;
+            }
+            $guarda = array_diff($viene, $tiene);
+            foreach ($guarda as $key=>$ft) {
+                $ftype = new Model\Project\Ftype(array('id'=>$ft,'project'=>$project->id));
+                $project->ftypes[] = $ftype;
+            }
+
+            // quitar las que tiene y no vienen
+            foreach ($quita as $key=>$ft) {
+                unset($project->ftypes[$key]);
+            }
+
+            $quedan = $project->ftypes; // truki para xdebug
+			
+			
 			//VER
 			if (!$_POST['past_funded']) {
                 $project->post_address = null;
@@ -823,7 +921,10 @@ namespace Goteo\Controller {
 			
 			//campos que guarda este paso  
 		 	$fields = array(
-				'name',        
+				'name',   
+				'media', 
+				'text_pitch',  
+				'keywords',  
 			
 			
 		 	);
@@ -832,15 +933,36 @@ namespace Goteo\Controller {
                 if (isset($_POST[$field])) {
                     $project->$field = $_POST[$field];
                 }
-            };
+            }
+			
+			// Media
+            if (!empty($project->media)) {
+                $project->media = new Model\Project\Media($project->media);
+            }
 			
 			
+			
+			// tratra dos ARQUIVOS ADICIONAIS
+			if(!empty($_FILES['adfile_upload']['name'])) {				
+				$project->adfile_set = $_FILES['adfile_upload'];
+				$project->adfile_set['kind'] = 3;
+				$project->adfile_set['type'] = end(explode(".", $_FILES["adfile_upload"]["name"]));					
+				
+			}
+			
+			
+						
+			//tratar dos files que saem
+			foreach ($project->files as $key=>$file) {
+                if (!empty($_POST["adfile-{$file->id}-remove"])) {
+                    $file->remove('project');
+					$project->adfile_set = "";
+                    unset($project->files[$key]);
+                }
+			
+            }
 		 }
-		 
-		 
-		 
-		 
-		 
+		
 		 /*
          * Paso 4 - ENTREPRENEURS
          */
@@ -849,29 +971,89 @@ namespace Goteo\Controller {
                 return false;
             }
 			
-			//campos que guarda este paso  
-		 	$fields = array(
-				'name',        
-			
-			
-		 	);
-			
-			foreach ($fields as $field) {
-                if (isset($_POST[$field])) {
-                    $project->$field = $_POST[$field];
+            // tratar colaboraciones existentes
+            foreach ($project->entrepreneurs as $key => $entrepreneur) {
+                
+                // quitar las colaboraciones marcadas para quitar
+                if (!empty($_POST["entrepreneur-{$entrepreneur->id}-remove"])) {
+                    unset($project->entrepreneurs[$key]);
+                    continue;
                 }
-            };
+				
+				if (!empty($_POST["entrepreneur-{$entrepreneur->id}-ok"])) {
+					
+                    continue;
+                    
+                }
+				
+                if (isset($_POST['entrepreneur-' . $entrepreneur->id . '-name'])) {
+                    $entrepreneur->role = $_POST['entrepreneur-' . $entrepreneur->id . '-role'];
+					
+					$entrepreneur->name = $_POST['entrepreneur-' . $entrepreneur->id . '-name'];
+										
+					$entrepreneur->bios = $_POST['entrepreneur-' . $entrepreneur->id . '-bios'];
+					
+					$entrepreneur->founder = $_POST['founder'];
+					
+
+                    /*if (!empty($support->thread)) {
+                        // actualizar ese mensaje
+                        $msg = Model\Message::get($support->thread);
+                        $msg->date = date('Y-m-d');
+                        $msg->message = "{$support->support}: {$support->description}";
+                        $msg->blocked = true;
+                        $msg->save();
+                    } else {
+                        // grabar nuevo mensaje
+                        $msg = new Model\Message(array(
+                            'user'    => $project->owner,
+                            'project' => $project->id,
+                            'date'    => date('Y-m-d'),
+                            'message' => "{$support->support}: {$support->description}",
+                            'blocked' => true
+                            ));
+                        if ($msg->save()) {
+                            // asignado a la colaboracion como thread inicial
+                            $support->thread = $msg->id;
+                        }
+                    }*/
+
+                }
+                
+            }
+            
+            // añadir nueva colaboracion
+            if (!empty($_POST['entrepreneur-add'])) {
+                $project->entrepreneurs[] = new Model\Project\Entrepreneur(array(
+                    'project'       => $project->id,
+					'role'          => 'Cargo',
+                    'name'          => 'Nome',
+                    'founder'       => '0',
+                    'bios'          => ''
+                ));
+            }
 			
+			// tratar las imagenes que quitan
+            foreach ($project->gallery as $key=>$image) {
+                if (!empty($_POST["gallery-{$image->id}-remove"])) {
+                    $image->remove('project');
+                    unset($project->gallery[$key]);
+                }
+            }
+			
+			// tratar la imagen que suben
+            if(!empty($_FILES['image_upload']['name'])) {
+                $project->image = $_FILES['image_upload'];
+            }	
+			
+			return true;
 		 }
 		 
-		 
-		 
-		
         /*
          * Paso 2 - COMPANY - NOT THIS ONE!!!!!
          */
 
-        /*private function process_company(&$project, &$errors) {
+        private function process_company(&$project, &$errors) {
             if (!isset($_POST['process_company'])) {
                 return false;
             }
@@ -905,7 +1087,8 @@ namespace Goteo\Controller {
             // tratar la imagen que suben
             if(!empty($_FILES['image_upload']['name'])) {
                 $project->image = $_FILES['image_upload'];
-            }
+            }			
+			
 
             // tratar las imagenes que quitan
             foreach ($project->gallery as $key=>$image) {
@@ -914,6 +1097,10 @@ namespace Goteo\Controller {
                     unset($project->gallery[$key]);
                 }
             }
+			
+			
+			
+	
 
             // Media
             if (!empty($project->media)) {
@@ -948,7 +1135,7 @@ namespace Goteo\Controller {
 
             return true;
         }
-*/
+
 
 
 
@@ -1013,7 +1200,7 @@ namespace Goteo\Controller {
             $types = Model\Project\Reward::icons('');
 
             //tratar retornos sociales
-            foreach ($project->social_rewards as $k => $reward) {
+            /*foreach ($project->social_rewards as $k => $reward) {
                 
                 if (!empty($_POST["social_reward-{$reward->id}-remove"])) {
                     unset($project->social_rewards[$k]);
@@ -1031,7 +1218,7 @@ namespace Goteo\Controller {
                     $reward->icon_name = $types[$reward->icon]->name;
                 }
                 
-            }
+            }*/
 
             // retornos individuales
             foreach ($project->individual_rewards as $k => $reward) {
@@ -1042,21 +1229,21 @@ namespace Goteo\Controller {
                 }
 
                 if (isset($_POST['individual_reward-' . $reward->id .'-reward'])) {
-                    $reward->reward = $_POST['individual_reward-' . $reward->id .'-reward'];
+                   // $reward->reward = $_POST['individual_reward-' . $reward->id .'-reward'];
                     $reward->description = $_POST['individual_reward-' . $reward->id . '-description'];
-                    $reward->icon = $_POST['individual_reward-' . $reward->id . '-icon'];
-                    if ($reward->icon == 'other') {
-                        $reward->other = $_POST['individual_reward-' . $reward->id . '-other'];
-                    }
+                  //  $reward->icon = $_POST['individual_reward-' . $reward->id . '-icon'];
+                  //  if ($reward->icon == 'other') {
+                  //      $reward->other = $_POST['individual_reward-' . $reward->id . '-other'];
+                  //  }
                     $reward->amount = $_POST['individual_reward-' . $reward->id . '-amount'];
                     $reward->units = $_POST['individual_reward-' . $reward->id . '-units'];
-                    $reward->icon_name = $types[$reward->icon]->name;
+                  //  $reward->icon_name = $types[$reward->icon]->name;
                 }
                 
             }
 
             // tratar nuevos retornos
-            if (!empty($_POST['social_reward-add'])) {
+           /* if (!empty($_POST['social_reward-add'])) {
                 $project->social_rewards[] = new Model\Project\Reward(array(
                     'type'      => 'social',
                     'project'   => $project->id,
@@ -1065,7 +1252,7 @@ namespace Goteo\Controller {
                     'license'   => ''
 
                 ));
-            }
+            }*/
             
             if (!empty($_POST['individual_reward-add'])) {
                 $project->individual_rewards[] = new Model\Project\Reward(array(
@@ -1085,9 +1272,6 @@ namespace Goteo\Controller {
         /*
          * Paso 6 - COLABORACIONES
          */
-		 
-		 
-		 
          private function process_supports(&$project, &$errors) {            
             if (!isset($_POST['process_supports'])) {
                 return false;
@@ -1101,7 +1285,8 @@ namespace Goteo\Controller {
                     unset($project->supports[$key]);
                     continue;
                 }
-
+				
+				
                 if (isset($_POST['support-' . $support->id . '-support'])) {
                     $support->support = $_POST['support-' . $support->id . '-support'];
                     $support->description = $_POST['support-' . $support->id . '-description'];
@@ -1145,6 +1330,7 @@ namespace Goteo\Controller {
 
             return true;
         }
+		
 		
 		
 

@@ -155,7 +155,7 @@ echo new SuperForm(array(
                     'type'      => 'select',
 					'class'     => 'inline select',
                     'required'  => true,
-					'options'   => array("Masculino", "Feminino"),
+					'options'   => array("Select...", "Masculino", "Feminino"),
                     'size'      => 100,
                     'title'     => "Gender",
                     'hint'      => Text::get('tooltip-project-contract_name'),
