@@ -2217,6 +2217,23 @@ namespace Goteo\Model {
             }
             return $projects;
         }
+		
+		 public static function dynamic_search($search = null)
+        {
+			
+			$sql = 
+                			"SELECT project.id
+                            FROM project
+							WHERE project.description LIKE '%$search%'
+                            ORDER BY project.name ASC";
+							
+			$projects = array();
+            $query = self::query($sql);
+            foreach ($query->fetchAll(\PDO::FETCH_ASSOC) as $proj) {
+                $projects[] = self::getMedium($proj['id']);
+            }
+            return $projects;
+		}
 
         /*
          * Lista de proyectos en campaña (para ser revisados por el cron)
