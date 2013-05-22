@@ -7,6 +7,10 @@ namespace Goteo\Model {
         Goteo\Library\Text,
         Goteo\Model\User,
         Goteo\Model\Image,
+		
+		Goteo\Model\File,
+		
+		
         Goteo\Model\Message;
 
     class Project extends \Goteo\Core\Model {
@@ -91,13 +95,25 @@ namespace Goteo\Model {
 			$revenue,
 			$profit,
 			$press,
-			
-			
+			$text_pitch,
 			
 			
             $lang = 'es',
-            $image,
+        
+		
+		    $image,
+			$bplan,
+			$bplan_set,
+			$finForecast,
+			$finForecast_set,
+			$adfile,
+			$adfile_set,
+			
+			$files = array(),
+			
             $gallery = array(), // array de instancias image de project_image
+			
+				
             $description,
              $motivation,
               $video,   // video de motivacion
@@ -106,6 +122,9 @@ namespace Goteo\Model {
              $goal,
              $related,
             $categories = array(),
+			
+			$ftypes = array(),
+			
             $media, // video principal
              $media_usubs, // universal subtitles para el video principal
             $keywords, // por ahora se guarda en texto tal cual
@@ -126,6 +145,8 @@ namespace Goteo\Model {
 
             // Collaborations
             $supports = array(), // instances of project\support
+			
+			$entrepreneurs = array(), // instances of project\entrepreneur
 
             // Comment
             $comment, // Comentario para los admin introducido por el usuario
@@ -309,12 +330,32 @@ namespace Goteo\Model {
 
                 // imagen
                 $project->image = Image::get($project->image);
+				
+				// bplan
+                $project->bplan = File::get($project->bplan_set);
+				
+				// finForecast
+                $project->finForecast = File::get($project->finForecast_set);
+				
+				// adtional files
+                $project->adfile = File::getAdfiles($project->id);
+								
+			
 
                 // galeria
                 $project->gallery = Image::getAll($project->id, 'project');
+				
+				// files
+                $project->files = File::getAll($project->id, 'project');
+	
+							
+				
 
 				// categorias
                 $project->categories = Project\Category::get($id);
+				
+				// ftypes
+                $project->ftypes = Project\Ftype::get($id);
 
 				// costes y los sumammos
 				$project->costs = Project\Cost::getAll($id, $lang);
@@ -328,6 +369,9 @@ namespace Goteo\Model {
 
 				// colaboraciones
 				$project->supports = Project\Support::getAll($id, $lang);
+				
+				// entrepreneurs
+				$project->entrepreneurs = Project\Entrepreneur::getAll($id, $lang);
 
                 //-----------------------------------------------------------------
                 // Diferentes verificaciones segun el estado del proyecto
@@ -417,9 +461,17 @@ namespace Goteo\Model {
 
                 // galeria
                 $project->gallery = Image::getAll($project->id, 'project');
+				
+	
+				
+				
+				
 
 				// categorias
                 $project->categories = Project\Category::get($id);
+				
+				// ftypes
+                $project->ftypes = Project\Ftype::get($id);
 
 				// retornos colectivos
 				$project->social_rewards = Project\Reward::getAll($id, 'social', $lang);
@@ -602,6 +654,11 @@ namespace Goteo\Model {
 				
                 $this->entity_cif = str_replace(array('_', '.', ' ', '-', ',', ')', '('), '', $this->entity_cif);
 				
+				
+				if($this->leader_gender == "Select...") {
+					$this->leader_gender = NULL;				
+				}
+				
 				if($this->revenue == "Select...") {
 					$this->revenue = NULL;				
 				}
@@ -633,6 +690,68 @@ namespace Goteo\Model {
                         \Goteo\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
                     }
                 }
+				
+				// bPlan
+                if (is_array($this->bplan_set) && !empty($this->bplan_set['name'])) {
+                    $file = new File($this->bplan_set);
+                    if ($file->save($errors)) {
+                        $this->files[] = $file;
+                        $this->bplan_set = $file->id;
+
+                        /**
+                         * Guarda la relación NM en la tabla 'project_image'.
+                         */
+                        if(!empty($file->id)) {
+                            self::query("REPLACE INTO project_file (project, file) VALUES(:project, :file)", array(':project'=>$this->id, ':file'=>$file->id));
+                        }
+                    } else {
+                        \Goteo\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
+                    }
+					
+                }
+				
+				// finForecast
+                if (is_array($this->finForecast_set) && !empty($this->finForecast_set['name'])) {
+                    $file = new File($this->finForecast_set);
+                    if ($file->save($errors)) {
+                        $this->files[] = $file;
+                        $this->finForecast_set = $file->id;
+
+                        /**
+                         * Guarda la relación NM en la tabla 'project_image'.
+                         */
+                        if(!empty($file->id)) {
+                            self::query("REPLACE INTO project_file (project, file) VALUES(:project, :file)", array(':project'=>$this->id, ':file'=>$file->id));
+                        }
+                    } else {
+                        \Goteo\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
+                    }
+					
+                }
+				
+				// adFiles
+                if (is_array($this->adfile_set) && !empty($this->adfile_set['name'])) {
+                    $file = new File($this->adfile_set);
+                    if ($file->save($errors)) {
+                        $this->adfile[] = $file;
+                        $this->adfile_set = $this->id;
+
+                        /**
+                         * Guarda la relación NM en la tabla 'project_image'.
+                         */
+                        if(!empty($file->id)) {
+                            self::query("REPLACE INTO project_file (project, file) VALUES(:project, :file)", array(':project'=>$this->id, ':file'=>$file->id));
+                        }
+                    } else {
+                        \Goteo\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
+                    }
+					
+                }
+				
+				
+				
+				
+				
 
                 $fields = array(
                     //'contract_name',
@@ -663,16 +782,12 @@ namespace Goteo\Model {
                     //'zipcode',
                     //'location',
                     //'country',
-                    'secondary_address',
-					
-					
-					
+                    'secondary_address',		
 					
                     'post_address',
                     'post_zipcode',
                     'post_location',
                     'post_country',
-					
 					
                     'name',
                     'subtitle',
@@ -693,10 +808,15 @@ namespace Goteo\Model {
 					'revenue',
 					'profit',
 					'press',
-					
+					'text_pitch',
 					
 					
                     'image',
+					'bplan_set',
+					'finForecast_set',
+					'adfile_set',
+			
+					
                     'description',
                     'motivation',
                     'video',
@@ -761,6 +881,28 @@ namespace Goteo\Model {
                 // recuperamos las que le quedan si ha cambiado alguna
                 if (!empty($quita) || !empty($guarda))
                     $this->categories = Project\Category::get($this->id);
+
+				//ftypes
+                $tiene = Project\Ftype::get($this->id);
+                $viene = $this->ftypes;
+                $quita = array_diff_assoc($tiene, $viene);
+                $guarda = array_diff_assoc($viene, $tiene);
+                foreach ($quita as $key=>$item) {
+                    $ftype = new Project\Ftype(
+                        array(
+                            'id'=>$item,
+                            'project'=>$this->id)
+                    );
+                    if (!$ftype->remove($errors))
+                        $fail = true;
+                }
+                foreach ($guarda as $key=>$item) {
+                    if (!$item->save($errors))
+                        $fail = true;
+                }
+                // recuperamos las que le quedan si ha cambiado alguna
+                if (!empty($quita) || !empty($guarda))
+                    $this->ftypes = Project\Ftype::get($this->id);
 
                 //costes
                 $tiene = Project\Cost::getAll($this->id);
@@ -877,6 +1019,36 @@ namespace Goteo\Model {
                 if (!empty($quita) || !empty($guarda))
     				$this->supports = Project\Support::getAll($this->id);
 
+
+				// colaboraciones
+				$tiene = Project\Entrepreneur::getAll($this->id);
+                $viene = $this->entrepreneurs;
+                $quita = array_diff_key($tiene, $viene); // quitar los que tiene y no viene
+                $guarda = array_diff_key($viene, $tiene); // añadir los que viene y no tiene
+                foreach ($quita as $key=>$item) {
+                    if (!$item->remove($errors)) {
+                        $fail = true;
+                    } else {
+                        unset($tiene[$key]);
+                    }
+                }
+                foreach ($guarda as $key=>$item) {
+                    if (!$item->save($errors))
+                        $fail = true;
+                }
+                /* Ahora, los que tiene y vienen. Si el contenido es diferente, hay que guardarlo*/
+                foreach ($tiene as $key => $row) {
+                    // a ver la diferencia con el que viene
+                    if ($row != $viene[$key]) {
+                        if (!$viene[$key]->save($errors))
+                            $fail = true;
+                    }
+                }
+
+                if (!empty($quita) || !empty($guarda))
+    				$this->entrepreneurs = Project\Entrepreneur::getAll($this->id);
+
+               
                 //listo
                 return !$fail;
 			} catch(\PDOException $e) {
@@ -1325,6 +1497,15 @@ namespace Goteo\Model {
                  ++$score;
             }	
 			
+			if (empty($this->ftypes)) {
+                $errors['enterprise']['ftypes'] = Text::get('mandatory-project-field-category');
+            } else {
+                 $okeys['enterprise']['ftypes'] = 'ok';
+                 ++$score;
+            }	
+			
+			
+			
 			if (empty($this->opportunity)) {
                 $errors['enterprise']['opportunity'] = "oportunidades, parceiro!";
             } else {
@@ -1339,12 +1520,12 @@ namespace Goteo\Model {
                  ++$score;
             }
 			
-			if (empty($this->investment_secured)) {
+			/*if (empty($this->investment_secured)) {
                 $errors['investment_secured']['investment_secured'] = "past investments, parceiro!";
             } else {
                  $okeys['enterprise']['investment_secured'] = 'ok';
                  ++$score;
-            }
+            }*/
 			
 			if (empty($this->employees_forecast)) {
                 $errors['enterprise']['employees_forecast'] = "forescast dos empregados, parça";
@@ -1395,15 +1576,9 @@ namespace Goteo\Model {
 			
 			
 
-            if (empty($this->gallery)) {
-                $errors['company']['image'] = Text::get('mandatory-project-field-image');
-            } else {
-                 $okeys['company']['image'] = 'ok';
-                 ++$score;
-                 if (count($this->gallery) >= 2) ++$score;
-            }
+            
 
-            if (empty($this->description)) {
+            /*if (empty($this->description)) {
                 $errors['company']['description'] = Text::get('mandatory-project-field-description');
             } elseif (!Check::words($this->description, 80)) {
                  $errors['company']['description'] = Text::get('validate-project-field-description');
@@ -1421,8 +1596,8 @@ namespace Goteo\Model {
                  if (\strlen($this->about) > 2000) {
                      $errors['company']['about'] = Text::get('validate-project-field-about');
                  }
-                  * 
-                  */
+                   
+                  
             }
 
             if (empty($this->motivation)) {
@@ -1477,6 +1652,7 @@ namespace Goteo\Model {
             if (!empty($this->scope)) {
 //                 $okeys['company']['scope'] = 'ok';
             }
+			*/
 
             $this->setScore($score, 16);
             /***************** FIN Revisión del paso 3, DESCRIPCION *****************/
@@ -1486,7 +1662,28 @@ namespace Goteo\Model {
 
 			/***************** Revisión de campos del paso 3, PITCH *****************/
 			
+			$score = 0;
+						
+			if (empty($this->text_pitch)) {
+                $errors['pitch']['text_pitch'] = "e o pitch irmão?!";
+            } else {
+                 $okeys['pitch']['text_pitch'] = 'ok';
+                 ++$score;
+            }
 			
+			if (!empty($this->keywords)) {
+                 $okeys['pitch']['keywords'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->media)) {
+                $errors['pitch']['media'] = Text::get('mandatory-project-field-media');
+            } else {
+                 $okeys['pitch']['media'] = 'ok';
+                 $score+=3;
+            }
+			
+			$this->setScore($score, 16); //ver esse numero
 			/***************** FIN Revisión del paso 3, PITCH *****************/
 			
 			
@@ -1497,13 +1694,41 @@ namespace Goteo\Model {
 			/***************** Revisión de campos del paso 4, ENTREPRENEURS *****************/
 			
 			
+			$scorename = $scoreDesc = 0;
+            foreach ($this->entrepreneurs as $entrepreneur) {
+                if (!empty($entrepreneur->name)) {
+                     $okeys['entrepreneurs']['entrepreneur-'.$entrepreneur->id.'-name'] = 'ok';
+                     $scoreName = 1;
+                }
+
+                if (!empty($entrepreneur->bios)) {
+                     $okeys['entrepreneurs']['entrepreneur-'.$entrepreneur->id.'-bios'] = 'ok';
+                     $scoreDesc = 1;
+                }
+            }
+            $score = $scoreName + $scoreDesc;
+            
+			
+			
+			if (empty($this->gallery)) {
+                $errors['entrepreneurs']['image'] = Text::get('mandatory-project-field-image');
+            } else {
+                 $okeys['entrepreneurs']['image'] = 'ok';
+                 ++$score;
+                 if (count($this->gallery) >= 2) ++$score;
+            }
+			
+			
+			
+			$this->setScore($score, 3);
+			
 			/***************** FIN Revisión del paso 4, ENTREPRENEURS *****************/
 
 
 
             /***************** Revisión de campos del paso 4, COSTES *****************/
             $score = 0; $scoreName = $scoreDesc = $scoreAmount = $scoreDate = 0;
-            if (count($this->costs) < 2) {
+       /*     if (count($this->costs) < 2) {
                 $errors['costs']['costs'] = Text::get('mandatory-project-costs');
             } else {
                  $okeys['costs']['costs'] = 'ok';
@@ -1573,7 +1798,7 @@ namespace Goteo\Model {
                 ++$score;
             }
 
-            /*
+            
             if (empty($this->resource)) {
                 $errors['costs']['resource'] = Text::get('mandatory-project-resource');
             } else {
@@ -1581,14 +1806,14 @@ namespace Goteo\Model {
                  ++$score;
             }
              * 
-             */
-
+             
+*/
             $this->setScore($score, 6);
             /***************** FIN Revisión del paso 4, COSTES *****************/
 
             /***************** Revisión de campos del paso 5, RETORNOS *****************/
             $score = 0; $scoreName = $scoreDesc = $scoreAmount = $scoreLicense = 0;
-            if (empty($this->social_rewards)) {
+            /*if (empty($this->social_rewards)) {
                 $errors['rewards']['social_rewards'] = Text::get('validate-project-social_rewards');
             } else {
                  $okeys['rewards']['social_rewards'] = 'ok';
@@ -1633,13 +1858,13 @@ namespace Goteo\Model {
 
                 if (!empty($social->license)) {
                     $scoreLicense = 1;
-                    /*
-                     * Si elige de las mas abiertas
-                    if ($license_group == 1) {
-                        ++$score;
-                    }
-                     *
-                     */
+                    
+              //        Si elige de las mas abiertas
+               //     if ($license_group == 1) {
+              //          ++$score;
+              //      }
+                    
+                     
                 }
             }
 
@@ -1651,16 +1876,16 @@ namespace Goteo\Model {
             
             $score = $score + $scoreName + $scoreDesc + $scoreLicense;
             $scoreName = $scoreDesc = 0;
-
+*/
             $anyerror = false;
             foreach ($this->individual_rewards as $individual) {
-                if (empty($individual->reward)) {
+                /*if (empty($individual->reward)) {
                     $errors['rewards']['individual_reward-'.$individual->id.'-reward'] = Text::get('mandatory-individual_reward-field-name');
                     $anyerror = !$anyerror ?: true;
                 } else {
                      $okeys['rewards']['individual_reward-'.$individual->id.'-reward'] = 'ok';
                      $scoreName = 1;
-                }
+                }*/
 
                 if (empty($individual->description)) {
                     $errors['rewards']['individual_reward-'.$individual->id.'-description'] = Text::get('mandatory-individual_reward-field-description');
@@ -1678,12 +1903,12 @@ namespace Goteo\Model {
                      $scoreAmount = 1;
                 }
 
-                if (empty($individual->icon)) {
+                /*if (empty($individual->icon)) {
                     $errors['rewards']['individual_reward-'.$individual->id.'-icon'] = Text::get('mandatory-individual_reward-field-icon');
                     $anyerror = !$anyerror ?: true;
                 } else {
                      $okeys['rewards']['individual_reward-'.$individual->id.'-icon'] = 'ok';
-                }
+                }*/
 
             }
 
@@ -1925,11 +2150,18 @@ namespace Goteo\Model {
             try {
                 //borrar todos los registros
                 self::query("DELETE FROM project_category WHERE project = ?", array($this->id));
+				
+				self::query("DELETE FROM project_ftype WHERE project = ?", array($this->id));
+				
                 self::query("DELETE FROM cost WHERE project = ?", array($this->id));
                 self::query("DELETE FROM reward WHERE project = ?", array($this->id));
                 self::query("DELETE FROM support WHERE project = ?", array($this->id));
                 self::query("DELETE FROM image WHERE id IN (SELECT image FROM project_image WHERE project = ?)", array($this->id));
+				
+				
                 self::query("DELETE FROM project_image WHERE project = ?", array($this->id));
+				
+			
                 self::query("DELETE FROM message WHERE project = ?", array($this->id));
                 self::query("DELETE FROM project WHERE id = ?", array($this->id));
                 // y los permisos
@@ -1962,10 +2194,14 @@ namespace Goteo\Model {
                     if (self::query("START TRANSACTION")) {
                         try {
                             self::query("UPDATE project_category SET project = :newid WHERE project = :id", array(':newid'=>$newid, ':id'=>$this->id));
+							
+							self::query("UPDATE project_ftype SET project = :newid WHERE project = :id", array(':newid'=>$newid, ':id'=>$this->id));							
+							
                             self::query("UPDATE cost SET project = :newid WHERE project = :id", array(':newid'=>$newid, ':id'=>$this->id));
                             self::query("UPDATE reward SET project = :newid WHERE project = :id", array(':newid'=>$newid, ':id'=>$this->id));
                             self::query("UPDATE support SET project = :newid WHERE project = :id", array(':newid'=>$newid, ':id'=>$this->id));
                             self::query("UPDATE project_image SET project = :newid WHERE project = :id", array(':newid'=>$newid, ':id'=>$this->id));
+							
                             self::query("UPDATE project_account SET project = :newid WHERE project = :id", array(':newid'=>$newid, ':id'=>$this->id));
                             self::query("UPDATE invest SET project = :newid WHERE project = :id", array(':newid'=>$newid, ':id'=>$this->id));
                             self::query("UPDATE project SET id = :newid WHERE id = :id", array(':newid'=>$newid, ':id'=>$this->id));
@@ -2286,6 +2522,15 @@ namespace Goteo\Model {
                     WHERE category = :category
                     )";
                 $values[':category'] = $filters['category'];
+            }
+			
+			if (!empty($filters['ftype'])) {
+                $sqlFilter .= " AND id IN (
+                    SELECT project
+                    FROM project_ftype
+                    WHERE ftype = :ftype
+                    )";
+                $values[':ftype'] = $filters['ftype'];
             }
 
             //el Order

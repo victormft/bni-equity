@@ -70,11 +70,17 @@ $errors = $this['errors'] ?>
                             <strong class="number">4</strong></button>
                     </span>
                     
+                    <span class="step on-off <?php if ($this['step'] === 'rewards') echo ' active'; else echo ' activable'; ?>">
+                            <button type="submit" name="view-step-rewards" value="<?php echo Text::get('step-5'); ?>">Rewards<!--<?php echo Text::get('step-5'); ?>-->
+                            <strong class="number">5</strong></button>                            
+                    </span>
+                    
+                    
                     <fieldset style="display: inline">
                         
                         <legend><?php echo Text::get('regular-new_project'); ?></legend>
                         
-                        <span class="step on-on<?php if ($this['step'] === 'company') echo ' active'; else echo ' activable'; ?>">
+                        <span class="step off-on<?php if ($this['step'] === 'company') echo ' active'; else echo ' activable'; ?>">
                             <button type="submit" name="view-step-company" value="<?php echo Text::get('step-2'); ?>"><?php echo Text::get('step-2'); ?>
                             <strong class="number">2</strong></button>                            
                         </span>
@@ -84,14 +90,11 @@ $errors = $this['errors'] ?>
                             <strong class="number">3</strong></button>                            
                         </span>-->
 
-                        <span class="step on-on<?php if ($this['step'] === 'rewards') echo ' active'; else echo ' activable'; ?>">
-                            <button type="submit" name="view-step-rewards" value="<?php echo Text::get('step-5'); ?>"><?php echo Text::get('step-5'); ?>
-                            <strong class="number">4</strong></button>                            
-                        </span>
+                        
 
  					</fieldset>
 						
-                        <span class="step on-off<?php if ($this['step'] === 'supports') echo ' active'; else echo ' activable'; ?>">
+                        <span class="step off-off<?php if ($this['step'] === 'supports') echo ' active'; else echo ' activable'; ?>">
                             <button type="submit" name="view-step-supports" value="<?php echo Text::get('step-6'); ?>"><?php echo Text::get('step-6'); ?>
                             <strong class="number">5</strong></button>                            
                         </span>

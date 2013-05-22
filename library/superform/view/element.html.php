@@ -25,7 +25,9 @@ $element = $this['element'];
 
 ?>
 <?php if (isset($element->title)): ?>
-<h<?php echo $element->level ?> class="title"><?php echo htmlspecialchars($element->title) ?></h<?php echo $element->level ?>>
+
+<!--<?php echo $element->level ?>-->
+<h5 class="title"><?php echo htmlspecialchars($element->title) ?></h5>
 <?php endif ?>
 
 <?php if ('' !== ($innerHTML = $element->getInnerHTML())): ?>
