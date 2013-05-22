@@ -24,6 +24,59 @@ div#footer ul {
 	margin:0;padding:0;
 }
 
+div#new_footer{
+	width: 100%;
+	margin: 40px auto;
+	background: url('background/dark_back.png') repeat;
+	min-height: 200px;
+	overflow: auto;
+	
+}
+
+div#new_footer div.footer_content{
+	width: 100%;
+		
+}
+
+div#new_footer div.footer_content .info{
+	display:inline;
+	width: 210px;
+	padding:20px 0 20px 20px;
+	float: left;
+}
+
+
+div#new_footer h2{
+	color:#0c0;
+	margin: 0 0 30px 0;
+	text-transform:none;
+	font-size:20px;
+}
+
+div#new_footer ul{
+	list-style:none;
+	padding: 0;
+	
+}
+
+div#new_footer ul li{
+	margin: 15px 0 0 0;
+	
+	
+}
+
+div#new_footer ul li a{
+	text-decoration:none;
+	font-size:18px;
+	color:white;	
+}
+
+div#new_footer ul li a:hover{
+	color:#0c0;
+	text-decoration:underline;	
+	
+}
+
 div#footer {  
 	width:100%;  
 	height: 150px;

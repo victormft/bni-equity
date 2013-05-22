@@ -491,7 +491,7 @@ $(document).ready(function(){
 
         /* Arrow related */
         createArrows        : true, // Creates forward and backward navigation
-        arrowsPosition      : 'prepend', //Where to insert arrows in relation to the slider ('before', 'prepend', 'append', or 'after')
+        arrowsPosition      : 'before', //Where to insert arrows in relation to the slider ('before', 'prepend', 'append', or 'after')
         nextText            : 'Next', // Adds text to the 'next' trigger
         prevText            : 'Previous', // Adds text to the 'prev' trigger
 

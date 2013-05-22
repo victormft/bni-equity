@@ -36,6 +36,69 @@ jQuery(document).ready(function($) {
 });
 </script>
 
+    <div id="new_footer">
+		<div class="footer_content">    
+            <div class="info">
+                <h2>Informações</h2>
+                <ul>
+                	<li>
+                        <a href="#">Como Funciona?</a>
+                    </li>
+                    <li>
+                        <a href="#">Quem Somos?</a>
+                    </li>
+                    <li>
+                        <a href="#">Notícias</a>
+                    </li>
+                    <li>
+                        <a href="#">FAQ/Ajuda</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="info">
+                <h2><?php echo Text::get('footer-header-projects') ?></h2>
+                <ul>
+                    <li>
+                        <a href="#">Destaques</a>
+                    </li>
+                    <li>
+                        <a href="#">Populares</a>
+                    </li>
+                    <li>
+                        <a href="#">Recentes</a>
+                    </li>
+                    <li>
+                        <a href="#">Próximos de Expirar</a>
+                    </li>
+                    <li>
+                        <a href="#">Sucessos</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="info">
+                <h2><?php echo Text::get('footer-header-categories') ?></h2>
+                <ul>
+					<?php foreach ($categories as $id=>$name) : ?>
+                    <li><a href="/discover/results/<?php echo $id; ?>"><?php echo $name; ?></a></li>
+                	<?php endforeach; ?>
+                </ul>
+            </div>
+            
+            <div class="info">
+                <h2>Social</h2>
+                <ul>
+					<li>
+                    	<a href="#"></a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+    
+<!--    
     <div id="footer">
 		<div class="w940">
         	<div class="block categories">
@@ -127,7 +190,7 @@ jQuery(document).ready(function($) {
 
 		</div>
     </div>
-
+-->
     <div id="sub-footer">
 		<div class="w940">
 		

@@ -175,6 +175,32 @@ namespace Goteo\Controller {
         }
 		
 		
+		public function view_ajax_search ($search = null) {
+
+
+            $viewData = array();
+
+            // segun el tipo cargamos el título de la página
+            $viewData['title'] = "Match";
+
+            // segun el tipo cargamos la lista
+			$projects = Model\Project::dynamic_search($search);
+            $viewData['list']  = Listing::get($projects);
+			
+			//passa o parametro $type
+			$viewData['type'] = "search";
+			
+			$viewData['search'] = $search;
+
+
+            return new View(
+                'view/discover/ajax_search.html.php',
+                $viewData
+             );
+
+        }
+		
+		
 
     }
     
