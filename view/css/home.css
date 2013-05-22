@@ -194,7 +194,7 @@ body.home div#main div.projects {
 
 
 body.home div.dynamic_select {
-	color:#0c0;
+	color:#8dc63f;
 	background-color: white;
 	float:left;
 	border: 1px solid #bfbfbf;
@@ -206,7 +206,7 @@ body.home div.dynamic_select {
 
 body.home div.dynamic_select.active {
 	color:white;
-	background-color: #0c0;
+	background-color: #8dc63f;
 	float:left;
 	border: 1px solid #bfbfbf;
 	height: 30px;
@@ -228,7 +228,7 @@ body.home div.dynamic_select:hover {
 
 body.home div.dynamic_select.active:hover {
 	color:white;
-	background-color: #0c0;
+	background-color: #8dc63f;
 	float:left;
 	border: 1px solid #bfbfbf;
 	height: 30px;

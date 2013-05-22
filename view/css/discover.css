@@ -16,15 +16,82 @@
  *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
  *
  */
+ 
+body.discover div#main{
+	width:1200px;
+	
+	
+} 
+ 
 body.discover div#main div.widget {
     overflow: hidden;
 	margin-bottom: 24px;
+	border: 1px solid #dfdfdf;
+	border-radius: 5px;
+	float:left;
+}
+
+body.discover div#main div.projects {
+    margin-right:15px;
+	width: 900px;
 }
 
 body.discover div#main div.searcher {
 	background-color: transparent;
 	padding-bottom: 0;
 	border-bottom: 1px solid #d1d3d4;
+}
+
+body.discover div#main div.search{
+	border: 1px solid #dfdfdf;
+	background-color: white;
+    min-height: 200px;
+	width:230px;
+	float:left;
+	overflow:auto;
+	border-radius:5px;
+	
+}
+
+body.discover div#main div.search h2{
+	text-transform:none;
+	color:black;
+	font-size:14px;
+	padding-left: 30px;
+	
+}
+
+body.discover div#main div.search ul{
+	list-style:none;
+	padding-left:20px;
+	
+}
+
+body.discover div#main div.search ul li{
+	margin-bottom:5px;
+}
+
+body.discover div#main div.search ul li a{
+	display:block;
+	text-decoration:none;
+	font-size:14px;
+	font-family:"Liberation Sans", Helvetica, "Helvetica Neue", Arial, Geneva, sans-serif;
+	margin-right:30px;
+	border-radius:8px;
+	padding: 2px 0 2px 10px;
+	
+	
+}
+
+body.discover div#main div.search ul li a:hover{
+	background-color:#9F9;
+	color:black;
+	
+}
+
+body.discover div#main div.search ul li a.current{
+	background-color:#9F9;
+	
 }
 
 /* Buscador */

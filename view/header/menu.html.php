@@ -120,3 +120,59 @@
             <?php endif ?>
         </ul>
     </div>
+    
+    
+    <div id="dynamic_result"> 
+    
+<!--    <div id="sub_dyn">
+    </div>
+-->
+	   
+		<div id="out_search">
+        <a class="expand_search" href="#"></a>
+        </div>
+        
+		<div id="main">
+            <div class="widget projects" id="dynamicContent_search">
+            
+            </div>
+		</div>        
+    </div>
+
+   
+<script type="text/javascript">
+	$(document).ready(function() {
+	//$("#query").keypress(function() { // inclui todos os links com id="dynamic"
+		//$("#dynamic_result").animate({'display':'block'}, 'slow');
+		//$("#dynamic_result").css("display", "block");
+	$("#query").keyup(function() {
+	
+		var len = $("#query").val().length;
+		var val = $("#query").val();
+			
+		if(len >=3){	
+			
+				$("#dynamic_result").css("height", "600px");
+				$("#sub-header").css("opacity", "0.2");
+				$("#dynamicContent_search").load("/discover/view_ajax_search/"+val);
+		}
+		
+		else{	
+			
+				$("#dynamic_result").css("height", "0px");
+				$("#sub-header").css("opacity", "1");
+		}
+	});
+	
+	//});
+	
+	
+	
+	$("#out_search").click(function() { // inclui todos os links com id="dynamic"
+		//$("#dynamic_result").css("display", "none");
+		$("#dynamic_result").css("height", "0px");
+		$("#sub-header").css("opacity", "1");		
+	});
+});
+
+</script>

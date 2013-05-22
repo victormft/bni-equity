@@ -102,4 +102,20 @@
         </script>
         <noscript><!-- Please enable JavaScript --></noscript>
 
+		<div id="language">
+        	<ul>
+            	<li>
+                	<a href="?lang=en">
+                    	<img alt="en" width="30" height="30" src="<?php echo SRC_URL ?>/view/css/lang/en.png" />
+                    </a>
+                </li>
+                
+                <li>
+                	<a href="?lang=pt">
+                    	<img alt="pt" width="30" height="30" src="<?php echo SRC_URL ?>/view/css/lang/pt.png" />
+                    </a>
+                </li>
+            </ul>
+         </div>
+
         <div id="wrapper">

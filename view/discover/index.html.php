@@ -19,9 +19,11 @@
  */
 
 use Goteo\Core\View,
+	Goteo\Model\Category,
 	Goteo\Library\Text;
 
 $bodyClass = 'discover';
+$categories = Category::getList();
 include 'view/prologue.html.php';
 include 'view/header.html.php' ?>
 
@@ -64,19 +66,19 @@ include 'view/header.html.php' ?>
     </div>
 
     <div id="main">
-        <?php echo new View('view/discover/searcher.html.php',
-                            array(
-                                'categories' => $categories,
-                                'locations'  => $locations,
-                                'rewards'    => $rewards
-                            )
-            ); ?>
+        <?php //echo new View('view/discover/searcher.html.php',
+                //            array(
+                  //              'categories' => $categories,
+                    //            'locations'  => $locations,
+                      //          'rewards'    => $rewards
+                        //    )
+           // ); ?>
 
     <?php foreach ($this['lists'] as $type=>$list) :
         if (array_empty($list))
             continue;
         ?>
-        <div class="widget projects" id="ajaxContent">
+        <div class="widget projects" id="dynamicContent">
             <h2 class="title"><?php echo $this['title'][$type] ?></h2>
             <?php foreach ($list as $group=>$projects) : ?>
                 <div class="discover-group discover-group-<?php echo $type ?>" id="discover-group-<?php echo $type ?>-<?php echo $group ?>">
@@ -110,8 +112,52 @@ include 'view/header.html.php' ?>
         </div>
 
     <?php endforeach; ?>
-
+    
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$(".search a").click(function() {
+				$("#dynamicContent").load($(this).attr("href")); 
+				$(".search a.current").removeClass("current");
+				$(this).addClass("current");
+				return false;
+			});
+	});
+	</script>
+        
+        <div class="search">
+        	
+            <h2>Projects</h2>
+        	<ul>
+                    <li>
+                        <a href="/discover/view_ajax/highlighted">Destaques</a>
+                    </li>
+                    <li>
+                        <a href="/discover/view_ajax/popular">Populares</a>
+                    </li>
+                    <li>
+                        <a href="/discover/view_ajax/recent">Recentes</a>
+                    </li>
+                    <li>
+                        <a href="/discover/view_ajax/outdated">Próximos de Expirar</a>
+                    </li>
+                    <li>
+                        <a href="#">Sucessos</a>
+                    </li>
+                </ul>
+            
+            
+            <h2><?php echo Text::get('project-view-categories-title') ?></h2>
+        	<ul>
+				<?php foreach ($categories as $id=>$name) : ?>
+            	<li><a href="/discover/results/<?php echo $id; ?>"><?php echo $name; ?></a></li>
+            	<?php endforeach; ?>
+            </ul>
+        
+        </div>
+    
+    
     </div>
+    
 
     <?php include 'view/footer.html.php' ?>
 
