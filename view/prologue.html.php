@@ -22,6 +22,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <head>
+	    <base href="<?php echo SITE_URL ?>" target="_blank" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title><?php echo GOTEO_META_TITLE ?></title>
         <link rel="icon" type="image/png" href="/myicon.png" />

@@ -26,5 +26,5 @@ ServerSignature Off
   RewriteEngine On  
   RewriteBase /
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule .* index.php?%{QUERY_STRING}
+  RewriteRule .* /goteo/index.php?%{QUERY_STRING}
 </IfModule>

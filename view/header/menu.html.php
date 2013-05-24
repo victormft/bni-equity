@@ -30,7 +30,7 @@
         	<ul>
             
             	<li>
-                	<a href="/faq">FAQ/Ajuda</a>
+                	<a href="<?php echo SITE_URL ?>/faq">FAQ/Ajuda</a>
                 </li>
                 
                 <li class="separator">
@@ -38,7 +38,7 @@
                 </li>
             	
                 <li>
-                	<a href="/about">Quem somos?</a>
+                	<a href="about">Quem somos?</a>
                 </li>
                 
                 <li class="separator">

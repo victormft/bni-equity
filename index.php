@@ -84,9 +84,13 @@ $uri = strtok($_SERVER['REQUEST_URI'], '?');
 
 // Get requested segments
 $segments = preg_split('!\s*/+\s*!', $uri, -1, \PREG_SPLIT_NO_EMPTY);
+array_shift($segments);
 
 // Normalize URI
 $uri = '/' . implode('/', $segments);
+
+//print_r($uri);
+//exit();
 
 try {
 
@@ -98,7 +102,7 @@ try {
         if (strpos($uri, 'cron') !== false && strcmp($_GET[md5(CRON_PARAM)], md5(CRON_VALUE)) === 0) {
             // proceed
         } else {
-            throw new Redirection("/user/login/?return=".rawurlencode($uri));
+            throw new Redirection("/goteo/user/login/?return=".rawurlencode($uri));
         }
     }
 

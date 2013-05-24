@@ -90,8 +90,8 @@ define('GOTEO_GETTEXT_DOMAIN', 'messages');
 define('GOTEO_GETTEXT_BYPASS_CACHING', true);
 
 // url
-define('SITE_URL', 'http://localhost');
-define('SRC_URL', 'http://localhost');
+define('SITE_URL', 'http://localhost/goteo');
+define('SRC_URL', 'http://localhost/goteo');
 
 // Cron params
 define('CRON_PARAM', '');
