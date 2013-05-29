@@ -1,7 +1,7 @@
 <?php
 
 
-use Goteo\Library\Text;
+use Equity\Library\Text;
 
 $entrepreneur = $this['data']['entrepreneur'] ?>
 

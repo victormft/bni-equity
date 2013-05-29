@@ -1,6 +1,6 @@
 <?php
-use Goteo\Core\View,
-	Goteo\Library\Text;
+use Equity\Core\View,
+	Equity\Library\Text;
 ?>
 
 <script type="text/javascript">	
@@ -61,7 +61,7 @@ use Goteo\Core\View,
                 <div class="discover-group discover-group-<?php echo $this['type'] ?>" id="discover-group-<?php echo $this['type'] ?>-<?php echo $group ?>">
 
                     <div class="discover-arrow-left">
-                        <a class="discover-arrow" href="/discover/view_ajax/<?php echo $this['type'] ?>" rev="<?php echo $this['type'] ?>" rel="<?php echo $this['type'].'-'.$projects['prev'] ?>">&nbsp;</a>
+                        <a class="discover-arrow" href="<?php echo SITE_URL ?>/discover/view_ajax/<?php echo $this['type'] ?>" rev="<?php echo $this['type'] ?>" rel="<?php echo $this['type'].'-'.$projects['prev'] ?>">&nbsp;</a>
                     </div>
 
                     <?php foreach ($projects['items'] as $project) :
@@ -69,7 +69,7 @@ use Goteo\Core\View,
                     endforeach; ?>
 
                     <div class="discover-arrow-right">
-                        <a class="discover-arrow" href="/discover/view_ajax/<?php echo $this['type']; ?>" rev="<?php echo $this['type'] ?>" rel="<?php echo $this['type'].'-'.$projects['next'] ?>">&nbsp;</a>
+                        <a class="discover-arrow" href="<?php echo SITE_URL ?>/discover/view_ajax/<?php echo $this['type']; ?>" rev="<?php echo $this['type'] ?>" rel="<?php echo $this['type'].'-'.$projects['next'] ?>">&nbsp;</a>
                     </div>
 
                 </div>
@@ -80,8 +80,8 @@ use Goteo\Core\View,
             <div class="navi-bar">
                 <ul class="navi">
                     <?php foreach (array_keys($this['list']) as $group) : ?>
-                    <li><a id="navi-discover-group-<?php echo $this['type'].'-'.$group ?>" href="/discover/view_ajax/<?php echo $this['type']; ?>" rev="<?php echo $this['type'] ?>" rel="<?php echo "{$this['type']}-{$group}" ?>" class="navi-discover-group navi-discover-group-<?php echo $this['type'] ?>"><?php echo $group ?></a></li>
+                    <li><a id="navi-discover-group-<?php echo $this['type'].'-'.$group ?>" href="<?php echo SITE_URL ?>/discover/view_ajax/<?php echo $this['type']; ?>" rev="<?php echo $this['type'] ?>" rel="<?php echo "{$this['type']}-{$group}" ?>" class="navi-discover-group navi-discover-group-<?php echo $this['type'] ?>"><?php echo $group ?></a></li>
                     <?php endforeach ?>
                 </ul>
-                <a class="all" href="/discover/view/<?php echo $this['type']; ?>"><?php echo Text::get('regular-see_all'); ?></a>
+                <a class="all" href="<?php echo SITE_URL ?>/discover/view/<?php echo $this['type']; ?>"><?php echo Text::get('regular-see_all'); ?></a>
             </div>

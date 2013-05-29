@@ -1,6 +1,6 @@
 <?php
 
-use Goteo\Library\Text;
+use Equity\Library\Text;
 
 $reward = $this['data']['reward'];
 $types = $this['data']['types'];

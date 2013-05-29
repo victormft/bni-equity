@@ -1,9 +1,9 @@
 <?php
 
 
-use Goteo\Core\View,
-    Goteo\Library\Text,
-    Goteo\Library\SuperForm;
+use Equity\Core\View,
+    Equity\Library\Text,
+    Equity\Library\SuperForm;
             
 
 $project = $this['project'];

@@ -1,27 +1,9 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-use Goteo\Model\Category,
-    Goteo\Model\Icon,
-    Goteo\Library\Location,
-    Goteo\Library\Text;
+use Equity\Model\Category,
+    Equity\Model\Icon,
+    Equity\Library\Location,
+    Equity\Library\Text;
 
 
 $categories = Category::getList();  // categorias que se usan en proyectos
@@ -42,8 +24,8 @@ $params = $this['params'];
 
 
 <div class="widget searcher">
-<a id="ajax" href="/discover/view_ajax/recent">teste</a>
-    <form method="post" action="/discover/results">
+<a id="ajax" href="<?php echo SITE_URL ?>/discover/view_ajax/recent">teste</a>
+    <form method="post" action="<?php echo SITE_URL ?>/discover/results">
         <div class="text-filter">
             <label for="text-query"><?php echo Text::get('discover-searcher-bycontent-header'); ?></label>
             <input type="text" id="text-query" name="query" size="48" value="<?php echo \htmlspecialchars($params['query']); ?>" />

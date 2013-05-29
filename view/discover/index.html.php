@@ -1,26 +1,8 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-use Goteo\Core\View,
-	Goteo\Model\Category,
-	Goteo\Library\Text;
+use Equity\Core\View,
+	Equity\Model\Category,
+	Equity\Library\Text;
 
 $bodyClass = 'discover';
 $categories = Category::getList();
@@ -84,7 +66,7 @@ include 'view/header.html.php' ?>
                 <div class="discover-group discover-group-<?php echo $type ?>" id="discover-group-<?php echo $type ?>-<?php echo $group ?>">
 
                     <div class="discover-arrow-left">
-                        <a class="discover-arrow" href="/discover/view/<?php echo $type; ?>" rev="<?php echo $type ?>" rel="<?php echo $type.'-'.$projects['prev'] ?>">&nbsp;</a>
+                        <a class="discover-arrow" href="<?php echo SITE_URL ?>/discover/view/<?php echo $type; ?>" rev="<?php echo $type ?>" rel="<?php echo $type.'-'.$projects['prev'] ?>">&nbsp;</a>
                     </div>
 
                     <?php foreach ($projects['items'] as $project) :
@@ -92,7 +74,7 @@ include 'view/header.html.php' ?>
                     endforeach; ?>
 
                     <div class="discover-arrow-right">
-                        <a class="discover-arrow" href="/discover/view/<?php echo $type; ?>" rev="<?php echo $type ?>" rel="<?php echo $type.'-'.$projects['next'] ?>">&nbsp;</a>
+                        <a class="discover-arrow" href="<?php echo SITE_URL ?>/discover/view/<?php echo $type; ?>" rev="<?php echo $type ?>" rel="<?php echo $type.'-'.$projects['next'] ?>">&nbsp;</a>
                     </div>
 
                 </div>
@@ -103,10 +85,10 @@ include 'view/header.html.php' ?>
             <div class="navi-bar">
                 <ul class="navi">
                     <?php foreach (array_keys($list) as $group) : ?>
-                    <li><a id="navi-discover-group-<?php echo $type.'-'.$group ?>" href="/discover/view/<?php echo $type; ?>" rev="<?php echo $type ?>" rel="<?php echo "{$type}-{$group}" ?>" class="navi-discover-group navi-discover-group-<?php echo $type ?>"><?php echo $group ?></a></li>
+                    <li><a id="navi-discover-group-<?php echo $type.'-'.$group ?>" href="<?php echo SITE_URL ?>/discover/view/<?php echo $type; ?>" rev="<?php echo $type ?>" rel="<?php echo "{$type}-{$group}" ?>" class="navi-discover-group navi-discover-group-<?php echo $type ?>"><?php echo $group ?></a></li>
                     <?php endforeach ?>
                 </ul>
-                <a class="all" href="/discover/view/<?php echo $type; ?>"><?php echo Text::get('regular-see_all'); ?></a>
+                <a class="all" href="<?php echo SITE_URL ?>/discover/view/<?php echo $type; ?>"><?php echo Text::get('regular-see_all'); ?></a>
             </div>
 
         </div>
@@ -129,16 +111,16 @@ include 'view/header.html.php' ?>
             <h2>Projects</h2>
         	<ul>
                     <li>
-                        <a href="/discover/view_ajax/highlighted">Destaques</a>
+                        <a href="<?php echo SITE_URL ?>/discover/view_ajax/highlighted">Destaques</a>
                     </li>
                     <li>
-                        <a href="/discover/view_ajax/popular">Populares</a>
+                        <a href="<?php echo SITE_URL ?>/discover/view_ajax/popular">Populares</a>
                     </li>
                     <li>
-                        <a href="/discover/view_ajax/recent">Recentes</a>
+                        <a href="<?php echo SITE_URL ?>/discover/view_ajax/recent">Recentes</a>
                     </li>
                     <li>
-                        <a href="/discover/view_ajax/outdated">Próximos de Expirar</a>
+                        <a href="<?php echo SITE_URL ?>/discover/view_ajax/outdated">Próximos de Expirar</a>
                     </li>
                     <li>
                         <a href="#">Sucessos</a>
@@ -149,7 +131,7 @@ include 'view/header.html.php' ?>
             <h2><?php echo Text::get('project-view-categories-title') ?></h2>
         	<ul>
 				<?php foreach ($categories as $id=>$name) : ?>
-            	<li><a href="/discover/results/<?php echo $id; ?>"><?php echo $name; ?></a></li>
+            	<li><a href="<?php echo SITE_URL ?>/discover/results/<?php echo $id; ?>"><?php echo $name; ?></a></li>
             	<?php endforeach; ?>
             </ul>
         

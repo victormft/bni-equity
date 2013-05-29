@@ -22,9 +22,9 @@
 <?php
 
 
-use Goteo\Library\Text,
-    Goteo\Library\SuperForm,
-    Goteo\Core\View;
+use Equity\Library\Text,
+    Equity\Library\SuperForm,
+    Equity\Core\View;
 
 $project = $this['project'];
 $errors = $project->errors[$this['step']] ?: array();         

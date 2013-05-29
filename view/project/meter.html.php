@@ -1,24 +1,6 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-use Goteo\Library\Text;
+use Equity\Library\Text;
 
 $level = (int) $this['level'] ?: 3;
 
@@ -79,9 +61,9 @@ $minimum_ratio =  min(100, round(($minimum / $optimum) * 100));
 ?>        
     <div class="meter <?php echo $horizontal ? 'hor' : 'ver'; echo $big ? ' big' : ''; echo $activable ? ' activable' : ''; ?>">
         
-        <h<?php echo $level ?> class="title investment"><?php echo Text::get('project-view-metter-investment'); ?></h<?php echo $level ?>>
-        <?php if (!empty($project->round)) : ?><h<?php echo $level ?> class="title ronda"><?php echo $project->round . Text::get('regular-round'); ?></h<?php echo $level ?>><?php endif; ?>
-        <?php if ($activable) : ?><h<?php echo $level ?> class="title obtained"><?php echo Text::get('project-view-metter-got'); ?></h<?php echo $level ?>><?php endif; ?>
+        <h<?php echo $level ?> class="title investment"><?php echo Text::get('project-view-metter-investment'); ?></h><?php echo $level ?>>
+        <?php if (!empty($project->round)) : ?><h<?php echo $level ?> class="title ronda"><?php echo $project->round . Text::get('regular-round'); ?></h><?php echo $level ?>><?php endif; ?>
+        <?php if ($activable) : ?><h<?php echo $level ?> class="title obtained"><?php echo Text::get('project-view-metter-got'); ?></h><?php echo $level ?>><?php endif; ?>
         <div class="graph">
             <div class="optimum">
                  <div class="left" style="<?php echo $horizontal ? 'width' : 'height' ?>: <?php echo number_format($optimum_left) ?>%"></div>

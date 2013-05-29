@@ -12,9 +12,9 @@ div.file {
 
 <?php 
 
-use Goteo\Core\View,
-    Goteo\Library\Text,
-    Goteo\Library\SuperForm;
+use Equity\Core\View,
+    Equity\Library\Text,
+    Equity\Library\SuperForm;
     
 $project = $this['project'];
 $errors = $project->errors[$this['step']] ?: array();
@@ -44,7 +44,7 @@ foreach ($project->adfile as $adfile) {
 		'type' => 'html',
 		'class' => 'inline',
 		'html' =>  is_object($adfile) ?
-					'<img src="http://localhost/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$adfile->name.'</div><button class="file-remove" type="submit" name="adfile-'.$adfile->id.'-remove" title="Tirar file" value="remove"></button>' :
+					'<img src="<?php echo SITE_URL ?>/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$adfile->name.'</div><button class="file-remove" type="submit" name="adfile-'.$adfile->id.'-remove" title="Tirar file" value="remove"></button>' :
 					''
 	); 
 }

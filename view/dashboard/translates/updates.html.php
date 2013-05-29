@@ -1,26 +1,8 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-use Goteo\Core\View,
-    Goteo\Library\Text,
-    Goteo\Library\SuperForm;
+use Equity\Core\View,
+    Equity\Library\Text,
+    Equity\Library\SuperForm;
 
 define('ADMIN_NOAUTOSAVE', true);
 
@@ -36,7 +18,7 @@ $errors = $this['errors'];
     <?php if (!empty($posts)) : ?>
     <?php foreach ($posts as $post) : ?>
         <div class="post">
-            <a class="button" href="/dashboard/translates/updates/edit/<?php echo $post->id; ?>"><?php echo Text::get('regular-edit') ?></a>&nbsp;&nbsp;&nbsp;
+            <a class="button" href="<?php echo SITE_URL ?>/dashboard/translates/updates/edit/<?php echo $post->id; ?>"><?php echo Text::get('regular-edit') ?></a>&nbsp;&nbsp;&nbsp;
             <span><?php echo $post->publish ? Text::get('regular-published_yes') : Text::get('regular-published_no'); ?></span>
             <strong><?php echo $post->title; ?></strong>
             <span><?php echo $post->date; ?></span>
@@ -51,7 +33,7 @@ $errors = $this['errors'];
 <?php  else : // sueprform!
 
         $post  = $this['post']; // si edit
-        $original = \Goteo\Model\Blog\Post::get($post->id);
+        $original = \Equity\Model\Blog\Post::get($post->id);
 
 
         if (!empty($post->media->url)) {
@@ -74,7 +56,7 @@ $errors = $this['errors'];
 
     ?>
 
-    <form method="post" action="/dashboard/translates/updates/save/<?php echo $post->id; ?>" class="project" enctype="multipart/form-data">
+    <form method="post" action="<?php echo SITE_URL ?>/dashboard/translates/updates/save/<?php echo $post->id; ?>" class="project" enctype="multipart/form-data">
 
     <?php echo new SuperForm(array(
 

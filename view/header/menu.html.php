@@ -1,7 +1,7 @@
 <?php
 
  use Equity\Core\ACL,
-    Equity\Library\Text;
+     Equity\Library\Text;
 ?>
     <div id="menu">
         
@@ -42,7 +42,7 @@
             <li class="create"><a  href="<?php echo SITE_URL ?>/project/create"><?php //echo Text::get('regular-create'); ?><img src="<?php echo SITE_URL ?>/view/css/puzzle.png" width="20" height="20" /><span>Criar<br><span style="color:#888; font-size:12px; padding-left: 20px;">seu projeto</span></span></a></li>
             <li class="howitworks"><a  href="<?php echo SITE_URL ?>/project/create"><?php //echo Text::get('regular-create'); ?><img src="<?php echo SITE_URL ?>/view/css/questionmark.png" width="20" height="20" /><span>Como Funciona?<br><span style="color:#888; font-size:12px; padding-left: 20px;">entenda o BNIEquity</span></span></a></li>
             <li class="search">
-                <form method="get" action="/discover/results">
+                <form method="get" action="<?php echo SITE_URL ?>/discover/results">
                     <fieldset id="fieldset">
                         <legend><?php echo Text::get('regular-search'); ?></legend>
                         <input id="query" type="text" name="query" value="Buscar projetos..." onfocus="this.value=''" onblur="this.value='Buscar projetos...'" />

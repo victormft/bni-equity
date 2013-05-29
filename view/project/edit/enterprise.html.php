@@ -40,9 +40,9 @@
 
 <?php 
 
-use Goteo\Core\View,
-    Goteo\Library\Text,
-    Goteo\Library\SuperForm;
+use Equity\Core\View,
+    Equity\Library\Text,
+    Equity\Library\SuperForm;
     
 $project = $this['project'];
 $errors = $project->errors[$this['step']] ?: array();
@@ -70,7 +70,7 @@ $bplan[] = array(
 	'type' => 'html',
 	'class' => 'inline',
 	'html' =>  is_object($bp) ?
-			    '<img src="http://localhost/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$bp->name.'</div><button class="file-remove" type="submit" name="bplan-'.$bp->id.'-remove" title="Tirar file" value="remove"></button>' :
+			    '<img src="<?php echo SITE_URL ?>/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$bp->name.'</div><button class="file-remove" type="submit" name="bplan-'.$bp->id.'-remove" title="Tirar file" value="remove"></button>' :
 				''
 ); 
 
@@ -80,7 +80,7 @@ $finForecast[] = array(
 	'type' => 'html',
 	'class' => 'inline',
 	'html' =>  is_object($fin) ?
-			    '<img src="http://localhost/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$fin->name.'</div><button class="file-remove" type="submit" name="finForecast-'.$fin->id.'-remove" title="Tirar file" value="remove"></button>' :
+			    '<img src="<?php echo SITE_URL ?>/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$fin->name.'</div><button class="file-remove" type="submit" name="finForecast-'.$fin->id.'-remove" title="Tirar file" value="remove"></button>' :
 				''
 ); 
 

@@ -1,7 +1,7 @@
 <?php
 
 
-use Goteo\Library\Text;
+use Equity\Library\Text;
 
 $support = $this['data']['support'] ?>
 

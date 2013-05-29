@@ -1,26 +1,8 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-use Goteo\Core\View,
-    Goteo\Library\Text,
-    Goteo\Library\SuperForm;
+use Equity\Core\View,
+    Equity\Library\Text,
+    Equity\Library\SuperForm;
 
 $project = $this['project'];
 $errors = $this['errors'];
@@ -34,7 +16,7 @@ if (!empty($project->social_rewards)) {
         // a ver si es el que estamos editando o no
         if (!empty($this["social_reward-{$social_reward->id}-edit"])) {
 
-            $original = \Goteo\Model\Project\Reward::get($social_reward->id);
+            $original = \Equity\Model\Project\Reward::get($social_reward->id);
 
             // a este grupo le ponemos estilo de edicion
             $social_rewards["social_reward-{$social_reward->id}"] = array(
@@ -104,7 +86,7 @@ if (!empty($project->individual_rewards)) {
         // a ver si es el que estamos editando o no
         if (!empty($this["individual_reward-{$individual_reward->id}-edit"])) {
 
-            $original = \Goteo\Model\Project\Reward::get($individual_reward->id);
+            $original = \Equity\Model\Project\Reward::get($individual_reward->id);
 
             // a este grupo le ponemos estilo de edicion
             $individual_rewards["individual_reward-{$individual_reward->id}"] = array(

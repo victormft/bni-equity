@@ -1,27 +1,9 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-use Goteo\Core\View,
-    Goteo\Library\Text,
-    Goteo\Model\Project\Reward,
-    Goteo\Model\Invest;
+use Equity\Core\View,
+    Equity\Library\Text,
+    Equity\Model\Project\Reward,
+    Equity\Model\Invest;
 
 $icons = Reward::icons('individual');
 
@@ -113,7 +95,7 @@ switch ($order) {
 </script><div class="widget gestrew">
     <h2 class="title">Gestionar retornos</h2>
     <a name="gestrew"></a>
-   <form id="invests-filter-form" name="filter_form" action="<?php echo '/dashboard/projects/rewards/filter#gestrew'; ?>" method="post">
+   <form id="invests-filter-form" name="filter_form" action="<?php echo SITE_URL ?><?php echo '/dashboard/projects/rewards/filter#gestrew'; ?>" method="post">
        <input type="hidden" id="invests-filter" name="filter" value="<?php echo $filter; ?>" />
        <input type="hidden" id="invests-order" name="order" value="<?php echo $order; ?>" />
    </form>
@@ -139,7 +121,7 @@ switch ($order) {
     </div>
     
     <div id="invests-list">
-        <form name="invests_form" action="<?php echo '/dashboard/'.$this['section'].'/'.$this['option'].'/process'; ?>" method="post">
+        <form name="invests_form" action="<?php echo SITE_URL ?><?php echo '/dashboard/'.$this['section'].'/'.$this['option'].'/process'; ?>" method="post">
            <input type="hidden" name="filter" value="<?php echo $filter; ?>" />
            <input type="hidden" name="order" value="<?php echo $order; ?>" />
             <?php foreach ($invests as $investId=>$investData) :
@@ -163,11 +145,11 @@ switch ($order) {
                 <div class="investor">
 
                 	<div class="left">
-                        <a href="/user/<?php echo $investData->user->id; ?>"><img src="<?php echo $investData->user->avatar->getLink(45, 45, true); ?>" /></a>
+                        <a href="<?php echo SITE_URL ?>/user/<?php echo $investData->user->id; ?>"><img src="<?php echo $investData->user->avatar->getLink(45, 45, true); ?>" /></a>
                     </div>
                     
                     <div class="left" style="width:120px;">
-						<span class="username"><a href="/user/<?php echo $investData->user->id; ?>"><?php echo $investData->user->name; ?></a></span>
+						<span class="username"><a href="<?php echo SITE_URL ?>/user/<?php echo $investData->user->id; ?>"><?php echo $investData->user->name; ?></a></span>
                         <label class="amount">Aporte<?php if ($investData->anonymous) echo ' <strong>'.  Text::get('regular-anonymous').'</strong>'; ?></label>
 						<span class="amount"><?php echo $investData->amount; ?> &euro;</span>
                         <span class="date"><?php echo date('d-m-Y', strtotime($investData->invested)); ?></span>
@@ -193,8 +175,8 @@ switch ($order) {
                     
                     <div class="left">
 	                    <span class="status"><?php echo $cumplida ? '<span class="cumplida">Cumplida</span>' : '<span class="pendiente">Pendiente</span>'; ?></span>
-                        <span class="profile"><a href="/user/profile/<?php echo $investData->user->id ?>" target="_blank"><?php echo Text::get('profile-widget-button'); ?></a> </span>
-                        <span class="contact"><a href="/user/profile/<?php echo $investData->user->id ?>/message" target="_blank"><?php echo Text::get('regular-send_message'); ?></a></span>
+                        <span class="profile"><a href="<?php echo SITE_URL ?>/user/profile/<?php echo $investData->user->id ?>" target="_blank"><?php echo Text::get('profile-widget-button'); ?></a> </span>
+                        <span class="contact"><a href="<?php echo SITE_URL ?>/user/profile/<?php echo $investData->user->id ?>/message" target="_blank"><?php echo Text::get('regular-send_message'); ?></a></span>
                     </div>
                     
                     
@@ -214,7 +196,7 @@ switch ($order) {
     <a name="message"></a>
     <h2 class="title">Mensajes colectivos</h2>
 
-        <form name="message_form" method="post" action="<?php echo '/dashboard/'.$this['section'].'/'.$this['option'].'/message'; ?>">
+        <form name="message_form" method="post" action="<?php echo SITE_URL ?><?php echo '/dashboard/'.$this['section'].'/'.$this['option'].'/message'; ?>">
         	<div id="checks">
                <input type="hidden" name="filter" value="<?php echo $filter; ?>" />
                <input type="hidden" name="order" value="<?php echo $order; ?>" />

@@ -1,24 +1,6 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-use Goteo\Library\Text;
+use Equity\Library\Text;
 
 $project = $this['project'];
 $level = (int) $this['level'] ?: 3;
@@ -46,10 +28,10 @@ $level = (int) $this['level'] ?: 3;
 </script>
 <?php if (!empty($_SESSION['user']) && $project->status >= 3) : ?>
 <div class="widget project-message">
-    <h<?php echo $level ?> class="title"><?php echo Text::get('project-messages-send_message-header'); ?></h<?php echo $level ?>>
+    <h<?php echo $level ?> class="title"><?php echo Text::get('project-messages-send_message-header'); ?></h><?php echo $level ?>>
 
     <div>
-        <form method="post" action="/message/<?php echo $project->id; ?>">
+        <form method="post" action="<?php echo SITE_URL ?>/message/<?php echo $project->id; ?>">
             <input type="hidden" id="thread" name="thread" value="" />
             <div id="bocadillo"></div>
             <textarea id="message-text" name="message" cols="50" rows="5"></textarea>
@@ -72,15 +54,15 @@ $level = (int) $this['level'] ?: 3;
 		<?php foreach ($project->messages as $message) : ?>
                 <div class="message<?php if ($message->user->id == $project->owner) echo ' owner'; ?>">
                    <span class="avatar">
-                   <a href="/user/profile/<?php echo htmlspecialchars($message->user->id)?>" target="_blank">
+                   <a href="<?php echo SITE_URL ?>/user/profile/<?php echo htmlspecialchars($message->user->id)?>" target="_blank">
                     <img src="<?php echo $message->user->avatar->getLink(50,50, true); ?>" alt="" />
                    </a>
                   </span>
                    <h<?php echo $level ?> class="user">
-				   <a href="/user/profile/<?php echo htmlspecialchars($message->user->id)?>" target="_blank">
+				   <a href="<?php echo SITE_URL ?>/user/profile/<?php echo htmlspecialchars($message->user->id)?>" target="_blank">
 				   <?php echo htmlspecialchars($message->user->name); if ($message->blocked == 1) echo ' ' . Text::get('regular-looks_for'); ?>
                    </a>
-                   </h<?php echo $level ?>>
+                   </h><?php echo $level ?>>
                    <a name="message<?php echo $message->id; ?>"></a>
                    <div class="date"><span>Hace <?php echo $message->timeago ?></span></div>
                    <blockquote><?php echo $message->message; ?></blockquote>
@@ -89,8 +71,8 @@ $level = (int) $this['level'] ?: 3;
                         <a class="" href="#" onclick="answer('<?php echo $message->id; ?>')"><?php echo Text::get('project-messages-answer_it'); ?></a>
                         <?php endif; ?>
                         <?php // si puede borrar este mensaje
-                        if (\Goteo\Core\ACL::check("/message/delete/{$message->id}/{$project->id}")) : ?>
-                                <a href="/message/delete/<?php echo $message->id; ?>/<?php echo $project->id; ?>"><?php echo Text::get('regular-delete'); ?></a>
+                        if (\Equity\Core\ACL::check("/message/delete/{$message->id}/{$project->id}")) : ?>
+                                <a href="<?php echo SITE_URL ?>/message/delete/<?php echo $message->id; ?>/<?php echo $project->id; ?>"><?php echo Text::get('regular-delete'); ?></a>
                         <?php endif ?>
                    </div>
 
@@ -100,22 +82,22 @@ $level = (int) $this['level'] ?: 3;
                     foreach ($message->responses as $child) : ?>
                        <div class="child<?php if ($child->user->id == $project->owner) echo ' owner'; ?>">
                            <span class="avatar">
-                           <a href="/user/profile/<?php echo htmlspecialchars($child->user->id) ?>" target="_blank">
+                           <a href="<?php echo SITE_URL ?>/user/profile/<?php echo htmlspecialchars($child->user->id) ?>" target="_blank">
 	                           <img src="<?php echo $child->user->avatar->getLink(40, 40, true); ?>" />
                            </a>
                            </span>
                            <a name="message<?php echo $child->id; ?>" />
                            <h<?php echo $level ?> class="user">
-						   <a href="/user/profile/<?php echo htmlspecialchars($child->user->id) ?>" target="_blank">
+						   <a href="<?php echo SITE_URL ?>/user/profile/<?php echo htmlspecialchars($child->user->id) ?>" target="_blank">
 						   <?php echo $child->user->name; ?>
                            </a>
-                           </h<?php echo $level ?>>
+                           </h><?php echo $level ?>>
                            <div class="date"><span>Hace <?php echo $child->timeago; ?></span></div>
                            <blockquote><?php echo $child->message; ?></blockquote>
                            <?php // si puede borrar este mensaje
-                           if (\Goteo\Core\ACL::check("/message/delete/{$child->id}/{$project->id}")) : ?>
+                           if (\Equity\Core\ACL::check("/message/delete/{$child->id}/{$project->id}")) : ?>
                            <div class="actions">
-                                <a href="/message/delete/<?php echo $child->id; ?>/<?php echo $project->id; ?>"><?php echo Text::get('regular-delete'); ?></a>
+                                <a href="<?php echo SITE_URL ?>/message/delete/<?php echo $child->id; ?>/<?php echo $project->id; ?>"><?php echo Text::get('regular-delete'); ?></a>
                            </div>
                            <?php endif; ?>
                        </div>

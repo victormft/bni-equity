@@ -1,9 +1,9 @@
-<form action="<?php echo SITE_URL ?>cliente/create" method="post" name="about_you">
+<form action="<?php echo SITE_URL ?>/cliente/create" method="post" name="about_you">
 
 	<h3>Informações sobre o líder da empresa</h3>
 
 	<div class="hint">                    
-        <blockquote><strong>The only thing left is to fill in your data if you want your project to be co-financed and supported through Goteo.</strong><br><br>The information in this section is necessary so that we can contact you if you get the required financing, and be able to make the deposit. In the case of organizations, we recommend that the representative of the organization be formally accredited (for example, by way of the statutes or a certificate of the secretary with an OK from the president, in the case of associations).</blockquote>
+        <blockquote><strong>The only thing left is to fill in your data if you want your project to be co-financed and supported through Equity.</strong><br><br>The information in this section is necessary so that we can contact you if you get the required financing, and be able to make the deposit. In the case of organizations, we recommend that the representative of the organization be formally accredited (for example, by way of the statutes or a certificate of the secretary with an OK from the president, in the case of associations).</blockquote>
     </div>
 
     
