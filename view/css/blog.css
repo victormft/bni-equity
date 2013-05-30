@@ -1,21 +1,4 @@
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
+
 /* Content syles */ 
 #blog-content {
     width:620px;
@@ -242,66 +225,66 @@ div.post-comments div.message blockquote {
     clear: both;
 }
 /** end Comments like messages**/
-/** share goteo **/
-div.widget.blog-content-module ul.share-goteo,
-#blog-content .post ul.share-goteo {
+/** share equity **/
+div.widget.blog-content-module ul.share-equity,
+#blog-content .post ul.share-equity {
 	margin: 0;
 	padding:0px;
 	list-style:none;
 	float:right;
 }
-div.widget.blog-content-module ul.share-goteo li,
-#blog-content .post ul.share-goteo li{
+div.widget.blog-content-module ul.share-equity li,
+#blog-content .post ul.share-equity li{
 	display:inline;
 	float:left;
 	margin: 0 0 0 10px;
 }
-div.widget.blog-content-module ul.share-goteo li.twitter a,
-div.widget.blog-content-module ul.share-goteo li.facebook a,
-div.widget.blog-content-module ul.share-goteo li.rss a,
-#blog-content .post  ul.share-goteo li.twitter a,
-#blog-content .post  ul.share-goteo li.facebook a,
-#blog-content .post  ul.share-goteo li.rss a{
+div.widget.blog-content-module ul.share-equity li.twitter a,
+div.widget.blog-content-module ul.share-equity li.facebook a,
+div.widget.blog-content-module ul.share-equity li.rss a,
+#blog-content .post  ul.share-equity li.twitter a,
+#blog-content .post  ul.share-equity li.facebook a,
+#blog-content .post  ul.share-equity li.rss a{
 	height:20px;
 	float:left;
 	padding: 0 0 0 25px;
 	font-size: 11px;
 	line-height: 20px;
 }
-div.widget.blog-content-module ul.share-goteo li.sharetext,
-#blog-content .post ul.share-goteo li.sharetext{
+div.widget.blog-content-module ul.share-equity li.sharetext,
+#blog-content .post ul.share-equity li.sharetext{
 	height:20px;
 	float:left;
 	color: #808285;
 	font-size: 11px;
 }
-div.widget.blog-content-module ul.share-goteo li.twitter a,
-#blog-content .post ul.share-goteo li.twitter a{
+div.widget.blog-content-module ul.share-equity li.twitter a,
+#blog-content .post ul.share-equity li.twitter a{
 	background: transparent url('twitter.png') scroll no-repeat  0 0;
 	color:#13c2ec;
 	text-decoration:none;
 }
-div.widget.blog-content-module ul.share-goteo li.twitter a:hover,
-#blog-content .post ul.share-goteo li.twitter a:hover{
+div.widget.blog-content-module ul.share-equity li.twitter a:hover,
+#blog-content .post ul.share-equity li.twitter a:hover{
 	background: transparent url('twitter.png') scroll no-repeat  0 0;
 	opacity:0.6;
 	color:#1db3b2;
 	text-decoration:none;
 }
-div.widget.blog-content-module ul.share-goteo li.facebook a,
-#blog-content .post ul.share-goteo li.facebook a{
+div.widget.blog-content-module ul.share-equity li.facebook a,
+#blog-content .post ul.share-equity li.facebook a{
 	background: transparent url('facebook.png') scroll no-repeat  0 0;
 	color:#4a6393;
 	text-decoration:none;
 }
-div.widget.blog-content-module ul.share-goteo li.facebook a:hover,
-#blog-content .post ul.share-goteo li.facebook a:hover{
+div.widget.blog-content-module ul.share-equity li.facebook a:hover,
+#blog-content .post ul.share-equity li.facebook a:hover{
 	background: transparent url('facebook.png') scroll no-repeat  0 0;
 	color:#1db3b2;
 	opacity:0.6;
 	text-decoration:none;
 }
-/** end of share goteo **/
+/** end of share equity **/
 /** blog comments **/
 /*
 // he copaido mas arriba el css de mensajes

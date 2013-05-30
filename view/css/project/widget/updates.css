@@ -1,21 +1,4 @@
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
+
 div.widget.project-updates h1,
 div.widget.project-updates h2,
 div.widget.project-updates h3,
@@ -160,39 +143,39 @@ div.post-comments div.message blockquote {
     clear: both;
 }
 /** end Comments like messages**/
-/** share goteo **/
-.project-updates .post ul.share-goteo {
+/** share equity **/
+.project-updates .post ul.share-equity {
 	margin: 0;
 	padding:0px;
 	list-style:none;
 	float:right;
 }
-.project-updates .post ul.share-goteo li{
+.project-updates .post ul.share-equity li{
 	display:inline;
 	float:left;
 	margin: 0 0 0 10px;
 }
-.project-updates .post  ul.share-goteo li.twitter a,
-.project-updates .post  ul.share-goteo li.facebook a,
-.project-updates .post  ul.share-goteo li.rss a{
+.project-updates .post  ul.share-equity li.twitter a,
+.project-updates .post  ul.share-equity li.facebook a,
+.project-updates .post  ul.share-equity li.rss a{
 	height:20px;
 	float:left;
 	padding: 0 0 0 25px;
 	font-size: 11px;
 	line-height: 20px;
 }
-.project-updates .post ul.share-goteo li.sharetext{
+.project-updates .post ul.share-equity li.sharetext{
 	height:20px;
 	float:left;
 	color: #808285;
 	font-size: 11px;
 }
-.project-updates .post ul.share-goteo li.twitter a{
+.project-updates .post ul.share-equity li.twitter a{
 	background: transparent url('/view/css/twitter.png') scroll no-repeat  0 0;
 	color:#13c2ec;
 	text-decoration:none;
 }
-.project-updates .post ul.share-goteo li.facebook a{
+.project-updates .post ul.share-equity li.facebook a{
 	background: transparent url('/view/css/facebook.png') scroll no-repeat  0 0;
 	color:#4a6393;
 	text-decoration:none;
