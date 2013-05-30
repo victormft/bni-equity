@@ -1,29 +1,10 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
+namespace Equity\Model\User {
 
-namespace Goteo\Model\User {
+    use Equity\Model;
 
-    use Goteo\Model;
-
-    class Translate extends \Goteo\Core\Model {
+    class Translate extends \Equity\Core\Model {
 
         public
             $id,
@@ -49,7 +30,7 @@ namespace Goteo\Model\User {
 
                 return $array;
             } catch(\PDOException $e) {
-				throw new \Goteo\Core\Exception($e->getMessage());
+				throw new \Equity\Core\Exception($e->getMessage());
             }
 		}
 
@@ -69,7 +50,7 @@ namespace Goteo\Model\User {
 
                 return $array;
             } catch(\PDOException $e) {
-				throw new \Goteo\Core\Exception($e->getMessage());
+				throw new \Equity\Core\Exception($e->getMessage());
             }
 		}
 
@@ -192,14 +173,14 @@ namespace Goteo\Model\User {
                 foreach ($query->fetchAll(\PDO::FETCH_ASSOC) as $item) {
 
                     // nombre i avatar
-                    $user = \Goteo\Model\User::getMini($item['id']);
+                    $user = \Equity\Model\User::getMini($item['id']);
 
                     $array[$item['id']] = $user->name;
                 }
 
                 return $array;
             } catch(\PDOException $e) {
-				throw new \Goteo\Core\Exception($e->getMessage());
+				throw new \Equity\Core\Exception($e->getMessage());
             }
         }
 

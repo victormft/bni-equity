@@ -1,32 +1,13 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
+namespace Equity\Model {
 
-namespace Goteo\Model {
+    use \Equity\Model\Project\Media,
+        \Equity\Model\Image,
+        \Equity\Library\Text,
+        Equity\Library\Check;
 
-    use \Goteo\Model\Project\Media,
-        \Goteo\Model\Image,
-        \Goteo\Library\Text,
-        Goteo\Library\Check;
-
-    class Info extends \Goteo\Core\Model {
+    class Info extends \Equity\Core\Model {
 
         public
             $id,
@@ -77,7 +58,7 @@ namespace Goteo\Model {
         /*
          * Lista de entradas por orden alfabético
          */
-        public static function getAll ($published = false, $node = \GOTEO_NODE) {
+        public static function getAll ($published = false, $node = \EQUITY_NODE) {
 
             $list = array();
 
@@ -130,7 +111,7 @@ namespace Goteo\Model {
                 $errors['text'] = 'Falta texto';
 
             if (empty($this->node))
-                $this->node = \GOTEO_NODE;
+                $this->node = \EQUITY_NODE;
 
             if (empty($errors))
                 return true;
@@ -209,7 +190,7 @@ namespace Goteo\Model {
         /*
          * Para que una entrada salga antes  (disminuir el order)
          */
-        public static function up ($id, $node = \GOTEO_NODE) {
+        public static function up ($id, $node = \EQUITY_NODE) {
             $extra = array (
                     'node' => $node
                 );
@@ -219,7 +200,7 @@ namespace Goteo\Model {
         /*
          * Para que una entrada salga despues  (aumentar el order)
          */
-        public static function down ($id, $node = \GOTEO_NODE) {
+        public static function down ($id, $node = \EQUITY_NODE) {
             $extra = array (
                     'node' => $node
                 );
@@ -229,7 +210,7 @@ namespace Goteo\Model {
         /*
          * Orden para añadirlo al final
          */
-        public static function next ($node = \GOTEO_NODE) {
+        public static function next ($node = \EQUITY_NODE) {
             $query = self::query('SELECT MAX(`order`) FROM info WHERE node = :node'
                 , array(':node'=>$node));
             $order = $query->fetchColumn(0);

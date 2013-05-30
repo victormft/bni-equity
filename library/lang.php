@@ -1,29 +1,12 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
 
-namespace Goteo\Library {
+
+namespace Equity\Library {
 
   require_once 'library/php-mo/php-mo.php';  // external library to compile .po gettext files on the fly
 
-	use Goteo\Core\Model;
+	use Equity\Core\Model;
 	/*
 	 * Clase para sacar textos estáticos de la tabla text
 	 *  (por ahora utilizar gettext no nos compensa, quizás más adelante)
@@ -31,7 +14,7 @@ namespace Goteo\Library {
 	 */
     class Lang {
 		
-		static public function get ($id = \GOTEO_DEFAULT_LANG) {
+		static public function get ($id = \EQUITY_DEFAULT_LANG) {
             $sql = "SELECT
                         id, name,
                         IFNULL(short, name) as short
@@ -111,13 +94,13 @@ namespace Goteo\Library {
  */
                     $_SESSION['lang'] = $_GET['lang'];
    /*             } else {
-                    $_SESSION['lang'] = \GOTEO_DEFAULT_LANG;
+                    $_SESSION['lang'] = \EQUITY_DEFAULT_LANG;
                 }
     * 
     */
             } elseif (empty($_SESSION['lang'])) {
                 // si no hay uno de session ponemos el default
-                $_SESSION['lang'] = \GOTEO_DEFAULT_LANG;
+                $_SESSION['lang'] = \EQUITY_DEFAULT_LANG;
             }
             // establecemos la constante
             define('LANG', $_SESSION['lang']);
@@ -196,7 +179,7 @@ namespace Goteo\Library {
 				}
 
 				// generate a new uncached domain file if caching bypass featured is enabled
-				if(true == \GOTEO_GETTEXT_BYPASS_CACHING) {	
+				if(true == \EQUITY_GETTEXT_BYPASS_CACHING) {	
 					$domain = Lang::spawnUncachedDomain($locale, $domain);
 					//error_log("bypassing gettext caching");
 				}

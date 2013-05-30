@@ -1,37 +1,19 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
 
-namespace Goteo\Library {
+namespace Equity\Library {
 
-	use Goteo\Core\Model,
-        Goteo\Core\Exception,
-        Goteo\Core\View;
+	use Equity\Core\Model,
+        Equity\Core\Exception,
+        Equity\Core\View;
 
     class Mail {
 
         public
-            $from = GOTEO_MAIL_FROM,
-            $fromName = GOTEO_MAIL_NAME,
-            $to = GOTEO_MAIL_FROM,
-            $toName = GOTEO_MAIL_NAME,
+            $from = EQUITY_MAIL_FROM,
+            $fromName = EQUITY_MAIL_NAME,
+            $to = EQUITY_MAIL_FROM,
+            $toName = EQUITY_MAIL_NAME,
             $subject,
             $content,
             $cc = false,
@@ -63,7 +45,7 @@ namespace Goteo\Library {
             $mail->WordWrap = 50;
 
             // Define el tipo de gestor de correo
-            switch(GOTEO_MAIL_TYPE) {
+            switch(EQUITY_MAIL_TYPE) {
                 default:
                 case "mail":
                     $mail->isMail(); // set mailer to use PHP mail() function.
@@ -76,12 +58,12 @@ namespace Goteo\Library {
                     break;
                 case "smtp":
                     $mail->IsSMTP(); // set mailer to use SMTP
-                    $mail->SMTPAuth = GOTEO_MAIL_SMTP_AUTH; // enable SMTP authentication
-                    $mail->SMTPSecure = GOTEO_MAIL_SMTP_SECURE; // sets the prefix to the servier
-                    $mail->Host = GOTEO_MAIL_SMTP_HOST; // specify main and backup server
-                    $mail->Port = GOTEO_MAIL_SMTP_PORT; // set the SMTP port
-                    $mail->Username = GOTEO_MAIL_SMTP_USERNAME;  // SMTP username
-                    $mail->Password = GOTEO_MAIL_SMTP_PASSWORD; // SMTP password
+                    $mail->SMTPAuth = EQUITY_MAIL_SMTP_AUTH; // enable SMTP authentication
+                    $mail->SMTPSecure = EQUITY_MAIL_SMTP_SECURE; // sets the prefix to the servier
+                    $mail->Host = EQUITY_MAIL_SMTP_HOST; // specify main and backup server
+                    $mail->Port = EQUITY_MAIL_SMTP_PORT; // set the SMTP port
+                    $mail->Username = EQUITY_MAIL_SMTP_USERNAME;  // SMTP username
+                    $mail->Password = EQUITY_MAIL_SMTP_PASSWORD; // SMTP password
                     break;
             }
             $this->mail = $mail;
@@ -141,8 +123,8 @@ namespace Goteo\Library {
                         $mail->Body    = $this->bodyHTML();
                         $mail->AltBody = $this->bodyText();
 
-                        // incrustar el logo de goteo
-                        $mail->AddEmbeddedImage(GOTEO_PATH . '/goteo_logo.png', 'logo', 'Goteo', 'base64', 'image/png');
+                        // incrustar el logo de equity
+                        $mail->AddEmbeddedImage(EQUITY_PATH . '/equity_logo.png', 'logo', 'Equity', 'base64', 'image/png');
                     }
                     else {
                         $mail->IsHTML(false);
@@ -189,7 +171,7 @@ namespace Goteo\Library {
             $sql = "INSERT INTO mail (id, email, html, template) VALUES ('', :email, :html, :template)";
             $values = array (
                 ':email' => $this->to,
-                ':html' => str_replace('cid:logo', SITE_URL.'/goteo_logo.png', $this->content),
+                ':html' => str_replace('cid:logo', SITE_URL.'/equity_logo.png', $this->content),
                 ':template' => $this->template
             );
             $query = Model::query($sql, $values);
@@ -211,7 +193,7 @@ namespace Goteo\Library {
 
                 ' . $viewData['sinoves'];
             } else {
-                return new View ('view/email/goteo.html.php', $viewData);
+                return new View ('view/email/equity.html.php', $viewData);
             }
         }
 

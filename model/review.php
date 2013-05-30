@@ -1,29 +1,10 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
+namespace Equity\Model {
 
-namespace Goteo\Model {
+    use Equity\Model\User;
 
-    use Goteo\Model\User;
-
-    class Review extends \Goteo\Core\Model {
+    class Review extends \Equity\Core\Model {
 
         public
             $id,
@@ -108,7 +89,7 @@ namespace Goteo\Model {
          * @param string node id
          * @return array of project instances
          */
-        public static function getList($filters = array(), $node = \GOTEO_NODE) {
+        public static function getList($filters = array(), $node = \EQUITY_NODE) {
             $projects = array();
 
             $sqlFilter = "";
@@ -161,7 +142,7 @@ namespace Goteo\Model {
                     JOIN user_review ON user.id = user_review.user
                     WHERE user_review.review = ?
                 ", array($proj->review));
-                foreach ($subquery->fetchAll(\PDO::FETCH_CLASS, '\Goteo\Model\User\Review') as $checker) {
+                foreach ($subquery->fetchAll(\PDO::FETCH_CLASS, '\Equity\Model\User\Review') as $checker) {
 
                     $cuenta = $checker->recount();
                     $checker->score = $cuenta->score;
@@ -291,7 +272,7 @@ namespace Goteo\Model {
                     JOIN user_review ON user.id = user_review.user
                     WHERE user_review.review = ?
                 ", array($id));
-                foreach ($subquery->fetchAll(\PDO::FETCH_CLASS, '\Goteo\Model\User\Review') as $checker) {
+                foreach ($subquery->fetchAll(\PDO::FETCH_CLASS, '\Equity\Model\User\Review') as $checker) {
 
                     $review->ready = $checker->ready;
 

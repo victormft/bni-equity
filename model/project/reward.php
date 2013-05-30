@@ -1,30 +1,11 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
+namespace Equity\Model\Project {
 
-namespace Goteo\Model\Project {
+    use \Equity\Model\Icon,
+        \Equity\Model\License;
 
-    use \Goteo\Model\Icon,
-        \Goteo\Model\License;
-
-    class Reward extends \Goteo\Core\Model {
+    class Reward extends \Equity\Core\Model {
 
         public
             $id,
@@ -45,7 +26,7 @@ namespace Goteo\Model\Project {
                 $query = static::query("SELECT * FROM reward WHERE id = :id", array(':id' => $id));
                 return $query->fetchObject(__CLASS__);
             } catch(\PDOException $e) {
-                throw new \Goteo\Core\Exception($e->getMessage());
+                throw new \Equity\Core\Exception($e->getMessage());
             }
 		}
 
@@ -109,7 +90,7 @@ namespace Goteo\Model\Project {
                 }
 				return $array;
 			} catch (\PDOException $e) {
-                throw new \Goteo\Core\Exception($e->getMessage());
+                throw new \Equity\Core\Exception($e->getMessage());
 			}
 		}
 

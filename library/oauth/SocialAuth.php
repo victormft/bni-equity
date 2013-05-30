@@ -409,7 +409,7 @@ class SocialAuth {
 				//print_r($data);print_r($openid);print_r($openid->identity);die;
 				/*
 				//por seguridad no aceptaremos conexions de OpenID que no nos devuelvan el email
-				if(!Goteo\Library\Check::mail($data['contact/email'])) {
+				if(!Equity\Library\Check::mail($data['contact/email'])) {
 					$this->last_error = "oauth-openid-email-required";
 					return false;
 				}*/
@@ -439,23 +439,23 @@ class SocialAuth {
 	}
 
 	/**
-	 * Hace el login en goteo si es posible (existen tokens o el email es el mismo)
+	 * Hace el login en equity si es posible (existen tokens o el email es el mismo)
 	 * Guarda los tokens si se encuentra el usuario
 	 *
-	 * @param $force_login	logea en goteo sin comprovar que la contraseña esté vacía o que el usuario este activo
+	 * @param $force_login	logea en equity sin comprovar que la contraseña esté vacía o que el usuario este activo
 	 * */
-	public function goteoLogin($force_login = false) {
+	public function equityLogin($force_login = false) {
 		/*****
 		 * POSIBLE PROBLEMA:
-		 * en caso de que ya se haya dado permiso a la aplicación goteo,
-		 * el token da acceso al login del usuario aunque este haya cambiado el email en goteo.org
+		 * en caso de que ya se haya dado permiso a la aplicación equity,
+		 * el token da acceso al login del usuario aunque este haya cambiado el email en equity.org
 		 * es un problema? o da igual...
 		*****/
 		//Comprovar si existe el mail en la base de datos
 
 		$username = "";
 		//comprovar si existen tokens
-		$query = Goteo\Core\Model::query('SELECT id FROM user WHERE id = (SELECT user FROM user_login WHERE provider = :provider AND oauth_token = :token AND oauth_token_secret = :secret)', array(':provider' => $this->provider, ':token' => $this->tokens[$this->provider]['token'], ':secret' => $this->tokens[$this->provider]['secret']));
+		$query = Equity\Core\Model::query('SELECT id FROM user WHERE id = (SELECT user FROM user_login WHERE provider = :provider AND oauth_token = :token AND oauth_token_secret = :secret)', array(':provider' => $this->provider, ':token' => $this->tokens[$this->provider]['token'], ':secret' => $this->tokens[$this->provider]['secret']));
 
 		$username = $query->fetchColumn();
 
@@ -467,7 +467,7 @@ class SocialAuth {
 			 * por tanto, en caso de que no existan tokens, se deberá preguntar la contraseña al usuario
 			 * si el usuario no tiene contraseña, podemos permitir el acceso directo o denegarlo (mas seguro)
 			 * */
-			$query = Goteo\Core\Model::query('SELECT id,password FROM user WHERE email = ?', array($this->user_data['email']));
+			$query = Equity\Core\Model::query('SELECT id,password FROM user WHERE email = ?', array($this->user_data['email']));
 			if($user = $query->fetchObject()) {
 				$username = $user->id;
 				//sin no existe contraseña permitimos acceso
@@ -476,14 +476,14 @@ class SocialAuth {
 				if(!$force_login) {
 					//con contraseña lanzamos un error de usuario existente, se usará para mostrar un formulario donde preguntar el password
 					$this->user_data['username'] = $username;
-					$this->last_error = "oauth-goteo-user-password-exists";
+					$this->last_error = "oauth-equity-user-password-exists";
 					return false;
 				}
 			}
 			else {
 				//El usuario no existe
 				//redirigir a user/confirm para mostrar un formulario para que el usuario compruebe/rellene los datos que faltan
-				$this->last_error = "oauth-goteo-user-not-exists";
+				$this->last_error = "oauth-equity-user-not-exists";
 				return false;
 			}
 
@@ -494,21 +494,21 @@ class SocialAuth {
 
 		//actualizar la imagen de avatar si no tiene!
 		if($this->user_data['profile_image_url']) {
-			$query = Goteo\Core\Model::query('SELECT id FROM image WHERE id = (SELECT avatar FROM user WHERE id = ?)', array($username));
+			$query = Equity\Core\Model::query('SELECT id FROM image WHERE id = (SELECT avatar FROM user WHERE id = ?)', array($username));
 			if(!($query->fetchColumn())) {
 
-				$img = new Goteo\Model\Image($this->user_data['profile_image_url']);
+				$img = new Equity\Model\Image($this->user_data['profile_image_url']);
 				$img->save();
 
 				if($img->id) {
-					Goteo\Core\Model::query("REPLACE user_image (user, image) VALUES (:user, :image)", array(':user' => $username, ':image' => $img->id));
-					Goteo\Core\Model::query("UPDATE user SET avatar = :avatar WHERE id = :user", array(':user'=>$username,':avatar'=>$img->id));
+					Equity\Core\Model::query("REPLACE user_image (user, image) VALUES (:user, :image)", array(':user' => $username, ':image' => $img->id));
+					Equity\Core\Model::query("UPDATE user SET avatar = :avatar WHERE id = :user", array(':user'=>$username,':avatar'=>$img->id));
 				}
 			}
 		}
 
 		//el usuario existe, creamos el objeto
-		$user = Goteo\Model\User::get($username);
+		$user = Equity\Model\User::get($username);
 
 		//actualizar datos de usuario si no existen:
 		$update = array();
@@ -520,9 +520,9 @@ class SocialAuth {
 			}
 		}
 		if($update) {
-			Goteo\Core\Model::query("UPDATE user SET ".implode(", ",$update)." WHERE id = :user", $data);
+			Equity\Core\Model::query("UPDATE user SET ".implode(", ",$update)." WHERE id = :user", $data);
 			//rebuild user object
-			$user = Goteo\Model\User::get($username);
+			$user = Equity\Model\User::get($username);
 		}
 
 		//actualizar las webs
@@ -539,29 +539,29 @@ class SocialAuth {
 				foreach($webs[0] as $web) {
 					$web = strtolower($web);
 					if(!in_array($web,$current_webs)) {
-						Goteo\Core\Model::query("INSERT user_web (user, url) VALUES (:user, :url)", array(':user' => $username, ':url' => $web));
+						Equity\Core\Model::query("INSERT user_web (user, url) VALUES (:user, :url)", array(':user' => $username, ':url' => $web));
 						$updated = true;
 					}
 				}
 				//rebuild user object
-				if($updated) $user = Goteo\Model\User::get($username);
+				if($updated) $user = Equity\Model\User::get($username);
 			}
 		}
 
 		//Si no tiene imagen, importar de gravatar.com?
 		if(!$user->avatar || $user->avatar->id == 1) {
-			$query = Goteo\Core\Model::query('SELECT id FROM image WHERE id = (SELECT avatar FROM user WHERE id = ?)', array($username));
+			$query = Equity\Core\Model::query('SELECT id FROM image WHERE id = (SELECT avatar FROM user WHERE id = ?)', array($username));
 			if(!($query->fetchColumn())) {
 				$url = "http://www.gravatar.com/avatar/" . md5(strtolower(trim($user->email)));
 				$url .= "?d=404";
 
-				$img = new Goteo\Model\Image( $url );
+				$img = new Equity\Model\Image( $url );
 				$img->save();
 
 				if($img->id) {
-					Goteo\Core\Model::query("REPLACE user_image (user, image) VALUES (:user, :image)", array(':user' => $username, ':image' => $img->id));
-					Goteo\Core\Model::query("UPDATE user SET avatar = :avatar WHERE id = :user", array(':user'=>$username,':avatar'=>$img->id));
-					$user = Goteo\Model\User::get($username);
+					Equity\Core\Model::query("REPLACE user_image (user, image) VALUES (:user, :image)", array(':user' => $username, ':image' => $img->id));
+					Equity\Core\Model::query("UPDATE user SET avatar = :avatar WHERE id = :user", array(':user'=>$username,':avatar'=>$img->id));
+					$user = Equity\Model\User::get($username);
 				}
 			}
 		}
@@ -572,33 +572,33 @@ class SocialAuth {
 
 			//Guardar en una cookie la preferencia de "login with"
 			//no servira para mostrar al usuario primeramente su opcion preferida
-			setcookie("goteo_oauth_provider",$this->original_provider,time() + 3600*24*365);
+			setcookie("equity_oauth_provider",$this->original_provider,time() + 3600*24*365);
 
 			if (!empty($_POST['return'])) {
-				throw new Goteo\Core\Redirection($_POST['return']);
+				throw new Equity\Core\Redirection($_POST['return']);
 			} elseif (!empty($_SESSION['jumpto'])) {
 				$jumpto = $_SESSION['jumpto'];
 				unset($_SESSION['jumpto']);
-				throw new Goteo\Core\Redirection($jumpto);
+				throw new Equity\Core\Redirection($jumpto);
 			} else {
-				throw new Goteo\Core\Redirection('/dashboard');
+				throw new Equity\Core\Redirection('/dashboard');
 			}
 	}
 
 	/**
 	 * Guarda los tokens generados en el usuario
 	 * */
-	public function saveTokensToUser($goteouser) {
-		$query = Goteo\Core\Model::query('SELECT id FROM user WHERE id = ?', array($goteouser));
+	public function saveTokensToUser($equityuser) {
+		$query = Equity\Core\Model::query('SELECT id FROM user WHERE id = ?', array($equityuser));
 		if($id = $query->fetchColumn()) {
 			foreach($this->tokens as $provider => $token) {
 				if($token['token']) {
-					$query = Goteo\Core\Model::query("REPLACE user_login (user,provider,oauth_token,oauth_token_secret) VALUES (:user,:provider,:token,:secret)",array(':user'=>$goteouser,':provider'=>$provider,':token'=>$token['token'],':secret'=>$token['secret']));
+					$query = Equity\Core\Model::query("REPLACE user_login (user,provider,oauth_token,oauth_token_secret) VALUES (:user,:provider,:token,:secret)",array(':user'=>$equityuser,':provider'=>$provider,':token'=>$token['token'],':secret'=>$token['secret']));
 				}
 			}
 		}
 		else {
-			$this->last_error = "oauth-goteo-user-not-exists";
+			$this->last_error = "oauth-equity-user-not-exists";
 			return false;
 		}
 	}

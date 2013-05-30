@@ -1,30 +1,11 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
+namespace Equity\Model {
 
-namespace Goteo\Model {
+    use Equity\Library\Text,
+        Equity\Model\Image;
 
-    use Goteo\Library\Text,
-        Goteo\Model\Image;
-
-    class Invest extends \Goteo\Core\Model {
+    class Invest extends \Equity\Core\Model {
 
         public
             $id,
@@ -363,7 +344,7 @@ namespace Goteo\Model {
          *
          * @param bool success solo los prroyectos en campaña, financiados o exitosos
          */
-        public static function projects ($success = false, $node = \GOTEO_NODE) {
+        public static function projects ($success = false, $node = \EQUITY_NODE) {
 
             $list = array();
 
@@ -526,7 +507,7 @@ namespace Goteo\Model {
                         'name' => $investor->name,
                         'projects' => $investor->projects,
                         'avatar' => $investor->avatar,
-                        'worth' => \Goteo\Model\User::calcWorth($investor->user),
+                        'worth' => \Equity\Model\User::calcWorth($investor->user),
                         'amount' => ($investors[$investor->user]->amount + $investor->amount),
                         'date' => $investor->date
                     );

@@ -1,30 +1,12 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
 
-namespace Goteo\Model\Blog\Post {
+namespace Equity\Model\Blog\Post {
 
-    use Goteo\Library\Text,
-        Goteo\Library\Feed;
+    use Equity\Library\Text,
+        Equity\Library\Feed;
 
-    class Comment extends \Goteo\Core\Model {
+    class Comment extends \Equity\Core\Model {
 
         public
             $id,
@@ -83,7 +65,7 @@ namespace Goteo\Model\Blog\Post {
             $query = static::query($sql, array($post));
                 
             foreach ($query->fetchAll(\PDO::FETCH_CLASS, __CLASS__) as $comment) {
-                $comment->user = \Goteo\Model\User::getMini($comment->user);
+                $comment->user = \Equity\Model\User::getMini($comment->user);
 
                 // reconocimiento de enlaces y saltos de linea
                 $comment->text = nl2br(Text::urlink($comment->text));
@@ -127,7 +109,7 @@ namespace Goteo\Model\Blog\Post {
 
             foreach ($query->fetchAll(\PDO::FETCH_CLASS, __CLASS__) as $comment) {
                 
-                $comment->user = \Goteo\Model\User::getMini($comment->user);
+                $comment->user = \Equity\Model\User::getMini($comment->user);
 
                 // reconocimiento de enlaces y saltos de linea
                 $comment->text = nl2br(Text::urlink($comment->text));

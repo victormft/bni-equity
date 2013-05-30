@@ -1,35 +1,16 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
+namespace Equity\Model {
 
-namespace Goteo\Model {
+	use Equity\Core\Redirection,
+        Equity\Library\Text,
+        Equity\Model\Image,
+        Equity\Library\Template,
+        Equity\Library\Mail,
+        Equity\Library\Check,
+        Equity\Library\Message;
 
-	use Goteo\Core\Redirection,
-        Goteo\Library\Text,
-        Goteo\Model\Image,
-        Goteo\Library\Template,
-        Goteo\Library\Mail,
-        Goteo\Library\Check,
-        Goteo\Library\Message;
-
-	class User extends \Goteo\Core\Model {
+	class User extends \Equity\Core\Model {
 
         public
             $id = false,
@@ -146,7 +127,7 @@ namespace Goteo\Model {
 						if ($mail->send($errors)) {
 							Message::Info(Text::get('register-confirm_mail-success'));
 						} else {
-							Message::Error(Text::get('register-confirm_mail-fail', GOTEO_MAIL));
+							Message::Error(Text::get('register-confirm_mail-fail', EQUITY_MAIL));
 							Message::Error(implode('<br />', $errors));
 						}
 					}
@@ -532,8 +513,8 @@ namespace Goteo\Model {
                 $query = static::query($sql, array(':id' => $id, ':lang' => $lang));
                 $user = $query->fetchObject(__CLASS__);
 
-                if (!$user instanceof  \Goteo\Model\User) {
-                    throw new \Goteo\Core\Error('404', Text::html('fatal-error-user'));
+                if (!$user instanceof  \Equity\Model\User) {
+                    throw new \Equity\Core\Error('404', Text::html('fatal-error-user'));
                 }
 
                 $user->roles = $user->getRoles();
@@ -891,10 +872,10 @@ namespace Goteo\Model {
                 $mail->send($errors);
                 unset($mail);
 
-                // email a los de goteo
+                // email a los de equity
                 $mail = new Mail();
-                $mail->to = \GOTEO_MAIL;
-                $mail->toName = 'Admin Goteo';
+                $mail->to = \EQUITY_MAIL;
+                $mail->toName = 'Admin Equity';
                 $mail->subject = 'El usuario ' . $row->id . ' se da de baja';
                 $mail->content = '<p>Han solicitado la baja para el mail <strong>'.$email.'</strong> que corresponde al usuario <strong>'.$row->name.'</strong>';
                 if (!empty($message)) $mail->content .= 'y ha dejado el siguiente mensaje:</p><p> ' . $message;
@@ -1174,7 +1155,7 @@ namespace Goteo\Model {
 
             $query = self::query($sql, array($user));
             foreach ($query->fetchAll(\PDO::FETCH_CLASS) as $proj) {
-                $projects[] = \Goteo\Model\Project::get($proj->id);
+                $projects[] = \Equity\Model\Project::get($proj->id);
             }
             return $projects;
         }

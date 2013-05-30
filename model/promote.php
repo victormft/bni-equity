@@ -1,30 +1,12 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-namespace Goteo\Model {
+namespace Equity\Model {
 
-    use \Goteo\Library\Text,
-        \Goteo\Model\Project,
-        \Goteo\Library\Check;
+    use \Equity\Library\Text,
+        \Equity\Model\Project,
+        \Equity\Library\Check;
 
-    class Promote extends \Goteo\Core\Model {
+    class Promote extends \Equity\Core\Model {
 
         public
             $id,
@@ -39,7 +21,7 @@ namespace Goteo\Model {
         /*
          *  Devuelve datos de un destacado
          */
-        public static function get ($project, $node = \GOTEO_NODE) {
+        public static function get ($project, $node = \EQUITY_NODE) {
                 $query = static::query("
                     SELECT  
                         promote.id as id,
@@ -67,7 +49,7 @@ namespace Goteo\Model {
         /*
          * Lista de proyectos destacados
          */
-        public static function getAll ($activeonly = false, $node = \GOTEO_NODE) {
+        public static function getAll ($activeonly = false, $node = \EQUITY_NODE) {
 
             // estados
             $status = Project::status();
@@ -109,7 +91,7 @@ namespace Goteo\Model {
         /*
          * Lista de proyectos disponibles para destacar
          */
-        public static function available ($current = null, $node = \GOTEO_NODE) {
+        public static function available ($current = null, $node = \EQUITY_NODE) {
 
             if (!empty($current)) {
                 $sqlCurr = " AND project != '$current'";
@@ -188,7 +170,7 @@ namespace Goteo\Model {
         /*
          * Para quitar un proyecto destacado
          */
-        public static function delete ($project, $node = \GOTEO_NODE) {
+        public static function delete ($project, $node = \EQUITY_NODE) {
             
             $sql = "DELETE FROM promote WHERE project = :project AND node = :node";
             if (self::query($sql, array(':project'=>$project, ':node'=>$node))) {
@@ -215,7 +197,7 @@ namespace Goteo\Model {
         /*
          * Para que un proyecto salga antes  (disminuir el order)
          */
-        public static function up ($project, $node = \GOTEO_NODE) {
+        public static function up ($project, $node = \EQUITY_NODE) {
             $extra = array (
                     'node' => $node
                 );
@@ -225,7 +207,7 @@ namespace Goteo\Model {
         /*
          * Para que un proyecto salga despues  (aumentar el order)
          */
-        public static function down ($project, $node = \GOTEO_NODE) {
+        public static function down ($project, $node = \EQUITY_NODE) {
             $extra = array (
                     'node' => $node
                 );
@@ -235,7 +217,7 @@ namespace Goteo\Model {
         /*
          *
          */
-        public static function next ($node = \GOTEO_NODE) {
+        public static function next ($node = \EQUITY_NODE) {
             $query = self::query('SELECT MAX(`order`) FROM promote WHERE node = :node'
                 , array(':node'=>$node));
             $order = $query->fetchColumn(0);

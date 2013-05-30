@@ -1,28 +1,10 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
 
-namespace Goteo\Library {
+namespace Equity\Library {
 
-	use Goteo\Core\Model,
-        Goteo\Core\Exception;
+	use Equity\Core\Model,
+        Equity\Core\Exception;
 	/*
 	 * Clase para sacar textos dinámicos de la tabla text
      *  @TODO, definir donde se define y se cambia la constante LANG y utilizarla en los _::get_
@@ -105,7 +87,7 @@ namespace Goteo\Library {
 
             $lang = LANG;
 
-            if (\defined('GOTEO_ADMIN_NOCACHE')) {
+            if (\defined('EQUITY_ADMIN_NOCACHE')) {
                 $nocache = true;
             } else {
                 $nocache = false;
@@ -373,14 +355,14 @@ namespace Goteo\Library {
                     break;
                 case 'pages':
                     // table nos indica si es la de descripciones o la de contenido,
-                    //  en la de contenido hay que filtrar nodo goteo y español
+                    //  en la de contenido hay que filtrar nodo equity y español
                     if ($table == 'page_node') {
-                        $sqlFilter = " WHERE node = 'goteo' AND lang = 'es'";
+                        $sqlFilter = " WHERE node = 'equity' AND lang = 'es'";
                     }
                     break;
                 case 'contents':
                 case 'home':
-                    // ojo! post es solo del blog 1 (goteo)
+                    // ojo! post es solo del blog 1 (equity)
                     if ($table == 'post') {
                         $sqlFilter = " WHERE blog = '1'";
                     }

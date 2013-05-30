@@ -1,28 +1,11 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-namespace Goteo\Library {
 
-	use Goteo\Core\Model,
-        Goteo\Model\Blog\Post,
-        Goteo\Library\Text;
+namespace Equity\Library {
+
+	use Equity\Core\Model,
+        Equity\Model\Blog\Post,
+        Equity\Library\Text;
 
 	/*
 	 * Clase para loguear eventos
@@ -78,8 +61,8 @@ namespace Goteo\Library {
         );
 
         static public $public_types = array(
-            'goteo' => array(
-                'label' => 'Goteo'
+            'equity' => array(
+                'label' => 'Equity'
             ),
             'projects' => array(
                 'label' => 'Proyectos'
@@ -136,7 +119,7 @@ namespace Goteo\Library {
             $this->doEvent('admin', $type);
         }
 
-        public function doPublic ($type = 'goteo') {
+        public function doPublic ($type = 'equity') {
             $this->doEvent('public', $type);
         }
 
@@ -149,7 +132,7 @@ namespace Goteo\Library {
         /**
 		 *  Metodo para sacar los eventos
          *
-         * @param string $type  tipo de evento (public: columnas goteo, proyectos, comunidad;  admin: categorias de filtro)
+         * @param string $type  tipo de evento (public: columnas equity, proyectos, comunidad;  admin: categorias de filtro)
          * @param string $scope ambito de eventos (public | admin)
          * @return array list of items
 		 */
@@ -186,8 +169,8 @@ namespace Goteo\Library {
                     //hace tanto
                     $item->timeago = self::time_ago($item->timer);
 
-                    // si es la columan goteo, vamos a cambiar el html por el del post traducido
-                    if ($type == 'goteo') {
+                    // si es la columan equity, vamos a cambiar el html por el del post traducido
+                    if ($type == 'equity') {
                         // primero sacamos la id del post de la url
                         $matches = array();
                         
@@ -225,7 +208,7 @@ namespace Goteo\Library {
 		public function add() {
 
             if (empty($this->html)) {
-                @mail(\GOTEO_MAIL,
+                @mail(\EQUITY_MAIL,
                     'Evento feed sin html: ' . SITE_URL,
                     "Feed sin contenido html<hr /><pre>" . print_r($this, 1) . "</pre>");
                 return false;
@@ -263,14 +246,14 @@ namespace Goteo\Library {
 				if (Model::query($sql, $values)) {
                     return true;
                 } else {
-                    @mail(\GOTEO_MAIL,
+                    @mail(\EQUITY_MAIL,
                         'Fallo al hacer evento feed: ' . SITE_URL,
                         "Ha fallado Feed<br /> {$sql} con <pre>" . print_r($values, 1) . "</pre><hr /><pre>" . print_r($this, 1) . "</pre>");
                     return false;
                 }
                 
 			} catch(\PDOException $e) {
-                    @mail(\GOTEO_MAIL,
+                    @mail(\EQUITY_MAIL,
                         'PDO Exception evento feed: ' . SITE_URL,
                         "Ha fallado Feed PDO Exception<br /> {$sql} con " . $e->getMessage() . "<hr /><pre>" . print_r($this, 1) . "</pre>");
                 return false;
