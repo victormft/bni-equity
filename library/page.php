@@ -1,27 +1,9 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-namespace Goteo\Library {
+namespace Equity\Library {
 
-	use Goteo\Core\Model,
-        Goteo\Core\Exception;
+	use Equity\Core\Model,
+        Equity\Core\Exception;
 
 	/*
 	 * Clase para gestionar el contenido de las páginas institucionales
@@ -38,7 +20,7 @@ namespace Goteo\Library {
             $content,
             $pendiente; // para si esta pendiente de traduccion
 
-        static public function get ($id, $lang = \LANG, $node = \GOTEO_NODE) {
+        static public function get ($id, $lang = \LANG, $node = \EQUITY_NODE) {
 
             // buscamos la página para este nodo en este idioma
 			$sql = "SELECT  page.id as id,
@@ -76,7 +58,7 @@ namespace Goteo\Library {
 		/*
 		 *  Metodo para la lista de páginas
 		 */
-		public static function getAll($lang = \LANG, $node = \GOTEO_NODE) {
+		public static function getAll($lang = \LANG, $node = \EQUITY_NODE) {
             $pages = array();
 
             try {
@@ -188,7 +170,7 @@ namespace Goteo\Library {
                 $values = array(
                     ':page' => $id,
                     ':lang' => $lang,
-                    ':node' => \GOTEO_NODE,
+                    ':node' => \EQUITY_NODE,
                     ':contenido' => $content
                 );
 

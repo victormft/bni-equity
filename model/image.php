@@ -1,10 +1,10 @@
 <?php
 
-namespace Goteo\Model {
+namespace Equity\Model {
 
-    use Goteo\Library\Text;
+    use Equity\Library\Text;
 
-    class Image extends \Goteo\Core\Model {
+    class Image extends \Equity\Core\Model {
 
         public
 			$id,
@@ -24,8 +24,8 @@ namespace Goteo\Model {
          * @param type array	$file	Array $_FILES.
          */
         public function __construct ($file) {
-			$this->dir_originals = GOTEO_DATA_PATH . 'images' . DIRECTORY_SEPARATOR;
-			$this->dir_cache = GOTEO_DATA_PATH . 'cache' . DIRECTORY_SEPARATOR;
+			$this->dir_originals = EQUITY_DATA_PATH . 'images' . DIRECTORY_SEPARATOR;
+			$this->dir_cache = EQUITY_DATA_PATH . 'cache' . DIRECTORY_SEPARATOR;
 
             if(is_array($file)) {
                 $this->name = self::check_filename($file['name'], $this->dir_originals);
@@ -62,7 +62,7 @@ namespace Goteo\Model {
 
         /**
          * (non-PHPdoc)
-         * @see Goteo\Core.Model::save()
+         * @see Equity\Core.Model::save()
          */
         public function save(&$errors = array()) {
             if($this->validate($errors)) {
@@ -143,7 +143,7 @@ namespace Goteo\Model {
 
 		/**
 		 * (non-PHPdoc)
-		 * @see Goteo\Core.Model::validate()
+		 * @see Equity\Core.Model::validate()
 		 */
 		public function validate(&$errors = array()) {
 			if(empty($this->name)) {
@@ -299,12 +299,12 @@ namespace Goteo\Model {
 		 */
 		public function load () {
 		    if(!empty($this->id) && !empty($this->name)) {
-    		    $tmp = tempnam(sys_get_temp_dir(), 'Goteo');
+    		    $tmp = tempnam(sys_get_temp_dir(), 'Equity');
                 $file = fopen($tmp, "w");
                 fwrite($file, $this->content);
                 fclose($file);
                 if(!file_exists($tmp)) {
-                    throw \Goteo\Core\Exception("Error al cargar la imagen temporal.");
+                    throw \Equity\Core\Exception("Error al cargar la imagen temporal.");
                 }
                 else {
                     $this->tmp = $tmp;
@@ -321,7 +321,7 @@ namespace Goteo\Model {
     	public function unload () {
     	    if(!empty($this->tmp)) {
                 if(!file_exists($this->tmp)) {
-                    throw \Goteo\Core\Exception("Error, la imagen temporal no ha sido encontrada.");
+                    throw \Equity\Core\Exception("Error, la imagen temporal no ha sido encontrada.");
                 }
                 else {
                     unlink($this->tmp);

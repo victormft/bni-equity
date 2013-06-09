@@ -1,30 +1,13 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-namespace Goteo\Library {
 
-    use Goteo\Model\Invest,
-        Goteo\Model\Project,
-        Goteo\Model\User,
-        Goteo\Library\Feed,
-        Goteo\Core\Redirection;
+namespace Equity\Library {
+
+    use Equity\Model\Invest,
+        Equity\Model\Project,
+        Equity\Model\User,
+        Equity\Library\Feed,
+        Equity\Core\Redirection;
 
 	/*
 	 * Clase para usar los adaptive payments de paypal
@@ -43,10 +26,10 @@ namespace Goteo\Library {
         public $main = array(
 		'api_endpoint' => '', 
 		'wsdl' => '',
-		'API_UserName' => 'sbapi_1287090601_biz_api1.paypal.com', //replace with values from Goteo
-		'API_Password' => '1287090610', //replace with values from Goteo
-		'API_Signature' => 'ANFgtzcGWolmjcm5vfrf07xVQ6B9AsoDvVryVxEQqezY85hChCfdBMvY', //replace with values from Goteo
-		'API_AppID' => 'APP-80W284485P519543T', //replace with values from Goteo
+		'API_UserName' => 'sbapi_1287090601_biz_api1.paypal.com', //replace with values from Equity
+		'API_Password' => '1287090610', //replace with values from Equity
+		'API_Signature' => 'ANFgtzcGWolmjcm5vfrf07xVQ6B9AsoDvVryVxEQqezY85hChCfdBMvY', //replace with values from Equity
+		'API_AppID' => 'APP-80W284485P519543T', //replace with values from Equity
 		'API_MessageProtocol' => 'SOAP11',
 	);
 	public $RequestEnvelope = array(
@@ -81,13 +64,13 @@ namespace Goteo\Library {
          */
         public static function preapproval($invest, &$errors = array()) {
 		error_log(print_r($invest,1));
-		$this->$PreapprovalRequest['cancelUrl'] = 'http://www.ebay.com'; //replace with values from Goteo
-		$this->$PreapprovalRequest['currencyCode'] = 'EUR'; //replace with values from Goteo
-		$this->$PreapprovalRequest['returnUrl'] = 'http://www.ebay.com'; //replace with values from Goteo
-		$this->$PreapprovalRequest['endingDate'] = '2012-12-30T08:00:00'; //replace with values from Goteo
-		$this->$PreapprovalRequest['maxTotalAmountOfAllPayments'] = '500.0'; //replace with values from Goteo
+		$this->$PreapprovalRequest['cancelUrl'] = 'http://www.ebay.com'; //replace with values from Equity
+		$this->$PreapprovalRequest['currencyCode'] = 'EUR'; //replace with values from Equity
+		$this->$PreapprovalRequest['returnUrl'] = 'http://www.ebay.com'; //replace with values from Equity
+		$this->$PreapprovalRequest['endingDate'] = '2012-12-30T08:00:00'; //replace with values from Equity
+		$this->$PreapprovalRequest['maxTotalAmountOfAllPayments'] = '500.0'; //replace with values from Equity
 		$this->$PreapprovalRequest['memo'] = 'preapproval';
-		$this->$PreapprovalRequest['startingDate'] = '2012-11-20T08:00:00'; //replace with values from Goteo
+		$this->$PreapprovalRequest['startingDate'] = '2012-11-20T08:00:00'; //replace with values from Equity
 		$http_headers = "X-PAYPAL-SECURITY-USERID: " . $this->main['API_UserName'] . "\r\n" .
                     "X-PAYPAL-SECURITY-SIGNATURE: " . $this->main['API_Signature'] . "\r\n" .
                  	"X-PAYPAL-SECURITY-PASSWORD: " . $this->main['API_Password'] . "\r\n" .
@@ -118,11 +101,11 @@ namespace Goteo\Library {
          *  Metodo para ejecutar pago (desde cron)
          * Recibe parametro del aporte (id, cuenta, cantidad)
          *
-         * Es un pago encadenado, la comision del 8% a Goteo y el resto al proyecto
+         * Es un pago encadenado, la comision del 8% a Equity y el resto al proyecto
          *
          */
         public static function pay($invest, &$errors = array()) {
-            if (\GOTEO_FREE) {
+            if (\EQUITY_FREE) {
                 return false;
             }
         }
@@ -133,7 +116,7 @@ namespace Goteo\Library {
          * Recibe parametro del aporte (id, cuenta, cantidad)
          */
         public static function doPay($invest, &$errors = array()) {
-            if (\GOTEO_FREE) {
+            if (\EQUITY_FREE) {
                 return false;
             }
         }
@@ -143,7 +126,7 @@ namespace Goteo\Library {
          * Llamada a paypal para obtener los detalles de un preapproval
          */
         public static function preapprovalDetails ($key, &$errors = array()) {
-            if (\GOTEO_FREE) {
+            if (\EQUITY_FREE) {
                 return false;
             }
         }
@@ -152,7 +135,7 @@ namespace Goteo\Library {
          * Llamada a paypal para obtener los detalles de un cargo
          */
         public static function paymentDetails ($key, &$errors = array()) {
-            if (\GOTEO_FREE) {
+            if (\EQUITY_FREE) {
                 return false;
             }
         }
@@ -163,7 +146,7 @@ namespace Goteo\Library {
          * recibe la instancia del aporte
          */
         public static function cancelPreapproval ($invest, &$errors = array()) {
-            if (\GOTEO_FREE) {
+            if (\EQUITY_FREE) {
                 return false;
             }
         }

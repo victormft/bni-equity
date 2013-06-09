@@ -9,7 +9,7 @@ if (function_exists('ini_set')) {
 }
 
 // Nodo actual
-define('EQUITY_NODE', 'goteo');
+define('EQUITY_NODE', 'equity');
 
 define('PEAR', EQUITY_PATH . 'library' . '/' . 'pear' . '/');
 if (function_exists('ini_set')) {

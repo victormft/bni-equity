@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Goteo\Model\Project {
+namespace Equity\Model\Project {
 
-    use Goteo\Library\Text;
+    use Equity\Library\Text;
 
-    class Entrepreneur extends \Goteo\Core\Model {
+    class Entrepreneur extends \Equity\Core\Model {
 
         public
             $id,
@@ -21,7 +21,7 @@ namespace Goteo\Model\Project {
                 $query = static::query("SELECT * FROM entrepreneur WHERE id = :id", array(':id' => $id));
                 return $query->fetchObject(__CLASS__);
             } catch(\PDOException $e) {
-                throw new \Goteo\Core\Exception($e->getMessage());
+                throw new \Equity\Core\Exception($e->getMessage());
             }
 		}
 
@@ -52,7 +52,7 @@ namespace Goteo\Model\Project {
                 }
 				return $array;
             } catch(\PDOException $e) {
-                throw new \Goteo\Core\Exception($e->getMessage());
+                throw new \Equity\Core\Exception($e->getMessage());
             }
 		}
 

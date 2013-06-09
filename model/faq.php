@@ -1,30 +1,11 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
+namespace Equity\Model {
 
-namespace Goteo\Model {
+    use Equity\Library\Check,
+        Equity\Library\Text;
 
-    use Goteo\Library\Check,
-        Goteo\Library\Text;
-
-    class Faq extends \Goteo\Core\Model {
+    class Faq extends \Equity\Core\Model {
 
         public
             $id,
@@ -164,7 +145,7 @@ namespace Goteo\Model {
         /*
          * Para quitar una pregunta
          */
-        public static function delete ($id, $node = \GOTEO_NODE) {
+        public static function delete ($id, $node = \EQUITY_NODE) {
             
             $sql = "DELETE FROM faq WHERE id = :id AND node = :node";
             if (self::query($sql, array(':id'=>$id, ':node'=>$node))) {
@@ -178,7 +159,7 @@ namespace Goteo\Model {
         /*
          * Para que una pregunta salga antes  (disminuir el order)
          */
-        public static function up ($id, $node = \GOTEO_NODE) {
+        public static function up ($id, $node = \EQUITY_NODE) {
             $query = static::query("SELECT section FROM faq WHERE id = ?", array($id));
             $faq = $query->fetchObject();
             $extra = array(
@@ -191,7 +172,7 @@ namespace Goteo\Model {
         /*
          * Para que un proyecto salga despues  (aumentar el order)
          */
-        public static function down ($id, $node = \GOTEO_NODE) {
+        public static function down ($id, $node = \EQUITY_NODE) {
             $query = static::query("SELECT section FROM faq WHERE id = ?", array($id));
             $faq = $query->fetchObject();
             $extra = array(
@@ -204,7 +185,7 @@ namespace Goteo\Model {
         /*
          * Orden para añadirlo al final
          */
-        public static function next ($section = 'node', $node = \GOTEO_NODE) {
+        public static function next ($section = 'node', $node = \EQUITY_NODE) {
             $query = self::query('SELECT MAX(`order`) FROM faq WHERE section = :section AND node = :node'
                 , array(':section'=>$section, ':node'=>$node));
             $order = $query->fetchColumn(0);

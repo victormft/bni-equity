@@ -1,27 +1,9 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
-namespace Goteo\Library {
+namespace Equity\Library {
 
-	use Goteo\Core\Model,
-        Goteo\Core\Exception;
+	use Equity\Core\Model,
+        Equity\Core\Exception;
 
 	/*
 	 * Clase para gestionar la traducción de registros de tablas de contenido
@@ -204,13 +186,13 @@ namespace Goteo\Library {
                              WHERE {$table}.id IS NOT NULL
                         ";
 
-                        // solo entradas de goteo en esta gestión
+                        // solo entradas de Equity en esta gestión
                         if ($table == 'post') {
                             $sql .= "AND post.blog = 1
                                 ";
                         }
                         if ($table == 'info') {
-                            $sql .= "AND info.node = '".\GOTEO_NODE."'
+                            $sql .= "AND info.node = '".\EQUITY_NODE."'
                                 ";
                         }
 

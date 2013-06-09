@@ -1,19 +1,19 @@
 <?php
 
-namespace Goteo\Model {
+namespace Equity\Model {
 
-    use Goteo\Core\ACL,
-        Goteo\Library\Check,
-        Goteo\Library\Text,
-        Goteo\Model\User,
-        Goteo\Model\Image,
+    use Equity\Core\ACL,
+        Equity\Library\Check,
+        Equity\Library\Text,
+        Equity\Model\User,
+        Equity\Model\Image,
 		
-		Goteo\Model\File,
+		Equity\Model\File,
 		
 		
-        Goteo\Model\Message;
+        Equity\Model\Message;
 
-    class Project extends \Goteo\Core\Model {
+    class Project extends \Equity\Core\Model {
 
         public
             $id = null,
@@ -184,7 +184,7 @@ namespace Goteo\Model {
          * @param array $data
          * @return boolean
          */
-        public function create ($node = \GOTEO_NODE, &$errors = array()) {
+        public function create ($node = \EQUITY_NODE, &$errors = array()) {
 
             $user = $_SESSION['user']->id;
 
@@ -287,8 +287,8 @@ namespace Goteo\Model {
 				$query = self::query("SELECT * FROM project WHERE id = ?", array($id));
 				$project = $query->fetchObject(__CLASS__);
 
-                if (!$project instanceof \Goteo\Model\Project) {
-                    throw new \Goteo\Core\Error('404', Text::html('fatal-error-project'));
+                if (!$project instanceof \Equity\Model\Project) {
+                    throw new \Equity\Core\Error('404', Text::html('fatal-error-project'));
                 }
 
                 // si recibimos lang y no es el idioma original del proyecto, ponemos la traducción y mantenemos para el resto de contenido
@@ -397,9 +397,9 @@ namespace Goteo\Model {
 				return $project;
 
 			} catch(\PDOException $e) {
-				throw new \Goteo\Core\Exception($e->getMessage());
-			} catch(\Goteo\Core\Error $e) {
-                throw new \Goteo\Core\Error('404', Text::html('fatal-error-project'));
+				throw new \Equity\Core\Exception($e->getMessage());
+			} catch(\Equity\Core\Error $e) {
+                throw new \Equity\Core\Error('404', Text::html('fatal-error-project'));
 			}
 		}
 
@@ -419,7 +419,7 @@ namespace Goteo\Model {
 				return $project;
 
 			} catch(\PDOException $e) {
-				throw new \Goteo\Core\Exception($e->getMessage());
+				throw new \Equity\Core\Exception($e->getMessage());
 			}
 		}
 
@@ -507,14 +507,14 @@ namespace Goteo\Model {
 				return $project;
 
 			} catch(\PDOException $e) {
-				throw new \Goteo\Core\Exception($e->getMessage());
+				throw new \Equity\Core\Exception($e->getMessage());
 			}
 		}
 
         /*
          * Listado simple de todos los proyectos
          */
-        public static function getAll($node = \GOTEO_NODE) {
+        public static function getAll($node = \EQUITY_NODE) {
 
             $list = array();
 
@@ -624,7 +624,7 @@ namespace Goteo\Model {
                 //Text::get('validate-project-noowner');
 
             if (empty($this->node))
-                $this->node = 'goteo';
+                $this->node = 'equity';
 
             //cualquiera de estos errores hace fallar la validación
             if (!empty($errors))
@@ -687,7 +687,7 @@ namespace Goteo\Model {
                             self::query("REPLACE project_image (project, image) VALUES (:project, :image)", array(':project' => $this->id, ':image' => $image->id));
                         }
                     } else {
-                        \Goteo\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
+                        \Equity\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
                     }
                 }
 				
@@ -705,7 +705,7 @@ namespace Goteo\Model {
                             self::query("REPLACE INTO project_file (project, file) VALUES(:project, :file)", array(':project'=>$this->id, ':file'=>$file->id));
                         }
                     } else {
-                        \Goteo\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
+                        \Equity\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
                     }
 					
                 }
@@ -724,7 +724,7 @@ namespace Goteo\Model {
                             self::query("REPLACE INTO project_file (project, file) VALUES(:project, :file)", array(':project'=>$this->id, ':file'=>$file->id));
                         }
                     } else {
-                        \Goteo\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
+                        \Equity\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
                     }
 					
                 }
@@ -743,7 +743,7 @@ namespace Goteo\Model {
                             self::query("REPLACE INTO project_file (project, file) VALUES(:project, :file)", array(':project'=>$this->id, ':file'=>$file->id));
                         }
                     } else {
-                        \Goteo\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
+                        \Equity\Library\Message::Error(Text::get('image-upload-fail') . implode(', ', $errors));
                     }
 					
                 }
@@ -1813,7 +1813,7 @@ namespace Goteo\Model {
 
             /***************** Revisión de campos del paso 5, RETORNOS *****************/
             $score = 0; $scoreName = $scoreDesc = $scoreAmount = $scoreLicense = 0;
-            /*if (empty($this->social_rewards)) {
+            if (empty($this->social_rewards)) {
                 $errors['rewards']['social_rewards'] = Text::get('validate-project-social_rewards');
             } else {
                  $okeys['rewards']['social_rewards'] = 'ok';
@@ -1876,16 +1876,16 @@ namespace Goteo\Model {
             
             $score = $score + $scoreName + $scoreDesc + $scoreLicense;
             $scoreName = $scoreDesc = 0;
-*/
+
             $anyerror = false;
             foreach ($this->individual_rewards as $individual) {
-                /*if (empty($individual->reward)) {
+                if (empty($individual->reward)) {
                     $errors['rewards']['individual_reward-'.$individual->id.'-reward'] = Text::get('mandatory-individual_reward-field-name');
                     $anyerror = !$anyerror ?: true;
                 } else {
                      $okeys['rewards']['individual_reward-'.$individual->id.'-reward'] = 'ok';
                      $scoreName = 1;
-                }*/
+                }
 
                 if (empty($individual->description)) {
                     $errors['rewards']['individual_reward-'.$individual->id.'-description'] = Text::get('mandatory-individual_reward-field-description');
@@ -1903,12 +1903,12 @@ namespace Goteo\Model {
                      $scoreAmount = 1;
                 }
 
-                /*if (empty($individual->icon)) {
+                if (empty($individual->icon)) {
                     $errors['rewards']['individual_reward-'.$individual->id.'-icon'] = Text::get('mandatory-individual_reward-field-icon');
                     $anyerror = !$anyerror ?: true;
                 } else {
                      $okeys['rewards']['individual_reward-'.$individual->id.'-icon'] = 'ok';
-                }*/
+                }
 
             }
 
@@ -2218,13 +2218,13 @@ namespace Goteo\Model {
                             return false;
                         }
                     } else {
-                        throw new \Goteo\Core\Exception('Fallo al iniciar transaccion rebase. ' . \trace($e));
+                        throw new \Equity\Core\Exception('Fallo al iniciar transaccion rebase. ' . \trace($e));
                     }
                 }
 
                 return true;
             } catch (\PDOException $e) {
-                throw new \Goteo\Core\Exception('Fallo rebase id temporal. ' . \trace($e));
+                throw new \Equity\Core\Exception('Fallo rebase id temporal. ' . \trace($e));
             }
 
         }
@@ -2250,7 +2250,7 @@ namespace Goteo\Model {
                 return $id;
             }
             catch (\PDOException $e) {
-                throw new \Goteo\Core\Exception('Fallo al verificar id única para el proyecto. ' . $e->getMessage());
+                throw new \Equity\Core\Exception('Fallo al verificar id única para el proyecto. ' . $e->getMessage());
             }
         }
 
@@ -2495,7 +2495,7 @@ namespace Goteo\Model {
          * @param string node id
          * @return array of project instances
          */
-        public static function getList($filters = array(), $node = \GOTEO_NODE) {
+        public static function getList($filters = array(), $node = \EQUITY_NODE) {
             $projects = array();
 
             $values = array(':node' => $node);
@@ -2572,7 +2572,7 @@ namespace Goteo\Model {
          * @param string node id
          * @return array of project instances
          */
-        public static function getTranslates($filters = array(), $node = \GOTEO_NODE) {
+        public static function getTranslates($filters = array(), $node = \EQUITY_NODE) {
             $projects = array();
 
             $values = array(':node' => $node);

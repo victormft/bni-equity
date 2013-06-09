@@ -1,8 +1,8 @@
 <?php
 
-namespace Goteo\Model\Project {
+namespace Equity\Model\Project {
 
-    class Ftype extends \Goteo\Core\Model {
+    class Ftype extends \Equity\Core\Model {
 
         public
             $id,
@@ -25,7 +25,7 @@ namespace Goteo\Model\Project {
 
                 return $array;
             } catch(\PDOException $e) {
-				throw new \Goteo\Core\Exception($e->getMessage());
+				throw new \Equity\Core\Exception($e->getMessage());
             }
 		}
 
@@ -59,7 +59,7 @@ namespace Goteo\Model\Project {
 
                 return $array;
             } catch(\PDOException $e) {
-				throw new \Goteo\Core\Exception($e->getMessage());
+				throw new \Equity\Core\Exception($e->getMessage());
             }
 		}
 
@@ -101,7 +101,7 @@ namespace Goteo\Model\Project {
 
                 return $array;
             } catch(\PDOException $e) {
-				throw new \Goteo\Core\Exception($e->getMessage());
+				throw new \Equity\Core\Exception($e->getMessage());
             }
 		}
 

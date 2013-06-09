@@ -1,21 +1,4 @@
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
+
 /**
  * Header
  */
@@ -464,37 +447,37 @@ div#sub-header > div > h2 .greenblue{
 /* fin de los controlers del carrusel de banners*/
 
 /* subheader secundario  */
-div#sub-header-secondary > div > ul.share-goteo{
+div#sub-header-secondary > div > ul.share-equity{
 	margin: 40px 9px 0 0;
 	padding:0px;
 	list-style:none;
 	float:right;
 }
 
-div#sub-header-secondary > div > ul.share-goteo li{
+div#sub-header-secondary > div > ul.share-equity li{
 	display:inline;
 	float:left;
 	margin: 0 0 0 22px;
 }
-div#sub-header-secondary > div > ul.share-goteo li.twitter a,
-div#sub-header-secondary > div > ul.share-goteo li.facebook a,
-div#sub-header-secondary > div > ul.share-goteo li.rss a{
+div#sub-header-secondary > div > ul.share-equity li.twitter a,
+div#sub-header-secondary > div > ul.share-equity li.facebook a,
+div#sub-header-secondary > div > ul.share-equity li.rss a{
 	height:20px;
 	float:left;
 	padding: 4px 0 0 30px;
 	font-size: 11px;
 }
-div#sub-header-secondary > div > ul.share-goteo li.twitter a{
+div#sub-header-secondary > div > ul.share-equity li.twitter a{
 	background: #d7eaeb url('sprite-socials-icons.gif') scroll no-repeat  0 0;
 	color:#13c2ec;
 	text-decoration:none;
 }
-div#sub-header-secondary > div > ul.share-goteo li.facebook a{
+div#sub-header-secondary > div > ul.share-equity li.facebook a{
 	background: #d7eaeb url('sprite-socials-icons.gif') scroll no-repeat  0 -24px;
 	color:#4a6393;
 	text-decoration:none;
 }
-div#sub-header-secondary > div > ul.share-goteo li.rss a{
+div#sub-header-secondary > div > ul.share-equity li.rss a{
 	background: #d7eaeb url('sprite-socials-icons.gif') scroll no-repeat  0 -48px;
 	color:#f38321;
 	text-decoration:none;
@@ -607,7 +590,7 @@ div#header div#highlights > ul > li > a {
 
 /* menu y despelgable dashboard */
 div#header div#menu {
-    /* tirado do Goteo: background: #b5dadc url('header/background.png') repeat-x top;*/
+    /* tirado do Equity: background: #b5dadc url('header/background.png') repeat-x top;*/
 	
     overflow: visible;
 	background-color: #fafafa;
