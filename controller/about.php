@@ -28,7 +28,7 @@ namespace Equity\Controller {
             }
 
             if ($id == 'faq' || $id == 'contact') {
-                throw new Redirection('/'.$id, Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL . '/'.$id, Redirection::TEMPORARY);
             }
 
             $page = Page::get($id);

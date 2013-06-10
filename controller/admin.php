@@ -89,7 +89,7 @@ namespace Equity\Controller {
                             $log->add($errors);
                             unset($log);
 
-                            throw new Redirection("/admin/pages");
+                            throw new Redirection(SITE_URL . "/admin/pages");
                         }
                     }
 
@@ -217,7 +217,7 @@ namespace Equity\Controller {
                         );
 
                         if (Text::update($data, $errors)) {
-                            throw new Redirection("/admin/texts/$filter");
+                            throw new Redirection(SITE_URL . "/admin/texts/$filter");
                         }
                     } else {
                         $text = Text::getPurpose($id);
@@ -262,7 +262,7 @@ namespace Equity\Controller {
 
                     break;
                 default:
-                    throw new Redirection("/admin");
+                    throw new Redirection(SITE_URL . "/admin");
             }
 		}
 
@@ -292,7 +292,7 @@ namespace Equity\Controller {
                         $template->title = $_POST['title'];
                         $template->text  = $_POST['text'];
                         if ($template->save($errors))
-                            throw new Redirection("/admin/templates");
+                            throw new Redirection(SITE_URL . "/admin/templates");
                     }
 
 
@@ -494,7 +494,7 @@ namespace Equity\Controller {
 
                 unset($log);
 
-                throw new Redirection('/admin/projects/list');
+                throw new Redirection(SITE_URL . '/admin/projects/list');
             }
 
             if ($action == 'dates') {
@@ -628,7 +628,7 @@ namespace Equity\Controller {
                                     break;
                             }
                             
-                            throw new Redirection('/admin/reviews/' . $filter);
+                            throw new Redirection(SITE_URL . '/admin/reviews/' . $filter);
                         }
                     }
                     
@@ -853,7 +853,7 @@ namespace Equity\Controller {
                         $project = Model\Project::getMini($id);
                     } elseif ($action != 'add') {
                         Message::Error(('No hay proyecto sobre el que operar'));
-                        throw new Redirection('/admin/translates');
+                        throw new Redirection(SITE_URL . '/admin/translates');
                     }
 
                     // asignar o desasignar
@@ -1999,7 +1999,7 @@ namespace Equity\Controller {
                     );
                     break;
                 case 'edit':
-                    throw new Redirection('/admin/blog');
+                    throw new Redirection(SITE_URL . '/admin/blog');
                     break;
                 case 'remove':
                     // se quita de la portada solamente
@@ -2086,7 +2086,7 @@ namespace Equity\Controller {
                     );
                     break;
                 case 'edit':
-                    throw new Redirection('/admin/blog');
+                    throw new Redirection(SITE_URL . '/admin/blog');
                     break;
                 case 'remove':
                     Model\Post::remove($id, 'footer');
@@ -2182,7 +2182,7 @@ namespace Equity\Controller {
                         ));
 
                         if ($item->save($errors)) {
-                            throw new Redirection($url);
+                            throw new Redirection(SITE_URL . $url);
                         }
                     } else {
                         $item = $model::get($id);
@@ -2235,7 +2235,7 @@ namespace Equity\Controller {
                     break;
                 case 'remove':
                     if ($model::delete($id)) {
-                        throw new Redirection($url);
+                        throw new Redirection(SITE_URL . $url);
                     }
                     break;
             }
@@ -2334,7 +2334,7 @@ namespace Equity\Controller {
                         ));
 
                         if ($item->save($errors)) {
-                            throw new Redirection($url);
+                            throw new Redirection(SITE_URL . $url);
                         }
                     } else {
                         $item = $model::get($id);
@@ -2374,7 +2374,7 @@ namespace Equity\Controller {
                     break;
                 case 'remove':
                     if ($model::delete($id)) {
-                        throw new Redirection($url);
+                        throw new Redirection(SITE_URL . $url);
                     }
                     break;
             }
@@ -2443,7 +2443,7 @@ namespace Equity\Controller {
                         if(empty($errors)) {
                           // mensaje de ok y volvemos a la lista de usuarios
                           Message::Info(Text::get('user-register-success'));
-                          throw new Redirection('/admin/users');
+                          throw new Redirection(SITE_URL . '/admin/users');
                         } else {
                             // si hay algun error volvemos a poner los datos en el formulario
                             $data = $_POST;
@@ -2504,7 +2504,7 @@ namespace Equity\Controller {
 
                             // mensaje de ok y volvemos a la lista de usuarios
                             Message::Info(('Datos actualizados'));
-                            throw new Redirection('/admin/users');
+                            throw new Redirection(SITE_URL . '/admin/users');
                             
                         } else {
                             // si hay algun error volvemos a poner los datos en el formulario
@@ -2622,7 +2622,7 @@ namespace Equity\Controller {
 
                         unset($log);
 
-                        throw new Redirection('/admin/users/manage/'.$id);
+                        throw new Redirection(SITE_URL . '/admin/users/manage/'.$id);
                     }
 
                     $user = Model\User::get($id);
@@ -2760,7 +2760,7 @@ namespace Equity\Controller {
                 //el original tiene que ser de tpv o cash y estar como 'cargo ejecutado'
                 if ($original->method == 'paypal' || $original->status != 1) {
                     Message::Error(('No se puede reubicar este aporte!'));
-                    throw new Redirection('/admin/invests');
+                    throw new Redirection(SITE_URL.'/admin/invests');
                 }
 
 
@@ -2826,7 +2826,7 @@ namespace Equity\Controller {
                             unset($log);
 
                             Message::Info(('Aporte reubicado correctamente'));
-                            throw new Redirection('/admin/invests');
+                            throw new Redirection(SITE_URL.'/admin/invests');
                         } else {
 							$msgi = ("A fallado al cambiar el estado del aporte original (%s)");
                             $errors[] = sprintf($msgi, $original->id);
@@ -2907,7 +2907,7 @@ namespace Equity\Controller {
                         unset($log);
                         
                         Message::Info( ('Aporte manual creado correctamente') );
-                        throw new Redirection('/admin/invests');
+                        throw new Redirection(SITE_URL.'/admin/invests');
                     } else{
                         $errors[] = ('Ha fallado algo al crear el aporte manual');
                     }
@@ -2971,7 +2971,7 @@ namespace Equity\Controller {
                 $project = Model\Project::get($id);
                 if (!$project instanceof Model\Project) {
                     Message::Error(('Instancia de proyecto no valida'));
-                    throw new Redirection('/admin/invests');
+                    throw new Redirection(SITE_URL.'/admin/invests');
                 }
                 $invests = Model\Invest::getAll($id);
                 $users  = Model\Invest::investors($id, false, true);
@@ -3601,7 +3601,7 @@ namespace Equity\Controller {
                     break;
                 case 'edit':
                     if (empty($id)) {
-                        throw new Redirection('/admin/blog');
+                        throw new Redirection(SITE_URL.'/admin/blog');
 //                        $errors[] = 'No se ha encontrado la entrada';
                         //Text::get('dashboard-project-updates-nopost');
 //                        $action = 'list';
@@ -3744,7 +3744,7 @@ namespace Equity\Controller {
                     break;
                 case 'edit':
                     if (empty($id)) {
-                        throw new Redirection('/admin/glossary');
+                        throw new Redirection(SITE_URL.'/admin/glossary');
                         break;
                     } else {
                         $post = Model\Glossary::get($id);
@@ -3953,7 +3953,7 @@ namespace Equity\Controller {
                     break;
                 case 'edit':
                     if (empty($id)) {
-                        throw new Redirection('/admin/info');
+                        throw new Redirection(SITE_URL.'/admin/info');
                         break;
                     } else {
                         $post = Model\Info::get($id);
@@ -4108,7 +4108,7 @@ namespace Equity\Controller {
                                 unset($log);
                             }
 
-                            throw new Redirection($url);
+                            throw new Redirection(SITE_URL.$url);
                         }
                     } else {
                         $item = $model::get($id);
@@ -4191,7 +4191,7 @@ namespace Equity\Controller {
 
                         unset($log);
 
-                        throw new Redirection($url);
+                        throw new Redirection(SITE_URL.$url);
                     }
                     break;
             }
@@ -4318,7 +4318,7 @@ namespace Equity\Controller {
                         }
 
                         if ($item->save($errors)) {
-                            throw new Redirection($url);
+                            throw new Redirection(SITE_URL.$url);
                         }
                     } else {
                         $item = $model::get($id);
@@ -4380,7 +4380,7 @@ namespace Equity\Controller {
                     break;
                 case 'remove':
                     if ($model::delete($id)) {
-                        throw new Redirection($url);
+                        throw new Redirection(SITE_URL.$url);
                     }
                     break;
             }
@@ -4481,7 +4481,7 @@ namespace Equity\Controller {
                         ));
 
                         if ($item->save($errors)) {
-                            throw new Redirection($url);
+                            throw new Redirection(SITE_URL.$url);
                         }
                     } else {
                         $item = $model::get($id);
@@ -4527,7 +4527,7 @@ namespace Equity\Controller {
                     break;
                 case 'remove':
                     if ($model::delete($id)) {
-                        throw new Redirection($url);
+                        throw new Redirection(SITE_URL.$url);
                     }
                     break;
             }
@@ -4624,7 +4624,7 @@ namespace Equity\Controller {
                         ));
 
                         if ($item->save($errors)) {
-                            throw new Redirection($url);
+                            throw new Redirection(SITE_URL.$url);
                         }
                     } else {
                         $item = $model::get($id);
@@ -4670,7 +4670,7 @@ namespace Equity\Controller {
                     break;
                 case 'remove':
                     if ($model::delete($id)) {
-                        throw new Redirection($url);
+                        throw new Redirection(SITE_URL.$url);
                     }
                     break;
             }
@@ -4871,7 +4871,7 @@ namespace Equity\Controller {
                         if (empty($_SESSION['mailing']['receivers'])) {
                             $_SESSION['mailing']['errors'][] = ('No se han encontrado destinatarios para ') . $_SESSION['mailing']['filters_txt'];
 
-                            throw new Redirection('/admin/mailing/list');
+                            throw new Redirection(SITE_URL.'/admin/mailing/list');
                         }
 
                         // si hay, mostramos el formulario de envio

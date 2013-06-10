@@ -34,7 +34,7 @@ namespace Equity\Controller {
             }
 
             if (isset($post) && !isset($blog->posts[$post]) && $_GET['preview'] != $_SESSION['user']->id) {
-                throw new \Equity\Core\Redirection('/blog');
+                throw new \Equity\Core\Redirection(SITE_URL.'/blog');
             }
 
             // segun eso montamos la vista

@@ -90,7 +90,7 @@ namespace Equity\Controller {
                 $results = \Equity\Library\Search::params($params);
 
             } else {
-                throw new Redirection('/discover', Redirection::PERMANENT);
+                throw new Redirection(SITE_URL.'/discover', Redirection::PERMANENT);
             }
 
             return new View(
@@ -111,7 +111,7 @@ namespace Equity\Controller {
         public function view ($type = 'all') {
 
             if (!in_array($type, array('popular', 'outdate', 'recent', 'success', 'archive', 'all'))) {
-                throw new Redirection('/discover');
+                throw new Redirection(SITE_URL.'/discover');
             }
 
             $viewData = array();
@@ -133,7 +133,7 @@ namespace Equity\Controller {
 		public function view_ajax ($type = 'all') {
 
             if (!in_array($type, array('highlighted','popular', 'outdate', 'recent', 'success', 'archive', 'all'))) {
-                throw new Redirection('/discover');
+                throw new Redirection(SITE_URL.'/discover');
             }
 
             $viewData = array();

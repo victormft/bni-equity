@@ -19,7 +19,7 @@ namespace Equity\Controller {
     class Dashboard extends \Equity\Core\Controller {
 
         public function index ($section = null) {
-            throw new Redirection('/dashboard/activity');
+            throw new Redirection(SITE_URL.'/dashboard/activity');
         }
 
         /*
@@ -103,7 +103,7 @@ namespace Equity\Controller {
             $user = $_SESSION['user'];
 
             if ($option == 'public') {
-                throw new Redirection('/user/profile/'.$user->id);
+                throw new Redirection(SITE_URL.'/user/profile/'.$user->id);
             }
 
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -1225,9 +1225,9 @@ namespace Equity\Controller {
          */
         public function admin ($option = 'board') {
             if (ACL::check('/admin')) {
-                throw new Redirection('/admin', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/admin', Redirection::TEMPORARY);
             } else {
-                throw new Redirection('/dashboard', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/dashboard', Redirection::TEMPORARY);
             }
         }
 
@@ -1237,9 +1237,9 @@ namespace Equity\Controller {
          */
         public function review ($option = 'board') {
             if (ACL::check('/review')) {
-                throw new Redirection('/review', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/review', Redirection::TEMPORARY);
             } else {
-                throw new Redirection('/dashboard', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/dashboard', Redirection::TEMPORARY);
             }
         }
 
@@ -1249,9 +1249,9 @@ namespace Equity\Controller {
          */
         public function translate ($option = 'board') {
             if (ACL::check('/translate')) {
-                throw new Redirection('/translate', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/translate', Redirection::TEMPORARY);
             } else {
-                throw new Redirection('/dashboard', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/dashboard', Redirection::TEMPORARY);
             }
         }
 

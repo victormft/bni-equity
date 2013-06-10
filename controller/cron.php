@@ -16,7 +16,7 @@ namespace Goteo\Controller {
     class Cron extends \Goteo\Core\Controller {
         
         public function index () {
-            throw new Redirection('/cron/execute');
+            throw new Redirection(SITE_URL.'/cron/execute');
         }
 
         /*

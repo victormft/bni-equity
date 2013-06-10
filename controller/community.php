@@ -1,33 +1,14 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
+namespace Equity\Controller {
 
-namespace Goteo\Controller {
+    use Equity\Library\Page,
+        Equity\Library\Feed,
+        Equity\Core\View,
+        Equity\Model\User\Interest,
+        Equity\Model\Invest;
 
-    use Goteo\Library\Page,
-        Goteo\Library\Feed,
-        Goteo\Core\View,
-        Goteo\Model\User\Interest,
-        Goteo\Model\Invest;
-
-    class Community extends \Goteo\Core\Controller {
+    class Community extends \Equity\Core\Controller {
 
         public function index ($show = 'activity', $category = null) {
 
@@ -59,7 +40,7 @@ namespace Goteo\Controller {
                     $viewData['categories'] = $categories;
                     $viewData['shares'] = $shares;
 
-                    // top ten cofinanciadores en Goteo
+                    // top ten cofinanciadores en Equity
                     $projects = Invest::projects(true);
 
                     $investors = array();
@@ -95,7 +76,7 @@ namespace Goteo\Controller {
                     
                     $items = array();
 
-                    $items['goteo']     = Feed::getAll('goteo', 'public');
+                    $items['equity']     = Feed::getAll('equity', 'public');
                     $items['projects']  = Feed::getAll('projects', 'public');
                     $items['community'] = Feed::getAll('community', 'public');
 

@@ -22,7 +22,7 @@ namespace Equity\Controller {
          */
         public function index ($project = null) {
             if (empty($project))
-                throw new Redirection('/discover', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/discover', Redirection::TEMPORARY);
 
             $message = '';
 
@@ -31,7 +31,7 @@ namespace Equity\Controller {
 
             // si no está en campaña no pueden esta qui ni de coña
             if ($projectData->status != 3) {
-                throw new Redirection('/project/'.$project, Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/project/'.$project, Redirection::TEMPORARY);
             }
 
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -41,7 +41,7 @@ namespace Equity\Controller {
 
                 if (empty($_POST['amount'])) {
                     Message::Error(Text::get('invest-amount-error'));
-                    throw new Redirection("/project/$project/invest/?confirm=fail", Redirection::TEMPORARY);
+                    throw new Redirection(SITE_URL."/project/$project/invest/?confirm=fail", Redirection::TEMPORARY);
                 }
 
                 // dirección de envio para las recompensas
@@ -57,7 +57,7 @@ namespace Equity\Controller {
 
                 if ($projectData->owner == $_SESSION['user']->id) {
                     Message::Error(Text::get('invest-owner-error'));
-                    throw new Redirection("/project/$project/invest/?confirm=fail", Redirection::TEMPORARY);
+                    throw new Redirection(SITE_URL."/project/$project/invest/?confirm=fail", Redirection::TEMPORARY);
                 }
 
                 // añadir recompensas que ha elegido
@@ -119,7 +119,7 @@ namespace Equity\Controller {
                         case 'cash':
                             $invest->setStatus('0');
                             // En betatest aceptamos cash para pruebas
-                            throw new Redirection("/invest/confirmed/{$project}/{$invest->id}");
+                            throw new Redirection(SITE_URL."/invest/confirmed/{$project}/{$invest->id}");
                             break;
                     }
                 } else {
@@ -129,15 +129,15 @@ namespace Equity\Controller {
                 Message::Error(Text::get('invest-data-error'));
             }
 
-            throw new Redirection("/project/$project/invest/?confirm=fail");
-            //throw new Redirection("/project/$project/invest");
+            throw new Redirection(SITE_URL."/project/$project/invest/?confirm=fail");
+            //throw new Redirection(SITE_URL."/project/$project/invest");
         }
 
 
         public function confirmed ($project = null, $invest = null) {
             if (empty($project) || empty($invest)) {
                 Message::Error(Text::get('invest-data-error'));
-                throw new Redirection('/discover', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/discover', Redirection::TEMPORARY);
             }
 
             $confirm = Model\Invest::get($invest);
@@ -250,7 +250,7 @@ namespace Equity\Controller {
             }
 
             // mandarlo a la pagina de gracias
-            throw new Redirection("/project/$project/invest/?confirm=ok", Redirection::TEMPORARY);
+            throw new Redirection(SITE_URL."/project/$project/invest/?confirm=ok", Redirection::TEMPORARY);
         }
 
         /*
@@ -259,17 +259,17 @@ namespace Equity\Controller {
          */
         public function fail ($project = null, $id = null) {
             if (empty($project))
-                throw new Redirection('/discover', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL.'/discover', Redirection::TEMPORARY);
 
             if (empty($id))
-                throw new Redirection("/project/$project/invest", Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL."/project/$project/invest", Redirection::TEMPORARY);
 
             // quitar el preapproval y cancelar el aporte
             $invest = Model\Invest::get($id);
             $invest->cancel();
 
             // mandarlo a la pagina de aportar para que lo intente de nuevo
-            throw new Redirection("/project/$project/invest/?confirm=fail", Redirection::TEMPORARY);
+            throw new Redirection(SITE_URL."/project/$project/invest/?confirm=fail", Redirection::TEMPORARY);
         }
 
         // resultado del cargo

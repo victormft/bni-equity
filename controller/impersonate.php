@@ -44,12 +44,12 @@ namespace Equity\Controller {
                 unset($log);
 
 
-                throw new Redirection('/dashboard');
+                throw new Redirection(SITE_URL.'/dashboard');
                 
             }
             else {
                 Message::Error('Ha ocurrido un error');
-                throw new Redirection('/dashboard');
+                throw new Redirection(SITE_URL.'/dashboard');
             }
 		}
 

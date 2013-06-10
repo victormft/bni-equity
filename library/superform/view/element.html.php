@@ -9,8 +9,11 @@ $element = $this['element'];
 ?>
 <?php if (isset($element->title)): ?>
 
-<!--<?php echo $element->level ?>-->
-<h5 class="title"><?php echo htmlspecialchars($element->title) ?></h5>
+
+<!--title-->
+
+
+<h<?php echo $element->level ?> class="title"><?php echo htmlspecialchars($element->title) ?></h<?php echo $element->level ?>>
 <?php endif ?>
 
 <?php if ('' !== ($innerHTML = $element->getInnerHTML())): ?>
