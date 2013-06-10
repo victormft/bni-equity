@@ -4,7 +4,7 @@ use Equity\Library\Text,
     Equity\Library\SuperForm,
     Equity\Core\View;
 
-define('ADMIN_NOAUTOSAVE', true);
+//define('ADMIN_NOAUTOSAVE', true);
 
 $user   = $this['user'];
 $errors = $this['errors'];
@@ -100,14 +100,14 @@ $sfid = 'sf-project-profile';
     'level'         => $this['level'],
     'method'        => 'post',
     'hint'          => Text::get('guide-dashboard-user-profile'),
-    'footer'        => array(
-        'view-step-userPersonal' => array(
-            'type'  => 'submit',
-            'label' => Text::get('form-apply-button'),
-            'name'  => 'save-userProfile',
-            'class' => 'next'
-        )
-    ),
+//    'footer'        => array(
+//        'view-step-userPersonal' => array(
+//            'type'  => 'submit',
+//            'label' => Text::get('form-apply-button'),
+//            'name'  => 'save-userProfile',
+//            'class' => 'next'
+//        )
+//    ),
     'elements'      => array(
         'process_userProfile' => array (
             'type' => 'hidden',

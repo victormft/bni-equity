@@ -64,7 +64,7 @@ div.widget.project div.image div.tagmark {
 }
 
 div.widget.project div.image div.tagmark.green {
-    background:url('/view/css/project/tagmark_green.png') 0 0 no-repeat;
+    background: url('tagmark_green.png') 0 0 no-repeat;
 }
 
 div.widget.project div.image div.tagmark.red {

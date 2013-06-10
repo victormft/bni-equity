@@ -27,7 +27,7 @@ $level = (int) $this['level'] ?: 3;
     <?php endif; ?>
 <div class="widget project-summary">
     
-    <h<?php echo $level ?>><?php echo htmlspecialchars($project->name) ?></h><?php echo $level ?>>
+    <h<?php echo $level ?>><?php echo htmlspecialchars($project->name) ?></h<?php echo $level ?>>
         
     <?php if (!empty($project->description)): ?>
     <div class="description">
@@ -67,14 +67,14 @@ $level = (int) $this['level'] ?: 3;
 
     <?php if (!empty($project->about)): ?>
     <div class="about">
-        <h<?php echo $level + 1?>><?php echo Text::get('overview-field-about'); ?></h><?php echo $level + 1?>>
+        <h<?php echo $level + 1?>><?php echo Text::get('overview-field-about'); ?></h<?php echo $level + 1?>>
         <?php echo $project->about; ?>
     </div>    
     <?php endif ?>
     
     <?php if (!empty($project->motivation)): ?>
     <div class="motivation">
-        <h<?php echo $level + 1?>><?php echo Text::get('overview-field-motivation'); ?></h><?php echo $level + 1?>>
+        <h<?php echo $level + 1?>><?php echo Text::get('overview-field-motivation'); ?></h<?php echo $level + 1?>>
         <?php echo $project->motivation; ?>
     </div>
     <?php endif ?>
@@ -88,14 +88,14 @@ $level = (int) $this['level'] ?: 3;
 
     <?php if (!empty($project->goal)): ?>
     <div class="goal">
-        <h<?php echo $level + 1?>><?php echo Text::get('overview-field-goal'); ?></h><?php echo $level + 1?>>
+        <h<?php echo $level + 1?>><?php echo Text::get('overview-field-goal'); ?></h<?php echo $level + 1?>>
         <?php echo $project->goal; ?>
     </div>    
     <?php endif ?>
     
     <?php if (!empty($project->related)): ?>
     <div class="related">
-        <h<?php echo $level + 1?>><?php echo Text::get('overview-field-related'); ?></h><?php echo $level + 1?>>
+        <h<?php echo $level + 1?>><?php echo Text::get('overview-field-related'); ?></h<?php echo $level + 1?>>
         <?php echo $project->related ?>
     </div>
     <?php endif ?>

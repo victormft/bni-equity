@@ -458,11 +458,11 @@ namespace Equity\Controller {
             if (empty($_SESSION['user'])) {
                 $_SESSION['jumpto'] = '/project/create';
                 Message::Info(Text::get('user-login-required-to_create'));
-                throw new Redirection("/user/login");
+                throw new Redirection(SITE_URL."/user/login");
             }
 
             if ($_POST['action'] != 'continue' || $_POST['confirm'] != 'true') {
-                throw new Redirection("/about/howto");
+                throw new Redirection(SITE_URL."/about/howto");
             }
 
             $project = new Model\Project;
