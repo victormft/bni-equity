@@ -7,10 +7,7 @@ namespace Equity\Model {
         Equity\Library\Text,
         Equity\Model\User,
         Equity\Model\Image,
-		
-		Equity\Model\File,
-		
-		
+	Equity\Model\File,
         Equity\Model\Message;
 
     class Project extends \Equity\Core\Model {
@@ -29,7 +26,7 @@ namespace Equity\Model {
             // Register contract data
             //$contract_name, // Nombre y apellidos del responsable del proyecto
 			$leader_name, 
-			$leader_gender,
+			//$gender,
 			$contract_birthdate,
 			$leader_rg,        // Guardar sin espacios ni puntos ni guiones
 			$leader_telephone, // guardar sin espacios ni puntos
@@ -78,6 +75,9 @@ namespace Equity\Model {
 
             // Edit project description
             $name,        // nome da empresa
+			
+			$gender,
+			
             $subtitle,    // resumo de uma frase sobre a empresa
 			$cnpj,      //adivinha??
 			$site,
@@ -221,7 +221,8 @@ namespace Equity\Model {
                                     $userProfile->name,
 				*/
 				':leader_name' => $userPersonal->leader_name,
-				':leader_gender' => $userPersonal->leader_gender,
+				':gender' => $userProfile->gender,
+				':birthdate' => $userProfile->birthdate,
 				':contract_birthdate' => $userPersonal->contract_birthdate,
 				':leader_rg' => $userPersonal->leader_rg,
 				':leader_telephone' => $userPersonal->leader_telephone,
@@ -655,8 +656,8 @@ namespace Equity\Model {
                 $this->entity_cif = str_replace(array('_', '.', ' ', '-', ',', ')', '('), '', $this->entity_cif);
 				
 				
-				if($this->leader_gender == "Select...") {
-					$this->leader_gender = NULL;				
+				if($this->gender == "Select...") {
+					$this->user->gender = NULL;				
 				}
 				
 				if($this->revenue == "Select...") {
@@ -756,7 +757,7 @@ namespace Equity\Model {
                 $fields = array(
                     //'contract_name',
 					'leader_name',
-					'leader_gender',
+					//'gender',
 					'contract_birthdate',
 					'leader_rg',
 					'leader_telephone',
@@ -1124,7 +1125,21 @@ namespace Equity\Model {
                 $errors['userProfile']['name'] = Text::get('validate-user-field-name');
             } else {
                 $okeys['userProfile']['name'] = 'ok';
-                ++$score;
+                $score+=10;
+            }
+			
+			if (empty($this->user->gender)) {
+                $errors['userProfile']['gender'] = "olá amiguinho!";
+            } else {
+                 $okeys['userProfile']['gender'] = 'ok';
+                 ++$score;
+            }
+			
+			if (empty($this->user->birthdate)) {
+                $errors['userProfile']['birthdate'] = "olá amiguinho!";
+            } else {
+                 $okeys['userProfile']['birthdate'] = 'ok';
+                 ++$score;
             }
 
             // se supone que tiene email porque sino no puede tener usuario, no?
@@ -1212,6 +1227,7 @@ namespace Equity\Model {
             if (!empty($this->user->linkedin)) {
                 $okeys['userProfile']['linkedin'] = 'ok';
                 // if contacts > 250 $score+=2;
+				++$score;
             }
 
             //puntos
@@ -1229,24 +1245,23 @@ namespace Equity\Model {
                  ++$score;
             }*/
 			
+			//////////////////////////////////VER SCORE AQUI//////////////////////////////////////
+			
+			
 			if (empty($this->leader_name)) {
                 $errors['userPersonal']['leader_name'] = Text::get('mandatory-project-field-contract_name');
             } else {
                  $okeys['userPersonal']['leader_name'] = 'ok';
-                 ++$score;
+                 $score+=10;
             }
 			
-			if (empty($this->leader_gender)) {
-                $errors['userPersonal']['leader_gender'] = "olá amiguinho!";
-            } else {
-                 $okeys['userPersonal']['leader_gender'] = 'ok';
-                 ++$score;
-            }
+			
 			
 			if (empty($this->contract_birthdate)) {
 				$errors['userPersonal']['contract_birthdate'] = Text::get('mandatory-project-field-contract_birthdate');
 			} else {
 				 $okeys['userPersonal']['contract_birthdate'] = 'ok';
+				 ++$score;
 			}
 			
 
@@ -1283,6 +1298,7 @@ namespace Equity\Model {
                 $errors['userPersonal']['leader_email'] = Text::get('validate-project-value-contract_email');
             } else {
                  $okeys['userPersonal']['leader_email'] = 'ok';
+				 ++$score;
             }
 			
 			if (!empty($this->leader_facebook)) {
@@ -1568,15 +1584,6 @@ namespace Equity\Model {
                  $okeys['enterprise']['press'] = 'ok';
                  ++$score;
             }
-				
-				
-				
-				
-				
-			
-			
-
-            
 
             /*if (empty($this->description)) {
                 $errors['company']['description'] = Text::get('mandatory-project-field-description');
@@ -1813,7 +1820,7 @@ namespace Equity\Model {
 
             /***************** Revisión de campos del paso 5, RETORNOS *****************/
             $score = 0; $scoreName = $scoreDesc = $scoreAmount = $scoreLicense = 0;
-            if (empty($this->social_rewards)) {
+            /*if (empty($this->social_rewards)) {
                 $errors['rewards']['social_rewards'] = Text::get('validate-project-social_rewards');
             } else {
                  $okeys['rewards']['social_rewards'] = 'ok';
@@ -1876,16 +1883,16 @@ namespace Equity\Model {
             
             $score = $score + $scoreName + $scoreDesc + $scoreLicense;
             $scoreName = $scoreDesc = 0;
-
+*/
             $anyerror = false;
             foreach ($this->individual_rewards as $individual) {
-                if (empty($individual->reward)) {
+                /*if (empty($individual->reward)) {
                     $errors['rewards']['individual_reward-'.$individual->id.'-reward'] = Text::get('mandatory-individual_reward-field-name');
                     $anyerror = !$anyerror ?: true;
                 } else {
                      $okeys['rewards']['individual_reward-'.$individual->id.'-reward'] = 'ok';
                      $scoreName = 1;
-                }
+                }*/
 
                 if (empty($individual->description)) {
                     $errors['rewards']['individual_reward-'.$individual->id.'-description'] = Text::get('mandatory-individual_reward-field-description');
@@ -1903,12 +1910,12 @@ namespace Equity\Model {
                      $scoreAmount = 1;
                 }
 
-                if (empty($individual->icon)) {
+                /*if (empty($individual->icon)) {
                     $errors['rewards']['individual_reward-'.$individual->id.'-icon'] = Text::get('mandatory-individual_reward-field-icon');
                     $anyerror = !$anyerror ?: true;
                 } else {
                      $okeys['rewards']['individual_reward-'.$individual->id.'-icon'] = 'ok';
-                }
+                }*/
 
             }
 
@@ -2619,7 +2626,7 @@ namespace Equity\Model {
         }
 
         /*
-         * Ámbito de alcance de un proyecto
+         * �?mbito de alcance de un proyecto
          */
         public static function scope () {
             return array(

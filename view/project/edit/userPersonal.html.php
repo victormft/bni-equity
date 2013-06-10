@@ -27,6 +27,8 @@ use Equity\Library\Text,
     Equity\Core\View;
 
 $project = $this['project'];
+$user = $this['user'];
+
 $errors = $project->errors[$this['step']] ?: array();         
 $okeys  = $project->okeys[$this['step']] ?: array();
 
@@ -144,25 +146,14 @@ echo new SuperForm(array(
                     'class'     => 'inline',
                     'required'  => true,
                     'size'      => 20,
-                    'title'     => Text::get('personal-field-contract_name'),
+                    'title'     => "Full name" /*Text::get('personal-field-contract_name')*/,
                     'hint'      => Text::get('tooltip-project-contract_name'),
                     'errors'    => !empty($errors['leader_name']) ? array($errors['leader_name']) : array(),
                     'ok'        => !empty($okeys['leader_name']) ? array($okeys['leader_name']) : array(),
                     'value'     => $project->leader_name
                 ),
 				
-				'leader_gender' => array(
-                    'type'      => 'select',
-					'class'     => 'inline select',
-                    'required'  => true,
-					'options'   => array("Select...", "Masculino", "Feminino"),
-                    'size'      => 100,
-                    'title'     => "Gender",
-                    'hint'      => Text::get('tooltip-project-contract_name'),
-                    'errors'    => !empty($errors['leader_gender']) ? array($errors['leader_gender']) : array(),
-                    'ok'        => !empty($okeys['leader_gender']) ? array($okeys['leader_gender']) : array(),
-                    'value'     => $project->leader_gender
-                ),
+				
 				
 				'leader_rg' => array(
                     'type'      => 'textbox',
@@ -175,6 +166,21 @@ echo new SuperForm(array(
                     'ok'        => !empty($okeys['leader_rg']) ? array($okeys['leader_rg']) : array(),
                     'value'     => $project->leader_rg
                 ),
+				
+				'leader_telephone' => array(
+                    'type'      => 'textbox',
+                    'class'     => 'inline',
+                    'required'  => true,
+                    'title'     => Text::get('personal-field-phone'),
+                    'size'      => 15,
+                    'hint'      => Text::get('tooltip-project-phone'),
+                    'errors'    => !empty($errors['leader_telephone']) ? array($errors['leader_telephone']) : array(),
+                    'ok'        => !empty($okeys['leader_telephone']) ? array($okeys['leader_telephone']) : array(),
+                    'value'     => $project->leader_telephone
+                ),
+				
+				
+				
 				/*'contract_nif' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
@@ -187,7 +193,7 @@ echo new SuperForm(array(
                     'value'     => $project->contract_nif
                 ),*/
 
-                'contract_birthdate'  => array(
+                /*'contract_birthdate'  => array(
                     'type'      => 'datebox',
                     'required'  => true,
                     'size'      => 8,
@@ -196,7 +202,7 @@ echo new SuperForm(array(
                     'errors'    => !empty($errors['contract_birthdate']) ? array($errors['contract_birthdate']) : array(),
                     'ok'        => !empty($okeys['contract_birthdate']) ? array($okeys['contract_birthdate']) : array(),
                     'value'     => $project->contract_birthdate
-                ),
+                ),*/
 					
 				
 				
@@ -218,26 +224,16 @@ echo new SuperForm(array(
 			)
 		),
 				
-		'contact' => array(
+		/*'contact' => array(
             'type'      => 'group',
             'title'     => "Contacts",
             'hint'      => Text::get('tooltip-project-contract_data'),
             'children'  => array(
 				
 				
-				'leader_telephone' => array(
-                    'type'      => 'textbox',
-                    'class'     => 'inline',
-                    'required'  => true,
-                    'title'     => Text::get('personal-field-phone'),
-                    'size'      => 15,
-                    'hint'      => Text::get('tooltip-project-phone'),
-                    'errors'    => !empty($errors['leader_telephone']) ? array($errors['leader_telephone']) : array(),
-                    'ok'        => !empty($okeys['leader_telephone']) ? array($okeys['leader_telephone']) : array(),
-                    'value'     => $project->leader_telephone
-                ),
+				
 
-                /*'contract_email' => array(
+                'contract_email' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
                     'required'  => true,
@@ -247,7 +243,7 @@ echo new SuperForm(array(
                     'errors'    => !empty($errors['contract_email']) ? array($errors['contract_email']) : array(),
                     'ok'        => !empty($okeys['contract_email']) ? array($okeys['contract_email']) : array(),
                     'value'     => $project->contract_email
-                ),*/
+                ),
 				
 				'leader_email' => array(
                     'type'      => 'textbox',
@@ -296,7 +292,7 @@ echo new SuperForm(array(
                     'value'     => empty($project->leader_twitter) ? Text::get('regular-twitter-url') : $project->leader_twitter
                 )
             )
-        ),
+        ),*/
 
         /* Domicilio */
         'main_address' => array(

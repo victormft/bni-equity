@@ -10,7 +10,7 @@ $project = $this['project'];
 ?>
 <div class="widget project-support collapsable" id="project-support">
 
-    <h<?php echo $level + 1 ?> class="supertitle"><?php echo Text::get('project-support-supertitle'); ?></h><?php echo $level + 1 ?>>
+    <h<?php echo $level + 1 ?> class="supertitle"><?php echo Text::get('project-support-supertitle'); ?></h<?php echo $level + 1 ?>>
     
     <?php switch ($project->tagmark) {
         case 'onrun': // "en marcha"

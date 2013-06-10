@@ -176,7 +176,7 @@ foreach ($project->individual_rewards as $individual_reward) {
         // lo mismo que para las licencias solamente para el texto en el tipo otro
         $types = array();
 
-        /*foreach ($this['itypes'] as $type) {
+        foreach ($this['itypes'] as $type) {
 
             if ($type->id == 'other') {
                 // un campo para especificar el tipo
@@ -211,18 +211,15 @@ foreach ($project->individual_rewards as $individual_reward) {
                 'checked' => $type->id == $individual_reward->icon ? true : false,
                 'children' => $children
             );
-        }*/
+        }
 
         // a este grupo le ponemos estilo de edicion
         $individual_rewards["individual_reward-{$individual_reward->id}"] = array(
                 'type'      => 'group',
                 'class'     => 'reward individual_reward editindividual_reward',
                 'children'  => array(
-                    "individual_reward-{$individual_reward->id}-edit" => array(
-                        'type'      => 'hidden',
-                        'value'     => '1'
-                    ),
-                    /*"individual_reward-{$individual_reward->id}-reward" => array(
+                    
+                    "individual_reward-{$individual_reward->id}-reward" => array(
                         'title'     => Text::get('rewards-field-individual_reward-reward'),
                         'required'  => true,
                         'type'      => 'textbox',
@@ -232,7 +229,7 @@ foreach ($project->individual_rewards as $individual_reward) {
                         'errors'    => !empty($errors["individual_reward-{$individual_reward->id}-reward"]) ? array($errors["individual_reward-{$individual_reward->id}-reward"]) : array(),
                         'ok'        => !empty($okeys["individual_reward-{$individual_reward->id}-reward"]) ? array($okeys["individual_reward-{$individual_reward->id}-reward"]) : array(),
                         'hint'      => Text::get('tooltip-project-individual_reward-reward')
-                    ),*/
+                    ),
 					
 					"individual_reward-{$individual_reward->id}-amount" => array(
                         'title'     => Text::get('rewards-field-individual_reward-amount'),
@@ -267,7 +264,7 @@ foreach ($project->individual_rewards as $individual_reward) {
                         'ok'        => !empty($okeys["individual_reward-{$individual_reward->id}-description"]) ? array($okeys["individual_reward-{$individual_reward->id}-description"]) : array(),
                         'hint'      => Text::get('tooltip-project-individual_reward-description')
                     ),
-                    /*"individual_reward-{$individual_reward->id}-icon" => array(
+                    "individual_reward-{$individual_reward->id}-icon" => array(
                         'title'     => Text::get('rewards-field-individual_reward-type'),
                         'required'  => true,
                         'class'     => 'inline',
@@ -277,7 +274,11 @@ foreach ($project->individual_rewards as $individual_reward) {
                         'errors'    => !empty($errors["individual_reward-{$individual_reward->id}-icon"]) ? array($errors["individual_reward-{$individual_reward->id}-icon"]) : array(),
                         'ok'        => !empty($okeys["individual_reward-{$individual_reward->id}-icon"]) ? array($okeys["individual_reward-{$individual_reward->id}-icon"]) : array(),
                         'hint'      => Text::get('tooltip-project-individual_reward-type')
-                    ),*/
+                    ),
+					"individual_reward-{$individual_reward->id}-edit" => array(
+                        'type'      => 'hidden',
+                        'value'     => '1'
+                    ),
                     
                     "individual_reward-{$individual_reward->id}-buttons" => array(
                         'type' => 'group',
@@ -375,7 +376,7 @@ echo new SuperForm(array(
                     'children' => array(
                         'next' => array(
                             'type'  => 'submit',
-                            'name'  => 'view-step-supports',
+                            'name'  => 'view-step-preview',
                             'label' => Text::get('form-next-button'),
                             'class' => 'next'
                         )
@@ -403,7 +404,9 @@ $(function () {
 
     socials.delegate('li.element.editsocial_reward input.ok', 'click', function (event) {
         var data = {};
-        data[this.name.substring(0, 18) + 'edit'] = '0';
+		var thenum = this.name.match(/\d+/g); 
+		thenum = thenum.join("");
+        data[this.name.substring(0, 14) + thenum + '-edit'] = '0';
         Superform.update(socials, data);
         event.preventDefault();
     });
@@ -434,7 +437,9 @@ $(function () {
 
     individuals.delegate('li.element.editindividual_reward input.ok', 'click', function (event) {
         var data = {};
-        data[this.name.substring(0, 22) + 'edit'] = '0';
+		var thenum = this.name.match(/\d+/g); 
+		thenum = thenum.join("");
+        data[this.name.substring(0, 18) + thenum + '-edit'] = '0';
         Superform.update(individuals, data);
         event.preventDefault();
     });

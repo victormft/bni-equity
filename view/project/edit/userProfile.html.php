@@ -113,16 +113,41 @@ echo new SuperForm(array(
             'ok'        => !empty($okeys['name']) ? array($okeys['name']) : array(),
             'value'     => $user->name
         ),
+		
+		'gender' => array(
+			'type'      => 'select',
+			'class'     => 'inline select',
+			'required'  => true,
+			'options'   => array("Select...", "Masculino", "Feminino"),
+			'size'      => 100,
+			'title'     => "Gender",
+			'hint'      => Text::get('tooltip-project-contract_name'),
+			'errors'    => !empty($errors['gender']) ? array($errors['gender']) : array(),
+			'ok'        => !empty($okeys['gender']) ? array($okeys['gender']) : array(),
+			'value'     => $user->gender
+		),
+		
         'user_location' => array(
             'type'      => 'textbox',
             'required'  => true,
             'size'      => 20,
-            'title'     => Text::get('profile-field-location'),
+            'title'     => "Country of residence" /*Text::get('profile-field-location')*/,
             'hint'      => Text::get('tooltip-user-location'),
             'errors'    => !empty($errors['location']) ? array($errors['location']) : array(),
             'ok'        => !empty($okeys['location']) ? array($okeys['location']) : array(),
             'value'     => $user->location
         ),
+		
+		'birthdate'  => array(
+			'type'      => 'datebox',
+			'required'  => true,
+			'size'      => 8,
+			'title'     => Text::get('personal-field-contract_birthdate'),
+			'hint'      => Text::get('tooltip-project-contract_birthdate'),
+			'errors'    => !empty($errors['birthdate']) ? array($errors['birthdate']) : array(),
+			'ok'        => !empty($okeys['birthdate']) ? array($okeys['birthdate']) : array(),
+			'value'     => $user->birthdate
+		),
         'user_avatar' => array(
             'type'      => 'group',
             'required'  => true,
@@ -307,8 +332,11 @@ $(function () {
     });
 
     webs.delegate('li.element.editweb input.ok', 'click', function (event) {
-        var data = {};
-        data[this.name.substring(0, 7) + 'edit'] = '0';
+        var data = {};		
+		var thenum = this.name.match(/\d+/g); 
+		thenum = thenum.join("");
+        data[this.name.substring(0, 4) + thenum + "-edit"] = '0';
+		
         Superform.update(webs, data);
         event.preventDefault();
     });

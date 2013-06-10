@@ -70,7 +70,7 @@ $bplan[] = array(
 	'type' => 'html',
 	'class' => 'inline',
 	'html' =>  is_object($bp) ?
-			    '<img src="<?php echo SITE_URL ?>/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$bp->name.'</div><button class="file-remove" type="submit" name="bplan-'.$bp->id.'-remove" title="Tirar file" value="remove"></button>' :
+			    '<img src="'.SITE_URL.'/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$bp->name.'</div><button class="file-remove" type="submit" name="bplan-'.$bp->id.'-remove" title="Tirar file" value="remove"></button>' :
 				''
 ); 
 
@@ -80,7 +80,7 @@ $finForecast[] = array(
 	'type' => 'html',
 	'class' => 'inline',
 	'html' =>  is_object($fin) ?
-			    '<img src="<?php echo SITE_URL ?>/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$fin->name.'</div><button class="file-remove" type="submit" name="finForecast-'.$fin->id.'-remove" title="Tirar file" value="remove"></button>' :
+			    '<img src="'.SITE_URL.'/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$fin->name.'</div><button class="file-remove" type="submit" name="finForecast-'.$fin->id.'-remove" title="Tirar file" value="remove"></button>' :
 				''
 ); 
 
@@ -489,7 +489,7 @@ $superform = array(
                     'children' => array(
                         'next' => array(
                             'type'  => 'submit',
-                            'name'  => 'view-step-userPersonal2',
+                            'name'  => 'view-step-pitch',
                             'label' => Text::get('form-next-button'),
                             'class' => 'next'
                         )

@@ -18,6 +18,8 @@ namespace Equity\Model {
             $email,
             $password, // para gestion de super admin
             $name,
+			$gender,
+			$birthdate,
             $location,
             $avatar = false,
             $about,
@@ -86,6 +88,8 @@ namespace Equity\Model {
                     $data[':id'] = $this->id = static::idealiza($this->userid);
                     $data[':name'] = $this->name;
                     $data[':location'] = $this->location;
+					$data[':gender'] = $this->gender;
+					$data[':birthdate'] = $this->birthdate;
                     $data[':email'] = $this->email;
                     $data[':token'] = $token = md5(uniqid());
                     if(!in_array('password',$skip_validations)) $data[':password'] = sha1($this->password);
@@ -189,6 +193,14 @@ namespace Equity\Model {
                     // Dónde está
                     if(isset($this->location)) {
                         $data[':location'] = $this->location;
+                    }
+					
+					if(isset($this->gender)) {
+                        $data[':gender'] = $this->gender;
+                    }
+					
+					if(isset($this->birthdate)) {
+                        $data[':birthdate'] = $this->birthdate;
                     }
 
                     if(isset($this->about)) {
@@ -488,6 +500,8 @@ namespace Equity\Model {
                         user.id as id,
                         user.email as email,
                         user.name as name,
+						user.gender as gender,
+						user.birthdate as birthdate,
                         user.location as location,
                         user.avatar as avatar,
                         IFNULL(user_lang.about, user.about) as about,
@@ -872,7 +886,7 @@ namespace Equity\Model {
                 $mail->send($errors);
                 unset($mail);
 
-                // email a los de equity
+                // email a los de Equity
                 $mail = new Mail();
                 $mail->to = \EQUITY_MAIL;
                 $mail->toName = 'Admin Equity';

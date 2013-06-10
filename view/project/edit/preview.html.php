@@ -8,7 +8,7 @@ $project = $this['project'];
 $types   = $this['types'];
 $errors = $project->errors ?: array();
 
-// miramos el pruimer paso con errores para mandarlo a ese
+// miramos el primer paso con errores para mandarlo a ese
 $goto = 'view-step-userProfile';
 foreach ($this['steps'] as $id => $data) {
 

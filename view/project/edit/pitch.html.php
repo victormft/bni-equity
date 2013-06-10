@@ -44,7 +44,7 @@ foreach ($project->adfile as $adfile) {
 		'type' => 'html',
 		'class' => 'inline',
 		'html' =>  is_object($adfile) ?
-					'<img src="<?php echo SITE_URL ?>/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$adfile->name.'</div><button class="file-remove" type="submit" name="adfile-'.$adfile->id.'-remove" title="Tirar file" value="remove"></button>' :
+					'<img src='.SITE_URL.'"/view/css/project/file_uploaded.png" alt="Imagen"/><div class="file">'.$adfile->name.'</div><button class="file-remove" type="submit" name="adfile-'.$adfile->id.'-remove" title="Tirar file" value="remove"></button>' :
 					''
 	); 
 }

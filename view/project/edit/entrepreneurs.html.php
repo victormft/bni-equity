@@ -329,7 +329,7 @@ echo new SuperForm(array(
                     'children' => array(
                         'next' => array(
                             'type'  => 'submit',
-                            'name'  => 'view-step-preview',
+                            'name'  => 'view-step-rewards',
                             'label' => Text::get('form-next-button'),
                             'class' => 'next'
                         )
@@ -366,13 +366,9 @@ $(function () {
 
     entrepreneurs.delegate('li.element.editsupport input.ok', 'click', function (event) {
         var data = {};
-		//data[this.name] = '1';
-        data[this.name + "-edit"] = '1';
-		//$("li.editsupport").hide();
-		//$("li.support").removeClass("editsupport");
-		//$("li.support").removeClass("group");
-		//$("li.support").children().hide();
-		//$("li.support.contents").show();
+		var thenum = this.name.match(/\d+/g); 
+		thenum = thenum.join("");
+        data[this.name.substring(0, 13) + thenum + "-edit"] = '0';
         Superform.update(entrepreneurs, data);
 	    event.preventDefault();
 		

@@ -16,7 +16,7 @@ use Equity\Core\View ?>
     </script>
     
     <?php if (isset($this['title'])): ?>
-    <h<?php echo $this['level'] ?>><?php echo htmlspecialchars($this['title']) ?></h><?php echo $this['level'] ?>>
+    <h<?php echo $this['level'] ?>><?php echo htmlspecialchars($this['title']) ?></h<?php echo $this['level'] ?>>
     <?php endif ?>
     
     <?php if (isset($this['hint'])): ?>
