@@ -44,7 +44,7 @@ $worthcracy = Worth::getAll();
 
         <h3 class="title"><?php echo Text::get('user-message-send_personal-header'); ?></h3>
 
-        <form method="post" action="/message/personal/<?php echo $user->id; ?>">
+        <form method="post" action="<?php echo SITE_URL ?>/message/personal/<?php echo $user->id; ?>">
             <div id="bocadillo"></div>
             <textarea id="message" name="message" cols="50" rows="5"></textarea>
 

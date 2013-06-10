@@ -31,7 +31,7 @@ array_walk($roles, function (&$role) { $role = $role->name; });
         <dd><strong><?php echo $user->active ? 'Activa' : 'Inactiva'; ?></strong></dd>
     </dl>
 
-    <form action="/admin/users/edit/<?php echo $user->id ?>" method="post">
+    <form action="<?php echo SITE_URL ?>/admin/users/edit/<?php echo $user->id ?>" method="post">
         <p>
             <label for="user-email">Email:</label><span style="font-style:italic;">Que sea válido. Se verifica que no esté repetido</span><br />
             <input type="text" id="user-email" name="email" value="<?php echo $data['email'] ?>" style="width:500px" maxlength="255"/>

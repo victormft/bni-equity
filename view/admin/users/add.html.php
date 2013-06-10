@@ -5,7 +5,7 @@ use Equity\Library\Text;
 $data = $this['data'];
 ?>
 <div class="widget">
-    <form action="/admin/users/add" method="post">
+    <form action="<?php echo SITE_URL ?>/admin/users/add" method="post">
         <p>
             <label for="user-user">Login:</label><span style="font-style:italic;">Solo letras, números y guion '-'. Sin espacios ni tildes ni 'ñ' ni 'ç' ni otros caracteres que no sean letra, número o guión.</span><br />
             <input type="text" id="user-user" name="userid" value="<?php echo $data['user'] ?>" style="width:250px" maxlength="50"/>

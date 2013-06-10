@@ -29,7 +29,7 @@ extract($oauth->user_data);
 					echo '<strong>'.$email.'</strong>'."</p>\n";
 				?>
 				<div style="clear:both;"></div></div>
-                <form action="/user/oauth_register" method="post">
+                <form action="<?php echo SITE_URL ?>/user/oauth_register" method="post">
 
 					<div class="password">
                         <label><?php echo Text::get('login-access-password-field'); ?>

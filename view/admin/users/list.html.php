@@ -10,7 +10,7 @@ $filter = "?status={$filters['status']}&interest={$filters['interest']}&role={$f
 <a href="<?php echo SITE_URL ?>/admin/users/add" class="button red">Crear usuario</a>
 
 <div class="widget board">
-    <form id="filter-form" action="/admin/users" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/users" method="get">
 
         <table>
             <tr>

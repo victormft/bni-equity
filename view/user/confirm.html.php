@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
             <div>
                 <h2><?php echo Text::get('login-register-header'); ?></h2>
                 <p><?php echo Text::get('oauth-login-welcome-from'); ?></p>
-                <form action="/user/oauth_register" method="post">
+                <form action="<?php echo SITE_URL ?>/user/oauth_register" method="post">
 
                     <div class="userid">
                         <label for="RegisterUserid"><?php echo Text::get('login-register-userid-field'); ?></label>
