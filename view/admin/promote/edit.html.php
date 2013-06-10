@@ -38,7 +38,7 @@ $status = Model\Project::status();
 
 <p>
     <label>Publicado:</label><br />
-    <label><input type="radio" name="active" id="promo-active" value="1"<?php if ($promo->active) echo ' checked="checked"'; ?>/> S√ç</label>
+    <label><input type="radio" name="active" id="promo-active" value="1"<?php if ($promo->active) echo ' checked="checked"'; ?>/> S√?</label>
     &nbsp;&nbsp;&nbsp;
     <label><input type="radio" name="active" id="promo-inactive" value="0"<?php if (!$promo->active) echo ' checked="checked"'; ?>/> NO</label>
 </p>
