@@ -10,7 +10,7 @@ $filters = $this['filters'];
 <!--            <a href="<?php echo SITE_URL ?>/add/?filter=<?php echo $filter; ?>" class="button red">Añadir licencia</a> -->
 
 <div class="widget board">
-    <form id="filter-form" action="/admin/licenses" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/licenses" method="get">
         <label for="group-filter">Mostrar por grupo:</label>
         <select id="group-filter" name="group" onchange="document.getElementById('filter-form').submit();">
             <option value="">Todos los grupos</option>

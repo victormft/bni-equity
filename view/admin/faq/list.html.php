@@ -8,7 +8,7 @@ $translator = ACL::check('/translate') ? true : false;
 <a href="<?php echo SITE_URL ?>/admin/faq/add/?filter=<?php echo $this['filter']; ?>" class="button red">Añadir pregunta</a>
 
 <div class="widget board">
-    <form id="sectionfilter-form" action="/admin/faq" method="get">
+    <form id="sectionfilter-form" action="<?php echo SITE_URL ?>/admin/faq" method="get">
         <label for="section-filter">Mostrar las preguntas de:</label>
         <select id="section-filter" name="filter" onchange="document.getElementById('sectionfilter-form').submit();">
         <?php foreach ($this['sections'] as $sectionId=>$sectionName) : ?>

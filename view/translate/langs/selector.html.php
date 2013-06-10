@@ -11,7 +11,7 @@ $section = isset($this['table']) ? $this['table'] : $this['section'];
 
 ?>
 <div id="lang-selector">
-    <form id="selector-form" name="selector_form" action="<?php echo '/translate/select/'.$section.'/'.$this['action'].'/'.$this['id'].'/'.$this['filter'].'&page='.$_GET['page']; ?>" method="post">
+    <form id="selector-form" name="selector_form" action="<?php echo SITE_URL.'/translate/select/'.$section.'/'.$this['action'].'/'.$this['id'].'/'.$this['filter'].'&page='.$_GET['page']; ?>" method="post">
     <?php if (!empty($actual->id)) : ?>
     Estas traduciendo al <strong><?php echo $actual->name ?></strong>. <label for="selector">Cambiar a:</label>
     <?php else : ?>

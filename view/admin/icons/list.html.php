@@ -8,7 +8,7 @@ $translator = ACL::check('/translate') ? true : false;
 <!-- <a href="<?php echo SITE_URL ?>/admin/icons/add/?filter=<?php echo $this['filter']; ?>" class="button red">Añadir tipo</a> -->
 
 <div class="widget board">
-    <form id="groupfilter-form" action="/admin/icons" method="get">
+    <form id="groupfilter-form" action="<?php echo SITE_URL ?>/admin/icons" method="get">
         <label for="group-filter">Mostrar los tipos para:</label>
         <select id="group-filter" name="filter" onchange="document.getElementById('groupfilter-form').submit();">
             <option value="">Todo</option>

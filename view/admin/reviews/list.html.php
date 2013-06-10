@@ -9,7 +9,7 @@ $filter = "?status={$filters['status']}&checker={$filters['checker']}";
 
 ?>
 <div class="widget board">
-<form id="filter-form" action="/admin/reviews" method="get">
+<form id="filter-form" action="<?php echo SITE_URL ?>/admin/reviews" method="get">
     <label for="status-filter">Mostrar por estado:</label>
     <select id="status-filter" name="status" onchange="document.getElementById('filter-form').submit();">
         <option value="">Todas</option>
@@ -92,7 +92,7 @@ $filter = "?status={$filters['status']}&checker={$filters['checker']}";
                 <?php endforeach; ?>
                 <?php if ($project->status > 0) : ?>
                 <tr>
-                    <form id="form-assign-<?php echo $project->review; ?>" action="/admin/reviews/assign/<?php echo $project->review; ?>/<?php echo $filter; ?>" method="get">
+                    <form id="form-assign-<?php echo $project->review; ?>" action="<?php echo SITE_URL ?>/admin/reviews/assign/<?php echo $project->review; ?>/<?php echo $filter; ?>" method="get">
                     <td colspan="2">
                         <select name="user">
                             <option value="">Selecciona un nuevo revisor</option>

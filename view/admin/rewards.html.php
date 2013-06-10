@@ -11,7 +11,7 @@ $status = Equity\Model\Project::status();
 
 ?>
 <div class="widget board">
-    <form id="filter-form" action="/admin/rewards" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/rewards" method="get">
         <label for="status-filter">Mostrar por estado:</label>
         <select id="status-filter" name="status" onchange="document.getElementById('filter-form').submit();">
             <option value="">Todos los estados</option>

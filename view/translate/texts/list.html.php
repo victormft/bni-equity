@@ -50,7 +50,7 @@ $filters = array(
 <!-- Filtro -->
 <?php if (!empty($filters)) : ?>
 <div class="widget board">
-    <form id="filter-form" action="/translate/texts/list/<?php echo $filter ?>" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/translate/texts/list/<?php echo $filter ?>" method="get">
         <?php foreach ($filters as $id=>$fil) : ?>
         <?php if ($fil['type'] == 'select') : ?>
             <label for="filter-<?php echo $id; ?>"><?php echo $fil['label']; ?></label>

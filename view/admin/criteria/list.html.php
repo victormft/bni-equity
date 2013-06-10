@@ -8,7 +8,7 @@ $translator = ACL::check('/translate') ? true : false;
 <a href="<?php echo SITE_URL ?>/admin/criteria/add/?filter=<?php echo $this['filter']; ?>" class="button red">Añadir criterio</a>
 
 <div class="widget board">
-    <form id="sectionfilter-form" action="/admin/criteria" method="get">
+    <form id="sectionfilter-form" action="<?php echo SITE_URL ?>/admin/criteria" method="get">
         <label for="section-filter">Mostrar los criterios de la sección:</label>
         <select id="section-filter" name="filter" onchange="document.getElementById('sectionfilter-form').submit();">
         <?php foreach ($this['sections'] as $sectionId=>$sectionName) : ?>

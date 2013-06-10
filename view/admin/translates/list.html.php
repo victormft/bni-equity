@@ -11,7 +11,7 @@ $filter = "?owner={$filters['owner']}&translator={$filters['translator']}";
 <a href="<?php echo SITE_URL ?>/admin/translates/add" class="button red">Nuevo proyecto para traducir</a>
 
 <div class="widget board">
-<form id="filter-form" action="/admin/translates" method="get">
+<form id="filter-form" action="<?php echo SITE_URL ?>/admin/translates" method="get">
     <label for="owner-filter">Proyectos del usuario:</label>
     <select id="owner-filter" name="owner" onchange="document.getElementById('filter-form').submit();">
         <option value="">Todos los productores</option>

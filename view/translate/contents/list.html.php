@@ -36,7 +36,7 @@ $types = Content::$fields[$table]; // por tipo de campo
 ?>
 <!-- Filtro -->
 <div class="widget board">
-    <form id="filter-form" action="/translate/<?php echo $table ?>/list/<?php echo $filter ?>" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/translate/<?php echo $table ?>/list/<?php echo $filter ?>" method="get">
         <input type="hidden" name="table" value="<?php echo $table ?>" />
 
         <label for="filter-<?php echo $id; ?>">Filtrar por campo:</label>

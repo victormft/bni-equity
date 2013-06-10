@@ -18,7 +18,7 @@ $pagedResults = new \Paginated($sended, 20, isset($_GET['page']) ? $_GET['page']
 
 ?>
 <div class="widget board">
-    <form id="filter-form" action="/admin/sended" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/sended" method="get">
 
         <table>
             <tr>

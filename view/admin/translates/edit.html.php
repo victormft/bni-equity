@@ -28,7 +28,7 @@ $filter = "?owner={$filters['owner']}&translator={$filters['translator']}";
             </tr>
             <?php endforeach; ?>
             <tr>
-                <form id="form-assign" action="/admin/translates/assign/<?php echo $project->id; ?>/<?php echo $filter; ?>" method="get">
+                <form id="form-assign" action="<?php echo SITE_URL ?>/admin/translates/assign/<?php echo $project->id; ?>/<?php echo $filter; ?>" method="get">
                 <td colspan="2">
                     <select name="user">
                         <option value="">Selecciona otro traductor</option>
@@ -49,7 +49,7 @@ $filter = "?owner={$filters['owner']}&translator={$filters['translator']}";
         <hr />
 <?php endif; ?>
 
-    <form method="post" action="/admin/translates/<?php echo $this['action']; ?>/<?php echo $project->id; ?>/?filter=<?php echo $this['filter']; ?>">
+    <form method="post" action="<?php echo SITE_URL ?>/admin/translates/<?php echo $this['action']; ?>/<?php echo $project->id; ?>/?filter=<?php echo $this['filter']; ?>">
 
         <table>
             <tr>

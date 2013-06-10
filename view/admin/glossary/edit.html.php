@@ -53,7 +53,7 @@ $(document).ready(function(){
 });
 </script>
 
-<form method="post" action="/admin/glossary/<?php echo $this['action']; ?>/<?php echo $post->id; ?>" class="project" enctype="multipart/form-data">
+<form method="post" action="<?php echo SITE_URL ?>/admin/glossary/<?php echo $this['action']; ?>/<?php echo $post->id; ?>" class="project" enctype="multipart/form-data">
 
     <?php echo new SuperForm(array(
 

@@ -9,7 +9,7 @@ $filter = "?status={$filters['status']}&category={$filters['category']}&owner={$
 
 ?>
 <div class="widget board">
-    <form id="filter-form" action="/admin/projects" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/projects" method="get">
         <table>
             <tr>
                 <td>

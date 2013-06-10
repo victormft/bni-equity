@@ -5,7 +5,7 @@ use Equity\Library\Text;
 ?>
 <div class="widget board">
     <!-- super form -->
-    <form method="post" action="/admin/icons?filter=<?php echo $this['filter']; ?>">
+    <form method="post" action="<?php echo SITE_URL ?>/admin/icons?filter=<?php echo $this['filter']; ?>">
 
         <input type="hidden" name="action" value="<?php echo $this['action']; ?>" />
         <input type="hidden" name="id" value="<?php echo $this['icon']->id; ?>" />

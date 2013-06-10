@@ -32,7 +32,7 @@ $filters = $this['filters'];
 <a href="<?php echo SITE_URL ?>/admin/accounts/viewer" class="button">Visor de logs</a>&nbsp;&nbsp;&nbsp;
 <div class="widget board">
     <h3 class="title">Filtros</h3>
-    <form id="filter-form" action="/admin/accounts" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/accounts" method="get">
         <input type="hidden" name="filtered" value="yes" />
         <input type="hidden" name="status" value="all" />
         <?php foreach ($the_filters as $filter=>$data) : ?>

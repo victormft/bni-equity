@@ -6,7 +6,7 @@ use Equity\Library\Text;
 <p><strong><?php echo $this['template']->name; ?></strong>: <?php echo $this['template']->purpose; ?></p>
 
 <div class="widget board">
-    <form method="post" action="/admin/templates/edit/<?php echo $this['template']->id; ?>">
+    <form method="post" action="<?php echo SITE_URL ?>/admin/templates/edit/<?php echo $this['template']->id; ?>">
         <p>
             <label for="tpltitle">Título:</label><br />
             <input id="tpltitle" type="text" name="title" size="120" value="<?php echo $this['template']->title; ?>" />

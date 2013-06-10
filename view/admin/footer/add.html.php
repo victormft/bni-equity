@@ -9,7 +9,7 @@ $posts = Model\Blog\Post::getAll(1);
 
 ?>
 <div class="widget board">
-    <form method="post" action="/admin/footer">
+    <form method="post" action="<?php echo SITE_URL ?>/admin/footer">
 
         <input type="hidden" name="action" value="<?php echo $this['action']; ?>" />
         <input type="hidden" name="order" value="<?php echo $this['post']->order; ?>" />

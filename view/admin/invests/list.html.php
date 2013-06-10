@@ -37,7 +37,7 @@ $filters = $this['filters'];
 <?php endif ?>
 <div class="widget board">
     <h3 class="title">Filtros</h3>
-    <form id="filter-form" action="/admin/invests" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/invests" method="get">
         <input type="hidden" name="filtered" value="yes" />
         <?php foreach ($the_filters as $filter=>$data) : ?>
         <div style="float:left;margin:5px;">

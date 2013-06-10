@@ -23,7 +23,7 @@ if (!empty($_GET['date']) && !empty($_GET['type'])) {
 ?>
 <div class="widget">
     <h3>Seleccionar log por tipo y fecha</h3>
-    <form id="filter-form" action="/admin/accounts/viewer" method="get">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/accounts/viewer" method="get">
         <div style="float:left;margin:5px;">
             <label for="type-filter">Tipo de proceso:</label><br />
             <select id="type-filter" name="type">

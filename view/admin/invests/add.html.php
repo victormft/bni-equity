@@ -5,7 +5,7 @@ use Equity\Library\Text;
 
 ?>
 <div class="widget">
-    <form id="filter-form" action="/admin/invests/add" method="post">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/invests/add" method="post">
         <p>
             <label for="invest-amount">Importe:</label><br />
             <input type="text" id="invest-amount" name="amount" value="" />

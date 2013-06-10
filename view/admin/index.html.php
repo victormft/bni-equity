@@ -94,7 +94,7 @@ include 'view/prologue.html.php';
                     <h3 class="title"><?php echo $section['label'] ?></h3>
                     <ul>
                         <?php foreach ($section['options'] as $oCode=>$option) :
-                            echo '<li><a href="<?php echo SITE_URL ?>/admin/'.$oCode.'">'.$option['label'].'</a></li>
+                            echo '<li><a href='.SITE_URL.'/admin/'.$oCode.'>'.$option['label'].'</a></li>
                                 ';
                         endforeach; ?>
                     </ul>

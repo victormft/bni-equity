@@ -23,7 +23,7 @@ $filter = "?status={$filters['status']}&category={$filters['category']}";
 
 // Superform
 ?>
-<form method="post" action="/admin/projects/<?php echo $filter ?>" class="project" enctype="multipart/form-data">
+<form method="post" action="<?php echo SITE_URL ?>/admin/projects/<?php echo $filter ?>" class="project" enctype="multipart/form-data">
 
     <?php echo new SuperForm(array(
 

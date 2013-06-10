@@ -46,7 +46,7 @@ jQuery(document).ready(function ($) {
 </div>
 <div class="widget">
     <p><?php echo 'Vamos a comunicarnos con ' . $_SESSION['mailing']['filters_txt']; ?></p>
-    <form action="/admin/mailing/send" method="post">
+    <form action="<?php echo SITE_URL ?>/admin/mailing/send" method="post">
     <dl>
         <dt>Seleccionar plantilla:</dt>
         <dd>

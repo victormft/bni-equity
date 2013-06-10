@@ -43,7 +43,7 @@ $(document).ready(function(){
         <blockquote><?php echo $page->description; ?></blockquote>
     </fieldset>
 
-    <form method="post" action="/translate/pages/edit/<?php echo $page->id; ?>">
+    <form method="post" action="<?php echo SITE_URL ?>/translate/pages/edit/<?php echo $page->id; ?>">
         <input type="hidden" name="lang" value="<?php echo $_SESSION['translator_lang'] ?>" />
         <textarea id="richtext_content" name="content" cols="100" rows="20"><?php echo $page->content; ?></textarea>
         <input type="submit" name="save" value="Guardar" />

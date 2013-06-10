@@ -4,7 +4,7 @@ use Equity\Library\Text;
 
 ?>
 <div class="widget board">
-    <form method="post" action="/admin/licenses?filter=<?php echo serialize($filters); ?>">
+    <form method="post" action="<?php echo SITE_URL ?>/admin/licenses?filter=<?php echo serialize($filters); ?>">
 
         <input type="hidden" name="action" value="<?php echo $this['action']; ?>" />
         <input type="hidden" name="id" value="<?php echo $this['license']->id; ?>" />

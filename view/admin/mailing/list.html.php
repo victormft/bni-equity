@@ -6,7 +6,7 @@ $filters = $_SESSION['mailing']['filters'];
 
 ?>
 <div class="widget board">
-    <form id="filter-form" action="/admin/mailing/edit" method="post">
+    <form id="filter-form" action="<?php echo SITE_URL ?>/admin/mailing/edit" method="post">
 
         <table>
             <tr>

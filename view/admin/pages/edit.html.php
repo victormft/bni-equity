@@ -30,7 +30,7 @@ $(document).ready(function(){
 </script>
 
 <div class="widget board">
-    <form method="post" action="/admin/pages/edit/<?php echo $this['page']->id; ?>">
+    <form method="post" action="<?php echo SITE_URL ?>/admin/pages/edit/<?php echo $this['page']->id; ?>">
 
         <label for="page-name">T&iacute;tulo:</label><br />
         <input type="text" name="name" id="page-name" value="<?php echo $this['page']->name; ?>" />
