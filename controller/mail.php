@@ -27,7 +27,7 @@ namespace Equity\Controller {
                 }
             }
 
-            throw new Redirection('/');
+            throw new Redirection(SITE_URL . '/');
 		}
 
     }

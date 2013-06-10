@@ -18,7 +18,7 @@ namespace Equity\Controller {
 	     * @param string $id   Nombre de usuario
 	     */
 		public function index ($id, $show = '') {
-		    throw new Redirection('/user/profile/' .  $id . '/' . $show, Redirection::PERMANENT);
+		    throw new Redirection(SITE_URL . '/user/profile/' .  $id . '/' . $show, Redirection::PERMANENT);
 		}
 
         /**
@@ -36,13 +36,13 @@ namespace Equity\Controller {
                 if (false !== ($user = (\Equity\Model\User::login($username, $password)))) {
                     $_SESSION['user'] = $user;
                     if (!empty($_POST['return'])) {
-                        throw new Redirection($_POST['return']);
+                        throw new Redirection(SITE_URL . $_POST['return']);
                     } elseif (!empty($_SESSION['jumpto'])) {
                         $jumpto = $_SESSION['jumpto'];
                         unset($_SESSION['jumpto']);
-                        throw new Redirection($jumpto);
+                        throw new Redirection(SITE_URL . $jumpto);
                     } else {
-                        throw new Redirection('/dashboard');
+                        throw new Redirection(SITE_URL . '/dashboard');
                     }
                 }
                 else {
@@ -62,7 +62,7 @@ namespace Equity\Controller {
                 setcookie(session_name(), '', time()-42000, '/');
             }
             session_destroy();
-            throw new Redirection('/');
+            throw new Redirection(SITE_URL . '/');
             die;
         }
         /**
@@ -97,7 +97,7 @@ namespace Equity\Controller {
 				  Message::Info(Text::get('user-register-success'));
 				  Message::Info('Tus datos de acceso son Usuario: <strong>'.$user->id.'</strong> Contraseña: <strong>'.$_POST['password'].'</strong>');
                   
-                  throw new Redirection('/user/login');
+                  throw new Redirection(SITE_URL . '/user/login');
 				} else {
 					foreach ($errors as $field=>$text) {
 						Message::Error($text);
@@ -220,9 +220,9 @@ namespace Equity\Controller {
                     // Refresca la sesión.
                     $user = Model\User::flush();
                     if (isset($_POST['save'])) {
-                        throw new Redirection('/dashboard');
+                        throw new Redirection(SITE_URL . '/dashboard');
                     } else {
-                        throw new Redirection('/user/edit');
+                        throw new Redirection(SITE_URL . '/user/edit');
                     }
                 }
 			}
@@ -250,7 +250,7 @@ namespace Equity\Controller {
             $user = Model\User::get($id, LANG);
 
             if (!$user instanceof Model\User || $user->hide) {
-                throw new Redirection('/', Redirection::PERMANENT);
+                throw new Redirection(SITE_URL . '/', Redirection::PERMANENT);
             }
 
             //--- para usuarios públicos---
@@ -259,7 +259,7 @@ namespace Equity\Controller {
                 if ($show == 'message') {
                     $_SESSION['jumpto'] = '/user/profile/' .  $id . '/message';
                     Message::Info(Text::get('user-login-required-to_message'));
-                    throw new Redirection("/user/login");
+                    throw new Redirection(SITE_URL . "/user/login");
                 }
 
 
@@ -268,14 +268,14 @@ namespace Equity\Controller {
 //                if (!isset($owners[$id])) {
                     $_SESSION['jumpto'] = '/user/profile/' .  $id . '/' . $show;
                     Message::Info(Text::get('user-login-required-to_see'));
-                    throw new Redirection("/user/login");
+                    throw new Redirection(SITE_URL . "/user/login");
 //                }
 
                 /*
                 // subpágina de cofinanciadores
                 if ($show == 'investors') {
                     Message::Info(Text::get('user-login-required-to_see-supporters'));
-                    throw new Redirection('/user/profile/' .  $id);
+                    throw new Redirection(SITE_URL . '/user/profile/' .  $id);
                 }
                 */
 
@@ -394,7 +394,7 @@ namespace Equity\Controller {
             else {
                 Message::Error(Text::get('user-activate-fail'));
             }
-            throw new Redirection('/dashboard');
+            throw new Redirection(SITE_URL . '/dashboard');
         }
 
         /**
@@ -427,7 +427,7 @@ namespace Equity\Controller {
             else {
                 Message::Error(Text::get('user-changeemail-fail'));
             }
-            throw new Redirection('/dashboard');
+            throw new Redirection(SITE_URL . '/dashboard');
         }
 
         /**
@@ -456,7 +456,7 @@ namespace Equity\Controller {
                             $user = Model\User::get($id);
                             $_SESSION['user'] = $user;
                             $_SESSION['recovering'] = $user->id;
-                            throw new Redirection('/dashboard/profile/access/recover#password');
+                            throw new Redirection(SITE_URL . '/dashboard/profile/access/recover#password');
                         }
                     }
                 }
@@ -511,10 +511,10 @@ namespace Equity\Controller {
                             // el token coincide con el email y he obtenido una id
                             if (Model\User::cancel($id)) {
                                 Message::Info(Text::get('leave-process-completed'));
-                                throw new Redirection('/user/login');
+                                throw new Redirection(SITE_URL . '/user/login');
                             } else {
                                 Message::Error(Text::get('leave-process-fail'));
-                                throw new Redirection('/user/login');
+                                throw new Redirection(SITE_URL . '/user/login');
                             }
                         }
                     }

@@ -13,7 +13,7 @@ namespace Equity\Controller {
         public function index ($id = null) {
 
             if (empty($id)) {
-                throw new Redirection('/about/legal', Redirection::PERMANENT);
+                throw new Redirection(SITE_URL . '/about/legal', Redirection::PERMANENT);
             }
 
             $page = Page::get($id);

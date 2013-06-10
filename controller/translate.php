@@ -1,38 +1,20 @@
 <?php
-/*
- *  Copyright (C) 2012 Platoniq y Fundación Fuentes Abiertas (see README for details)
- *	This file is part of Goteo.
- *
- *  Goteo is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Affero General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Goteo is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Affero General Public License for more details.
- *
- *  You should have received a copy of the GNU Affero General Public License
- *  along with Goteo.  If not, see <http://www.gnu.org/licenses/agpl.txt>.
- *
- */
 
 
-namespace Goteo\Controller {
+namespace Equity\Controller {
 
-	use Goteo\Core\ACL,
-        Goteo\Core\View,
-        Goteo\Core\Redirection,
-        Goteo\Model,
-	    Goteo\Library\Feed,
-	    Goteo\Library\Message,
-	    Goteo\Library\Text,
-	    Goteo\Library\Page,
-	    Goteo\Library\Content,
-		Goteo\Library\Lang;
+	use Equity\Core\ACL,
+        Equity\Core\View,
+        Equity\Core\Redirection,
+        Equity\Model,
+	    Equity\Library\Feed,
+	    Equity\Library\Message,
+	    Equity\Library\Text,
+	    Equity\Library\Page,
+	    Equity\Library\Content,
+		Equity\Library\Lang;
 
-	class Translate extends \Goteo\Core\Controller {
+	class Translate extends \Equity\Core\Controller {
 
         public function index ($table = '', $action = 'list', $id = null) {
 
@@ -97,7 +79,7 @@ namespace Goteo\Controller {
 
                             Message::Info('Texto <strong>'.$id.'</strong> traducido correctamente al <strong>'.Lang::get($_POST['lang'])->name.'</strong>');
 
-                            throw new Redirection("/translate/texts/$filter&page=".$_GET['page']);
+                            throw new Redirection(SITE_URL . "/translate/texts/$filter&page=".$_GET['page']);
                         } else {
                             // Evento Feed
                             $log = new Feed();
@@ -147,7 +129,7 @@ namespace Goteo\Controller {
 
                             Message::Info('Contenido de la Pagina <strong>'.$id.'</strong> traducido correctamente al <strong>'.Lang::get($_POST['lang'])->name.'</strong>');
 
-                            throw new Redirection("/translate/pages");
+                            throw new Redirection(SITE_URL . "/translate/pages");
                         } else {
                             // Evento Feed
                             $log = new Feed();
@@ -213,7 +195,7 @@ namespace Goteo\Controller {
 
                             Message::Info('Contenido del registro <strong>'.$id.'</strong> de la tabla <strong>'.$table.'</strong> traducido correctamente al <strong>'.Lang::get($_POST['lang'])->name.'</strong>');
 
-                            throw new Redirection("/translate/$table/$filter&page=".$_GET['page']);
+                            throw new Redirection(SITE_URL . "/translate/$table/$filter&page=".$_GET['page']);
                         } else {
                             // Evento Feed
                             $log = new Feed();
@@ -259,7 +241,7 @@ namespace Goteo\Controller {
 
                 $filter = "?type={$_GET['type']}&text={$_GET['text']}";
 
-                throw new Redirection("/translate/$section/$action/$id/$filter&page=".$_GET['page']);
+                throw new Redirection(SITE_URL . "/translate/$section/$action/$id/$filter&page=".$_GET['page']);
             } else {
                 return new View('view/translate/index.html.php', array('menu'=>self::menu()));
             }
@@ -282,7 +264,7 @@ namespace Goteo\Controller {
          */
 
         /*
-         * criterios de puntuación Goteo
+         * criterios de puntuación Equity
          */
 
         /*

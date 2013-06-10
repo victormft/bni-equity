@@ -14,12 +14,12 @@ namespace Equity\Controller {
             $project  = Project::get($id, LANG);
 
             if (! $project instanceof  Project) {
-                throw new Redirection('/', Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL . '/', Redirection::TEMPORARY);
             }
 
             return new View('view/widget/project.html.php', array('project' => $project, 'global' => true));
             
-            throw new Redirection('/fail', Redirection::TEMPORARY);
+            throw new Redirection(SITE_URL . '/fail', Redirection::TEMPORARY);
         }
         
     }

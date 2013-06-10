@@ -98,7 +98,7 @@ namespace Equity\Controller {
 
             // si no hay proyectos asignados no tendria que estar aqui
             if (count($reviews) == 0) {
-                throw new Redirection('/review/activity');
+                throw new Redirection(SITE_URL . '/review/activity');
             }
 
             $review = $_SESSION['review'];

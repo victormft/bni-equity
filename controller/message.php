@@ -17,7 +17,7 @@ namespace Equity\Controller {
 
         public function index ($project = null) {
             if (empty($project))
-                throw new Redirection('/discover', Redirection::PERMANENT);
+                throw new Redirection(SITE_URL . '/discover', Redirection::PERMANENT);
 
 			if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
 
@@ -25,7 +25,7 @@ namespace Equity\Controller {
 
                 if ($projectData->status < 3) {
                     \Equity\Library\Message::Error(Text::get('project-messages-closed'));
-                    throw new Redirection("/project/{$project}");
+                    throw new Redirection(SITE_URL . "/project/{$project}");
                 }
 
                 $message = new Model\Message(array(
@@ -161,7 +161,7 @@ namespace Equity\Controller {
                 }
 			}
 
-            throw new Redirection("/project/{$project}/messages#message".$message->id, Redirection::TEMPORARY);
+            throw new Redirection(SITE_URL . "/project/{$project}/messages#message".$message->id, Redirection::TEMPORARY);
         }
 
         public function edit ($id, $project) {
@@ -174,14 +174,14 @@ namespace Equity\Controller {
                 $message->save();
             }
 
-            throw new Redirection("/project/{$project}/messages", Redirection::TEMPORARY);
+            throw new Redirection(SITE_URL . "/project/{$project}/messages", Redirection::TEMPORARY);
         }
 
         public function delete ($id, $project) {
 
             Model\Message::get($id)->delete();
 
-            throw new Redirection("/project/{$project}/messages", Redirection::TEMPORARY);
+            throw new Redirection(SITE_URL . "/project/{$project}/messages", Redirection::TEMPORARY);
         }
 
         /*
@@ -189,7 +189,7 @@ namespace Equity\Controller {
          */
         public function direct ($project = null) {
             if (empty($project))
-                throw new Redirection('/discover', Redirection::PERMANENT);
+                throw new Redirection(SITE_URL . '/discover', Redirection::PERMANENT);
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
 
@@ -237,7 +237,7 @@ namespace Equity\Controller {
                 unset($mailHandler);
 			}
 
-            throw new Redirection("/project/{$project->id}/messages", Redirection::TEMPORARY);
+            throw new Redirection(SITE_URL . "/project/{$project->id}/messages", Redirection::TEMPORARY);
         }
 
         /*
@@ -245,7 +245,7 @@ namespace Equity\Controller {
          */
         public function personal ($user = null) {
             if (empty($user))
-                throw new Redirection('/community', Redirection::PERMANENT);
+                throw new Redirection(SITE_URL . '/community', Redirection::PERMANENT);
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['message'])) {
 
@@ -253,7 +253,7 @@ namespace Equity\Controller {
                 $user = Model\User::get($user);
 
                 if (!$user instanceof Model\User) {
-                    throw new Redirection('/', Redirection::TEMPORARY);
+                    throw new Redirection(SITE_URL . '/', Redirection::TEMPORARY);
                 }
 
                 $msg_content = \nl2br(\strip_tags($_POST['message']));
@@ -297,7 +297,7 @@ namespace Equity\Controller {
                 unset($mailHandler);
 			}
 
-            throw new Redirection("/user/profile/{$user->id}", Redirection::TEMPORARY);
+            throw new Redirection(SITE_URL . "/user/profile/{$user->id}", Redirection::TEMPORARY);
         }
 
         /*
@@ -404,9 +404,9 @@ namespace Equity\Controller {
 			}
 
             if (!empty($project)) {
-                throw new Redirection("/project/{$project}/updates/{$post}#comment".$comment->id, Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL . "/project/{$project}/updates/{$post}#comment".$comment->id, Redirection::TEMPORARY);
             } else {
-                throw new Redirection("/blog/{$post}#comment".$comment->id, Redirection::TEMPORARY);
+                throw new Redirection(SITE_URL . "/blog/{$post}#comment".$comment->id, Redirection::TEMPORARY);
             }
         }
 

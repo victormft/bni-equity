@@ -20,9 +20,9 @@ namespace Equity\Controller {
             if ($id !== null) {
                 return $this->view($id, $show, $post);
             } else if (isset($_GET['create'])) {
-                throw new Redirection("/project/create");
+                throw new Redirection(SITE_URL . "/project/create");
             } else {
-                throw new Redirection("/discover");
+                throw new Redirection(SITE_URL . "/discover");
             }
         }
 
@@ -44,7 +44,7 @@ namespace Equity\Controller {
             } else {
                 Message::Info("No se han podido borrar los datos del proyecto '<strong>{$project->name}</strong>'. Error:" . implode(', ', $errors));
             }
-            throw new Redirection("/dashboard/projects");
+            throw new Redirection(SITE_URL . "/dashboard/projects");
         }
 
         //Aunque no esté en estado edición un admin siempre podrá editar un proyecto
@@ -251,7 +251,7 @@ namespace Equity\Controller {
                         $log->add($errors);
                         unset($log);
 
-                        throw new Redirection("/dashboard?ok");
+                        throw new Redirection(SITE_URL . "/dashboard?ok");
                     }
                 }
 
@@ -458,11 +458,11 @@ namespace Equity\Controller {
             if (empty($_SESSION['user'])) {
                 $_SESSION['jumpto'] = '/project/create';
                 Message::Info(Text::get('user-login-required-to_create'));
-                throw new Redirection("/user/login");
+                throw new Redirection(SITE_URL . "/user/login");
             }
 
             if ($_POST['action'] != 'continue' || $_POST['confirm'] != 'true') {
-                throw new Redirection("/about/howto");
+                throw new Redirection(SITE_URL . "/about/howto");
             }
 
             $project = new Model\Project;
@@ -490,7 +490,7 @@ namespace Equity\Controller {
                     unset($log);
 
 
-                throw new Redirection("/project/edit/{$project->id}");
+                throw new Redirection(SITE_URL . "/project/edit/{$project->id}");
             }
 
             throw new \Equity\Core\Exception('Fallo al crear un nuevo proyecto');
@@ -538,7 +538,7 @@ namespace Equity\Controller {
                     /*
                     if ($show == 'supporters') {
                         Message::Info(Text::get('user-login-required-to_see-supporters'));
-                        throw new Redirection('/project/' .  $id);
+                        throw new Redirection(SITE_URL . '/project/' .  $id);
                     }
                      *
                      */
@@ -550,7 +550,7 @@ namespace Equity\Controller {
                             $_SESSION['jumpto'] .= '?amount='.$_GET['amount'];
                         }
                         Message::Info(Text::get('user-login-required-to_invest'));
-                        throw new Redirection("/user/login");
+                        throw new Redirection(SITE_URL . "/user/login");
                     }
 
                     // -- Mensaje azul molesto para usuarios no registrados
@@ -566,7 +566,7 @@ namespace Equity\Controller {
                     // si no está en campaña no pueden estar aqui ni de coña
                     if ($project->status != 3) {
                         Message::Info(Text::get('project-invest-closed'));
-                        throw new Redirection('/project/'.$id, Redirection::TEMPORARY);
+                        throw new Redirection(SITE_URL . '/project/'.$id, Redirection::TEMPORARY);
                     }
 
                     $viewData['show'] = 'supporters';
@@ -596,7 +596,7 @@ namespace Equity\Controller {
 
             } else {
                 // no lo puede ver
-                throw new Redirection("/");
+                throw new Redirection(SITE_URL . "/");
             }
         }
 
