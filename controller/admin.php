@@ -47,7 +47,7 @@ namespace Equity\Controller {
         /*
          * Gestión de páginas institucionales
          */
-		public function pages ($action = 'list', $id = null) {
+	public function pages ($action = 'list', $id = null) {
 
             $BC = self::menu(array(
                 'section' => 'contents',
@@ -470,7 +470,7 @@ namespace Equity\Controller {
                  */
                 $log = new Feed();
                 $log->title = ('Cambio estado/fechas de un proyecto desde el admin');
-                $log->url = '/admin/projects';
+                $log->url = SITE_URL.'/admin/projects';
                 $log->type = 'admin';
                 $log_items = array(
                     Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
@@ -3085,7 +3085,7 @@ namespace Equity\Controller {
                              */
                             $log = new Feed();
                             $log->title = ('proyecto sin cuenta paypal (admin)');
-                            $log->url = '/admin/projects';
+                            $log->url = SITE_URL.'/admin/projects';
                             $log->type = 'project';
                             $log_text = ('El proyecto %s aun no ha puesto su %s !!!');
                             $log_items = array(
@@ -3136,7 +3136,7 @@ namespace Equity\Controller {
                      */
                     $log = new Feed();
                     $log->title = ('Cargo ejecutado (admin)');
-                    $log->url = '/admin/invests';
+                    $log->url = SITE_URL.'/admin/invests';
                     $log->type = 'system';
                     $log_items = array(
                         Feed::item('user', $_SESSION['user']->name, $_SESSION['user']->id),
@@ -3407,7 +3407,7 @@ namespace Equity\Controller {
                 $action = 'list';
             }
 
-            $url = '/admin/blog';
+            $url = SITE_URL.'/admin/blog';
 
 			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (empty($_POST['blog'])) {
@@ -3483,7 +3483,7 @@ namespace Equity\Controller {
                              */
                             $log = new Feed();
                             $log->title = ('nueva entrada blog Equity (admin)');
-                            $log->url = '/admin/blog';
+                            $log->url = SITE_URL.'/admin/blog';
                             $log->type = 'admin';
                             $log_text = ('El admin %s ha %s en el blog Equity la entrada "%s"');
                             $log_items = array(
@@ -3535,7 +3535,7 @@ namespace Equity\Controller {
                          */
                         $log = new Feed();
                         $log->title = ('entrada quitada (admin)');
-                        $log->url = '/admin/blog';
+                        $log->url = SITE_URL.'/admin/blog';
                         $log->type = 'admin';
                         $log_text = ('El admin %s ha %s la entrada "%s" del blog de Equity');
                         $log_items = array(
@@ -5511,13 +5511,13 @@ namespace Equity\Controller {
                 // si el BC tiene Option, enlace a la portada de esa gestión
                 if (!empty($BC['option'])) {
                     $option = $menu[$BC['section']]['options'][$BC['option']];
-                    $path = ' &gt; <a href="/admin/'.$BC['option'].''.$BC['filter'].'">'.$option['label'].'</a>'.$path;
+                    $path = ' &gt; <a href="'.SITE_URL.'/admin/'.$BC['option'].''.$BC['filter'].'">'.$option['label'].'</a>'.$path;
                 }
 
                 // si el BC tiene section, facil, enlace al admin
                 if (!empty($BC['section'])) {
                     $section = $menu[$BC['section']];
-                    $path = '<a href="/admin#'.$BC['section'].'">'.$section['label'].'</a>' . $path;
+                    $path = '<a href="'.SITE_URL.'/admin#'.$BC['section'].'">'.$section['label'].'</a>' . $path;
                 }
                 return $path;
             }

@@ -714,7 +714,8 @@ div#header div#menu > ul > li.home > a:hover {
 */
 div#header div#menu > ul > li.explore,
 div#header div#menu > ul > li.create,
-div#header div#menu > ul > li.howitworks {
+div#header div#menu > ul > li.howitworks 
+div#header div#menu > ul > li.pitches {
     float: left;
 	margin-right: 15px;
 }
@@ -725,6 +726,7 @@ div#header div#menu > ul > li.howitworks {
 
 div#header div#menu > ul > li.explore > a,
 div#header div#menu > ul > li.create > a,
+div#header div#menu > ul > li.pitches > a,
 div#header div#menu > ul > li.howitworks > a {
     padding: .4em .1em .4em .8em;
     font-size: 16px;
@@ -742,6 +744,7 @@ div#header div#menu > ul > li.howitworks > a {
 
 div#header div#menu > ul > li.explore > a:hover,
 div#header div#menu > ul > li.create > a:hover,
+div#header div#menu > ul > li.pitches > a:hover,
 div#header div#menu > ul > li.howitworks > a:hover {
 	
 	color:#090;

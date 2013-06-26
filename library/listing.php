@@ -35,5 +35,5 @@ namespace Equity\Library {
                 return $list;
         }
 
-	}
+    }
 }

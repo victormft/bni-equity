@@ -141,7 +141,7 @@ echo new SuperForm(array(
                     'ok'        => !empty($okeys['contract_name']) ? array($okeys['contract_name']) : array(),
                     'value'     => $project->contract_name
                 ),*/
-				'leader_name' => array(
+		'contract_name' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
                     'required'  => true,
@@ -155,7 +155,7 @@ echo new SuperForm(array(
 				
 				
 				
-				'leader_rg' => array(
+		'contract_rg' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
                     'required'  => true,
@@ -166,8 +166,20 @@ echo new SuperForm(array(
                     'ok'        => !empty($okeys['leader_rg']) ? array($okeys['leader_rg']) : array(),
                     'value'     => $project->leader_rg
                 ),
+                
+                'contract_cpf' => array(
+                    'type'      => 'textbox',
+                    'class'     => 'inline',
+                    'required'  => true,
+                    'title'     => "CPF",
+                    'size'      => 9,
+                    'hint'      => Text::get('tooltip-project-contract_nif'),
+                    'errors'    => !empty($errors['contract_cpf']) ? array($errors['contract_cpf']) : array(),
+                    'ok'        => !empty($okeys['contract_cpf']) ? array($okeys['contract_cpf']) : array(),
+                    //'value'     => $project->contract_cpf
+                ),
 				
-				'leader_telephone' => array(
+		'contract_telephone' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
                     'required'  => true,
@@ -313,7 +325,7 @@ echo new SuperForm(array(
                     'value'     => $project->address
                 ),*/
 				
-				'leader_street' => array(
+		'leader_street' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
                     'required'  => true,
@@ -325,7 +337,7 @@ echo new SuperForm(array(
                     'value'     => $project->leader_street
                 ),
 				
-				'leader_city' => array(
+		'leader_city' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
                     'required'  => true,
@@ -337,7 +349,7 @@ echo new SuperForm(array(
                     'value'     => $project->leader_city
                 ),
 				
-				'leader_state' => array(
+		'leader_state' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
                     'required'  => true,
@@ -361,7 +373,7 @@ echo new SuperForm(array(
                     'value'     => $project->zipcode
                 ),*/
 				
-				'leader_cep' => array(
+		'leader_cep' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
                     'required'  => true,
@@ -373,7 +385,7 @@ echo new SuperForm(array(
                     'value'     => $project->leader_cep
                 ),
 				
-				'leader_country' => array(
+		'leader_country' => array(
                     'type'      => 'textbox',
                     'class'     => 'inline',
                     'required'  => true,

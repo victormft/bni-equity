@@ -10,7 +10,7 @@ define('ADMIN_NOAUTOSAVE', true);
 $project = $this['project'];
 
 if (!$project instanceof Model\Project) {
-    throw new Redirection('/admin/projects');
+    throw new Redirection(SITE_URL . '/admin/projects');
 }
 
 $filters = $this['filters'];

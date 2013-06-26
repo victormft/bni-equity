@@ -57,16 +57,10 @@ namespace Equity\Controller {
                 $_SESSION['stepped'] = array(
                      'userProfile'  => 'userProfile',
                      'userPersonal' => 'userPersonal',
-					 'enterprise'   => 'enterprise',
-					 'pitch'        => 'pitch',
-					 'entrepreneurs'   => 'entrepreneurs',
-					 
-					 
-					 'userPersonal2' => 'userPersonal2',
-                     'company'      => 'company',
-                     'costs'        => 'costs',
-                     'rewards'      => 'rewards',
-                     'supports'     => 'supports'
+                     'enterprise'   => 'enterprise',
+                     'pitch'        => 'pitch',
+                     'entrepreneurs'   => 'entrepreneurs',                    
+                     'rewards'      => 'rewards',                 
                 );
 
             if ($project->status != 1 && !ACL::check('/project/edit/todos')) {
@@ -101,19 +95,19 @@ namespace Equity\Controller {
                         'offtopic' => true
                     ),
 					
-					'enterprise' => array(
+                    'enterprise' => array(
                         'name' => "Your company",
                         'title' => "Information about your company",
                         'offtopic' => true
                     ),
 					
-					'pitch' => array(
+                    'pitch' => array(
                         'name' => "Pitch",
                         'title' => "Your pitch",
                         'offtopic' => true
                     ),
 					
-					'entrepreneurs' => array(
+                    'entrepreneurs' => array(
                         'name' => "Entrepreneurs",
                         'title' => "Information about the entrepreneurs",
                         'offtopic' => true
@@ -123,7 +117,7 @@ namespace Equity\Controller {
 					
 					
 					
-					'userPersonal2' => array(
+                    'userPersonal2' => array(
                         'name' => meu,
                         'title' => meeeu,
                         'offtopic' => true
@@ -142,7 +136,7 @@ namespace Equity\Controller {
                         'title' => Text::get('step-rewards')
                     ),
                     
-					'supports' => array(
+                    'supports' => array(
                         'name' => Text::get('step-6'),
                         'title' => Text::get('step-supports')
                     ),

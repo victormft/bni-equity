@@ -32,7 +32,7 @@ if (!defined('PHPMAILER_POP3')) {
 }
 
 // Metadata
-define('EQUITY_META_TITLE', 'EQUITY.org  Crowdfunding the commons');
+define('EQUITY_META_TITLE', 'BNI Equity');
 define('EQUITY_META_DESCRIPTION', 'Red social de financiacion colectiva');
 define('EQUITY_META_KEYWORDS', 'crowdfunding, procomun, commons, social, network, financiacion colectiva, cultural, creative commons, proyectos abiertos, open source, free software, licencias libres');
 define('EQUITY_META_AUTHOR', 'Onliners Web Development');

@@ -37,10 +37,10 @@
         
         <ul>
             <li class="home"><a href="<?php echo SITE_URL ?>/"><?php //echo Text::get('regular-home'); ?><font style="font-size:36px; font-family:'Palatino Linotype', 'Book Antiqua', Palatino, serif; font-weight:bold"><text style="color:#8dc63f">BNI</text>Equity</font></a></li>
-            <li class="explore"><a href="<?php echo SITE_URL ?>/discover"><?php //echo Text::get('regular-discover'); ?>
-            <img src="<?php echo SITE_URL ?>/view/css/dollar.png" width="20" height="20" /><span>Investir<br><span style="color:#888; font-size:12px; padding-left: 20px;">em projetos</span></span></a></li>
-            <li class="create"><a  href="<?php echo SITE_URL ?>/project/create"><?php //echo Text::get('regular-create'); ?><img src="<?php echo SITE_URL ?>/view/css/puzzle.png" width="20" height="20" /><span>Criar<br><span style="color:#888; font-size:12px; padding-left: 20px;">seu projeto</span></span></a></li>
-            <li class="howitworks"><a  href="<?php echo SITE_URL ?>/project/create"><?php //echo Text::get('regular-create'); ?><img src="<?php echo SITE_URL ?>/view/css/questionmark.png" width="20" height="20" /><span>Como Funciona?<br><span style="color:#888; font-size:12px; padding-left: 20px;">entenda o BNIEquity</span></span></a></li>
+            <li class="explore"><a href="<?php echo SITE_URL ?>/community"><?php //echo Text::get('regular-discover'); ?><img src="<?php echo SITE_URL ?>/view/css/dollar.png" width="20" height="20" /><span>Comunidade<br><span style="color:#888; font-size:12px; padding-left: 20px;">do BNI Equity</span></span></a></li>
+            <li class="create"><a  href="<?php echo SITE_URL ?>/project/create"><?php //echo Text::get('regular-create'); ?><img src="<?php echo SITE_URL ?>/view/css/puzzle.png" width="20" height="20" /><span>Startups<br> <span style="color:#888; font-size:12px; padding-left: 20px;">muitas delas!</span></span></a></li>
+            <li class="create"><a  href="<?php echo SITE_URL ?>/"><img src="<?php echo SITE_URL ?>/view/css/dollar.png" width="20" height="20" /><span>Pitches<br><span style="color:#888; font-size:12px; padding-left: 20px;">para investir</span></span></a></li>
+       
             <li class="search">
                 <form method="get" action="<?php echo SITE_URL ?>/discover/results">
                     <fieldset id="fieldset">
